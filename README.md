@@ -1,2 +1,19 @@
-# nexcy-site
-Site vitrine de l’agence digitale Nexcy — création sur-mesure mettant en avant nos services en développement web, design, automatisation et IA. Développé pour refléter notre expertise moderne, sobre et performante, ce site illustre notre savoir-faire en matière de présence en ligne et d’expérience utilisateur.
+# Nexcy – Agence digitale 360°
+
+Bienvenue sur le dépôt officiel du site vitrine de Nexcy, agence digitale spécialisée dans :
+- Développement de sites web (vitrine, e-commerce, sur-mesure)
+- Branding & design
+- Automatisation & intelligence artificielle
+- SEO / SEA
+- Gestion de projets digitaux externalisés
+
+🔗 Site en ligne :  www.nexcy.fr
+
+## À propos du projet
+Ce site a été pensé pour refléter l’identité visuelle de Nexcy : moderne, élégante, fonctionnelle. Il est responsive, optimisé SEO, et conçu pour offrir une expérience fluide à tout visiteur.
+
+## Technologies utilisées
+- HTML5 / CSS3 / JavaScript
+- Figma (maquette)
+- GitHub Pages (hébergement)
+- OpenGraph & SEO tags
