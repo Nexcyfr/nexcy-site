@@ -41,6 +41,10 @@ Recherche de `.env`, clés API, `node_modules`, `package-lock.json`, scripts she
  3 files changed, 141 insertions(+)
 ```
 
+## 5b. Vérification avertissement GitHub "hidden or bidirectional Unicode text"
+
+Scan des 4 fichiers de `logs/research/` (les 3 rapports de recherche + ce rapport de validation) pour les caractères Unicode invisibles/bidirectionnels (U+202A-U+202E, U+2066-U+2069, U+200B, U+200C, U+200D, U+FEFF) : **aucun caractère trouvé**. Aucune correction nécessaire.
+
 ## 6-7. Résumé & recommandation
 
 - **Fichiers ajoutés** : 3 rapports markdown de recherche (Lots 1, 2, 3), tous en `logs/research/`.
