@@ -29,7 +29,7 @@ Aucune copie verbatim — agents réécrits/adaptés pour mateo_brain / Nexcy (f
 - Aucune configuration MCP.
 - Aucun script shell, aucun fichier exécutable.
 - Aucun `npm install`, `package.json` non modifié.
-- Aucun accès réseau dans les agents (outils limités à `Read`, `Grep`, `Glob`, `Bash` lecture seule, `Write`/`Edit` pour les agents de contenu/design uniquement).
+- Aucun accès réseau ni accès shell dans les agents (outils limités à `Read`, `Grep`, `Glob`, `Write`/`Edit` pour les agents de contenu/design uniquement).
 - Aucune modification de codebase Next.js active.
 
 ## Non créé dans cette PR
