@@ -174,3 +174,9 @@ logs/changes/2026-06-11_vague-1-claude-core.md  (nouveau log de changement)
 ---
 
 *Plan basé sur `2026-06-11_github-research-lot-1-claude-core.md` et `2026-06-11_pr-2-final-validation.md` (commit `b013140` sur `main`). Aucune intégration effectuée à ce stade.*
+
+---
+
+## 9. Vérification Unicode caché/bidirectionnel
+
+Avertissement GitHub "hidden or bidirectional Unicode text" vérifié sur ce fichier : scan des codepoints U+202A-U+202E, U+2066-U+2069, U+200B, U+200C, U+200D, U+FEFF, U+00A0, U+200E, U+200F — **aucun caractère détecté**. Aucune correction nécessaire.
