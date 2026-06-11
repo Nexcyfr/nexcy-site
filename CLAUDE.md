@@ -28,7 +28,17 @@ Ce fichier sert de point d'entrée pour Claude Code dans le dépôt `nexcy-site`
 
 Ces agents sont des fichiers markdown statiques (`.claude/agents/*.md`) avec frontmatter YAML conforme à la documentation officielle Claude Code (sub-agents). Aucun n'exécute de script externe, n'accède au réseau, ni ne modifie de fichier en dehors du dépôt courant.
 
+## Skills Claude Code disponibles
+
+| Skill | Description | Source / Licence |
+|---|---|---|
+| `claude-code-conventions` | Conventions internes pour travailler avec Claude Code dans ce dépôt (contexte, périmètre, PR, sécurité, diffs) | Inspiré de [awesome-claude-code-toolkit](https://github.com/rohitg00/awesome-claude-code-toolkit) (Apache-2.0) ; format de référence [anthropics/skills](https://github.com/anthropics/skills) |
+| `audit-report-structure` | Structure standard pour les rapports d'audit/recherche (résumé, périmètre, constats, risques, priorités P0-P3, recommandations) | Inspiré de [awesome-claude-code-toolkit](https://github.com/rohitg00/awesome-claude-code-toolkit) (Apache-2.0) ; format de référence [anthropics/skills](https://github.com/anthropics/skills) |
+
+Ces skills sont des fichiers markdown statiques (`skills/*/SKILL.md`) purement documentaires : aucun script, aucun code exécutable, aucun accès réseau, aucune manipulation automatique de fichiers.
+
 ## Historique d'intégration
 
 - Vague 1A (commandes Claude Code core) : voir `logs/changes/2026-06-11_vague-1a-claude-core-commands.md`
 - Vague 1B (subagents Claude Code core) : voir `logs/changes/2026-06-11_vague-1b-claude-core-subagents.md`
+- Vague 1C (skills documentaires sûres) : voir `logs/changes/2026-06-11_vague-1c-claude-core-skills.md`
