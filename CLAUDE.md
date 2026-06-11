@@ -37,8 +37,19 @@ Ces agents sont des fichiers markdown statiques (`.claude/agents/*.md`) avec fro
 
 Ces skills sont des fichiers markdown statiques (`skills/*/SKILL.md`) purement documentaires : aucun script, aucun code exécutable, aucun accès réseau, aucune manipulation automatique de fichiers.
 
+## Workflows et templates disponibles
+
+| Fichier | Description |
+|---|---|
+| `workflows/claude-code-core-onboarding.md` | Workflow décrivant comment utiliser ensemble les commandes (`.claude/commands/`), les subagents (`.claude/agents/`) et les skills (`skills/*/SKILL.md`) de ce dépôt |
+| `templates/agent-template.md` | Modèle standard pour créer un nouveau subagent (frontmatter, source/licence, rôle, quand l'utiliser, sécurité, limites, hors scope) |
+| `templates/skill-template.md` | Modèle standard pour créer une nouvelle skill (frontmatter, source/licence, objectif, instructions, sécurité, rappel documentaire) |
+
+Ces fichiers sont purement documentaires : aucun script, aucun code exécutable, aucun accès réseau, aucune manipulation automatique de fichiers.
+
 ## Historique d'intégration
 
 - Vague 1A (commandes Claude Code core) : voir `logs/changes/2026-06-11_vague-1a-claude-core-commands.md`
 - Vague 1B (subagents Claude Code core) : voir `logs/changes/2026-06-11_vague-1b-claude-core-subagents.md`
 - Vague 1C (skills documentaires sûres) : voir `logs/changes/2026-06-11_vague-1c-claude-core-skills.md`
+- Vague 1D (workflows et templates internes) : voir `logs/changes/2026-06-11_vague-1d-workflows-templates.md`
