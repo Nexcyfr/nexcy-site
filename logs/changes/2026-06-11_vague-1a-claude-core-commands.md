@@ -38,3 +38,7 @@ Ce fichier fait partie de la structure `mateo_brain` locale (`~/Desktop/mateo_br
 ## Phases restantes
 
 Phases B (subagents), C (skills), D (workflows/templates), E (documentation/dashboard complète), F (dry-run final) — non traitées dans cette PR, feront l'objet de PR séparées.
+
+## Vérification Unicode caché/bidirectionnel
+
+Avertissement GitHub "hidden or bidirectional Unicode text" vérifié sur les 5 fichiers ajoutés par cette PR (`.claude/commands/code-review.md`, `.claude/commands/commit-message.md`, `.claude/commands/pr-checklist.md`, `CLAUDE.md`, ce log) : scan des catégories Unicode Cc/Cf (hors `\n`, `\r`, `\t`) et des espaces spéciaux/insécables (U+00A0, U+2000-U+200A, U+202F, U+205F, U+3000) — **aucun caractère suspect détecté**. Aucune correction nécessaire.
