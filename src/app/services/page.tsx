@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ServicesHero } from "@/components/services/ServicesHero";
 import { ServiceBlock } from "@/components/services/ServiceBlock";
 import { ServicesMaintenanceBlock } from "@/components/services/ServicesMaintenanceBlock";
-import { CtaSection } from "@/components/ui/CtaSection";
 import { serviceDetails } from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
@@ -60,12 +59,6 @@ export default function ServicesPage() {
         <ServiceBlock key={service.slug} service={service} reversed={i % 2 === 1} />
       ))}
       <ServicesMaintenanceBlock />
-      <CtaSection
-        title="Un projet en tête ? Parlons-en."
-        buttonLabel="Discuter de votre projet"
-        buttonHref="/contact"
-        note="Réponse sous 48 heures. Aucun engagement."
-      />
     </>
   );
 }

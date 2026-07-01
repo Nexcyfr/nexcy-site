@@ -145,6 +145,13 @@ export function DemoLine() {
           repeatDelay: 0.6,
           yoyo: true,
           transformOrigin: "left center",
+          // Ne tourne que lorsque la section est visible (économie CPU/batterie).
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom",
+            end: "bottom top",
+            toggleActions: "play pause resume pause",
+          },
         },
       );
     },

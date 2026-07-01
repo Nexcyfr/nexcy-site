@@ -86,7 +86,7 @@ export function Header() {
       <nav
         aria-label="Navigation principale"
         className={cn(
-          "fixed left-1/2 top-6 z-50 hidden -translate-x-1/2 transition-transform duration-300 ease-premium md:block",
+          "fixed left-1/2 top-6 z-50 hidden -translate-x-1/2 transition-transform duration-300 ease-premium lg:block",
           hidden && "-translate-y-[180%]",
         )}
       >
@@ -132,7 +132,7 @@ export function Header() {
         aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
         aria-expanded={menuOpen}
         aria-controls="mobile-menu"
-        className="fixed right-4 top-4 z-[60] flex h-11 w-11 items-center justify-center md:hidden"
+        className="fixed right-4 top-4 z-[60] flex h-11 w-11 items-center justify-center lg:hidden"
       >
         <span className="relative block h-4 w-6" aria-hidden="true">
           <span
@@ -154,7 +154,7 @@ export function Header() {
       <div
         id="mobile-menu"
         className={cn(
-          "fixed inset-0 z-50 flex flex-col justify-center bg-black px-8 transition-opacity duration-300 md:hidden",
+          "fixed inset-0 z-50 flex flex-col justify-center bg-black px-8 transition-opacity duration-300 lg:hidden",
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         )}
         aria-hidden={!menuOpen}

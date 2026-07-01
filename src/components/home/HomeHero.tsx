@@ -29,7 +29,7 @@ export function HomeHero() {
       if (!scope) return;
 
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const words = gsap.utils.toArray<HTMLElement>("[data-hero-word]");
+      const words = gsap.utils.toArray<HTMLElement>("[data-hero-word]", scope);
       const tagline = scope.querySelector("[data-hero-tagline]");
       const desc = scope.querySelector("[data-hero-desc]");
       const line = scope.querySelector("[data-hero-line]");
