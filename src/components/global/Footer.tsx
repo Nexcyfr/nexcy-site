@@ -52,7 +52,7 @@ export function Footer() {
           </div>
 
           <nav
-            aria-label="Liens légaux"
+            aria-label="Navigation du pied de page"
             className="flex flex-col gap-4 md:items-end md:text-right"
           >
             <ul className="flex flex-col gap-3 text-sm md:items-end">
@@ -61,6 +61,9 @@ export function Footer() {
                   <TextLink href={link.href}>{link.label}</TextLink>
                 </li>
               ))}
+              <li>
+                <TextLink href="/contact">Contact</TextLink>
+              </li>
             </ul>
           </nav>
         </div>

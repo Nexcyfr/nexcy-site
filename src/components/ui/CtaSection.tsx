@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 
 interface CtaSectionProps {
   title: string;
+  /** Paragraphe descriptif optionnel, entre le titre et le bouton. */
+  subtitle?: string;
   buttonLabel: string;
   buttonHref: string;
   /** Ligne de réassurance sous le bouton (optionnelle). */
@@ -16,6 +18,7 @@ interface CtaSectionProps {
 /** Bande CTA finale réutilisable (Home / Services / Studio). */
 export function CtaSection({
   title,
+  subtitle,
   buttonLabel,
   buttonHref,
   note,
@@ -39,6 +42,14 @@ export function CtaSection({
         >
           {title}
         </TextReveal>
+
+        {subtitle ? (
+          <FadeIn className="mt-6">
+            <p className="mx-auto max-w-xl text-lg leading-relaxed text-text-secondary">
+              {subtitle}
+            </p>
+          </FadeIn>
+        ) : null}
 
         <FadeIn className="mt-10">
           <Button href={buttonHref} variant="primary">
