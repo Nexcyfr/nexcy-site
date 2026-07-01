@@ -107,8 +107,8 @@ export function DemoParallaxCard() {
   return (
     <div
       ref={ref}
+      aria-hidden="true"
       className="relative h-24 w-full overflow-hidden rounded-card border border-border"
-      aria-label="Carte à parallaxe"
     >
       <div
         ref={layer}

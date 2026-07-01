@@ -41,7 +41,7 @@ export function HomeShowcase() {
         {/* Grille de démonstration — bordures fines, légendes dorées */}
         <FadeIn className="mt-16">
           <div className="grid grid-cols-1 gap-px overflow-hidden rounded-card border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-            <DemoCell caption="Composant / Révélation">
+            <DemoCell caption="Composant / Animation">
               <TextReveal
                 as="p"
                 className="text-center text-lg font-medium text-text-primary"
@@ -50,15 +50,15 @@ export function HomeShowcase() {
               </TextReveal>
             </DemoCell>
 
-            <DemoCell caption="Composant / Parallaxe">
+            <DemoCell caption="Composant / Animation">
               <DemoParallaxCard />
             </DemoCell>
 
-            <DemoCell caption="Composant / États">
+            <DemoCell caption="Composant / Animation">
               <DemoButton />
             </DemoCell>
 
-            <DemoCell caption="Composant / Tracé">
+            <DemoCell caption="Composant / Animation">
               <DemoLine />
             </DemoCell>
           </div>

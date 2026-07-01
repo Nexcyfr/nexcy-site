@@ -20,6 +20,8 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const lastY = useRef(0);
   const ticking = useRef(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
 
   const isActive = useCallback(
     (href: string) => pathname === href || pathname.startsWith(`${href}/`),
@@ -66,6 +68,39 @@ export function Header() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  // Gestion du focus du menu mobile (piège de focus + retour au bouton).
+  useEffect(() => {
+    if (!menuOpen) return;
+    const menu = menuRef.current;
+    const hamburger = hamburgerRef.current;
+    if (!menu) return;
+
+    const focusables = menu.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled])',
+    );
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    first?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || focusables.length === 0) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+    menu.addEventListener("keydown", onKey);
+
+    return () => {
+      menu.removeEventListener("keydown", onKey);
+      // Retour du focus au bouton hamburger à la fermeture.
+      hamburger?.focus();
+    };
   }, [menuOpen]);
 
   return (
@@ -127,6 +162,7 @@ export function Header() {
 
       {/* Bouton hamburger — mobile */}
       <button
+        ref={hamburgerRef}
         type="button"
         onClick={() => setMenuOpen((v) => !v)}
         aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
@@ -152,7 +188,11 @@ export function Header() {
 
       {/* Menu mobile plein écran */}
       <div
+        ref={menuRef}
         id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu de navigation"
         className={cn(
           "fixed inset-0 z-50 flex flex-col justify-center bg-black px-8 transition-opacity duration-300 lg:hidden",
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",

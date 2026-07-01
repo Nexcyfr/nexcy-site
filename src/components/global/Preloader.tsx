@@ -107,7 +107,10 @@ export function Preloader() {
           strokeLinejoin="round"
         />
       </svg>
-      <div className="mt-6 text-xs font-light tracking-widest text-text-muted">
+      <div
+        aria-hidden="true"
+        className="mt-6 text-xs font-light tracking-widest text-text-muted"
+      >
         <span ref={counterRef}>0</span>
         <span> %</span>
       </div>

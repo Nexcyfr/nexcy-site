@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { Monogram } from "@/components/ui/Monogram";
 import { TextLink } from "@/components/ui/TextLink";
@@ -62,14 +61,6 @@ export function Footer() {
                   <TextLink href={link.href}>{link.label}</TextLink>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-sm text-text-secondary transition-colors hover:text-text-primary"
-                >
-                  Contact
-                </Link>
-              </li>
             </ul>
           </nav>
         </div>

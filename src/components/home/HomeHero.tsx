@@ -137,7 +137,11 @@ export function HomeHero() {
                 <span
                   key={i}
                   className="inline-block overflow-hidden align-bottom"
-                  style={{ marginRight: i < arr.length - 1 ? "0.24em" : undefined }}
+                  style={{
+                    marginRight: i < arr.length - 1 ? "0.24em" : undefined,
+                    paddingBottom: "0.1em",
+                    marginBottom: "-0.1em",
+                  }}
                 >
                   <span data-hero-word className="inline-block">
                     {w}
@@ -150,7 +154,11 @@ export function HomeHero() {
                 <span
                   key={i}
                   className="inline-block overflow-hidden align-bottom"
-                  style={{ marginRight: i < arr.length - 1 ? "0.24em" : undefined }}
+                  style={{
+                    marginRight: i < arr.length - 1 ? "0.24em" : undefined,
+                    paddingBottom: "0.1em",
+                    marginBottom: "-0.1em",
+                  }}
                 >
                   <span data-hero-word className="inline-block">
                     {w}
@@ -204,10 +212,22 @@ export function HomeHero() {
       <div
         data-hero-hint
         aria-hidden="true"
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-text-muted"
+        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center text-text-muted"
       >
-        <span className="text-[10px] uppercase tracking-widest2">Défiler</span>
-        <span className="h-8 w-px animate-pulse bg-border" />
+        <span className="h-8 w-px bg-border" />
+        <svg
+          viewBox="0 0 16 10"
+          className="mt-1 h-2.5 w-4 animate-bounce text-text-muted"
+          fill="none"
+        >
+          <path
+            d="M2 2l6 6 6-6"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
     </section>
   );

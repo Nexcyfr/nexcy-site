@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { LenisContext } from "@/hooks/useLenis";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 /**
  * Provider Lenis UNIQUE (Master Brief §9 / règle premium : un seul provider).
@@ -14,9 +15,11 @@ import { LenisContext } from "@/hooks/useLenis";
 export function SmoothScroll({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
   const rafRef = useRef<((time: number) => void) | null>(null);
+  // Réagit aux changements de préférence en cours de session : l'effet se
+  // ré-exécute (destruction / re-création de Lenis) quand `reduced` change.
+  const reduced = useReducedMotion();
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
 
     const instance = new Lenis({
@@ -44,7 +47,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       instance.destroy();
       setLenis(null);
     };
-  }, []);
+  }, [reduced]);
 
   return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
 }

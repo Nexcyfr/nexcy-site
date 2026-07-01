@@ -68,7 +68,13 @@ export function TextReveal({
       <span
         key={i}
         className="inline-block overflow-hidden align-bottom"
-        style={{ marginRight: i < words.length - 1 ? "0.26em" : undefined }}
+        style={{
+          marginRight: i < words.length - 1 ? "0.26em" : undefined,
+          // Le masque descend un peu sous la ligne de base (jambages non rognés),
+          // compensé par une marge négative pour préserver l'interligne.
+          paddingBottom: "0.12em",
+          marginBottom: "-0.12em",
+        }}
       >
         <span data-word-inner className="inline-block">
           {word}
