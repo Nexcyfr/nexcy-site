@@ -18,13 +18,19 @@ export const metadata: Metadata = buildMetadata({
   ogImage: "/assets/og/og-home.png",
 });
 
-/** JSON-LD LocalBusiness — page Accueil (Master Brief §21). */
-const localBusinessLd = {
+/**
+ * JSON-LD ProfessionalService — page Accueil.
+ * Remplace LocalBusiness : uniquement des champs vérifiés (pas d'horaires ni de
+ * priceRange non confirmés ; NEXCY n'est pas un établissement recevant du public).
+ */
+const professionalServiceLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "ProfessionalService",
   name: "NEXCY",
   url: SITE_URL,
-  description: "Agence web premium à Bordeaux",
+  description:
+    "Agence digitale premium à Bordeaux — création de sites web, branding, SEO et automatisation.",
+  areaServed: { "@type": "Country", name: "France" },
   address: {
     "@type": "PostalAddress",
     addressLocality: "Bordeaux",
@@ -32,8 +38,6 @@ const localBusinessLd = {
     addressCountry: "FR",
   },
   email: CONTACT_EMAIL,
-  priceRange: "€€€",
-  openingHours: "Mo-Fr 09:00-18:00",
 };
 
 export default function HomePage() {
@@ -41,7 +45,7 @@ export default function HomePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceLd) }}
       />
       <HomeHero />
       <HomeServices />

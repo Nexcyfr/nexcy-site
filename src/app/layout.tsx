@@ -7,7 +7,6 @@ import { SmoothScroll } from "@/components/global/SmoothScroll";
 import { Preloader } from "@/components/global/Preloader";
 import { Header } from "@/components/global/Header";
 import { Footer } from "@/components/global/Footer";
-import { CookieBanner } from "@/components/global/CookieBanner";
 import { SITE_URL } from "@/lib/utils";
 import { CONTACT_EMAIL } from "@/data/navigation";
 
@@ -52,7 +51,7 @@ const organizationLd = {
   logo: `${SITE_URL}/assets/brand/logo-nexcy.svg`,
   description:
     "Agence digitale premium spécialisée en création de sites web, branding, SEO et automatisation. Basée à Bordeaux, France.",
-  foundingDate: "2019",
+  foundingDate: "2025",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Bordeaux",
@@ -63,7 +62,6 @@ const organizationLd = {
     email: CONTACT_EMAIL,
     contactType: "customer service",
   },
-  sameAs: [],
 };
 
 const websiteLd = {
@@ -102,7 +100,6 @@ export default function RootLayout({
           <main id="main">{children}</main>
           <Footer />
         </SmoothScroll>
-        <CookieBanner />
 
         {plausibleDomain ? (
           <Script

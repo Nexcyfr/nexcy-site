@@ -23,5 +23,10 @@ export const legalLinks: NavLink[] = [
 
 export const CONTACT_EMAIL = "contact.agency@nexcy.fr";
 export const BRAND_TAGLINE = "Precision in Motion";
-export const FOUNDING_YEAR = 2019;
-export const CURRENT_YEAR = 2025;
+/**
+ * Année de création juridique de NEXCY (immatriculation RNE, 2025) — seule date
+ * vérifiable, utilisée pour le copyright et les données structurées.
+ * L'« expérience depuis 2019 » relève de l'éditorial (page Studio), pas d'une
+ * date d'entité.
+ */
+export const NEXCY_FOUNDING_YEAR = 2025;

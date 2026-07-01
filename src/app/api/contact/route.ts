@@ -4,20 +4,10 @@ import { contactSchema } from "@/lib/contact-schema";
 
 export const runtime = "nodejs";
 
-// ── Rate limiting simple en mémoire (Master Brief §22/§26) ──
-// Note : sur serverless, la mémoire n'est pas partagée entre instances.
-// Suffisant en phase 1 ; migrer vers Upstash Redis si le volume augmente.
-const RATE_LIMIT = 3;
-const WINDOW_MS = 60 * 60 * 1000; // 1 heure
-const hits = new Map<string, number[]>();
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > RATE_LIMIT;
-}
+// Anti-abus : Cloudflare Turnstile (fail-closed en prod) + honeypot.
+// Pas de rate-limit en mémoire : inefficace en serverless (instances éphémères).
+// Décision documentée dans docs/NEXCY-SECURITY-REPORT.md ; migrer vers Upstash
+// Redis uniquement si un volume d'abus réel le justifie.
 
 function getIp(req: NextRequest): string {
   const fwd = req.headers.get("x-forwarded-for");
@@ -25,10 +15,22 @@ function getIp(req: NextRequest): string {
   return req.headers.get("x-real-ip") ?? "unknown";
 }
 
-/** Vérifie le token Turnstile côté serveur. Ignoré si aucune clé configurée (dev). */
+/**
+ * Vérifie le token Turnstile côté serveur.
+ * - Production sans clé secrète → **fail-closed** (refus), jamais de bypass silencieux.
+ * - Hors production sans clé → bypass toléré (dev/local).
+ */
 async function verifyTurnstile(token: string | undefined, ip: string): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) return true; // dev sans Turnstile configuré
+  if (!secret) {
+    if (process.env.NODE_ENV === "production") {
+      console.error(
+        "[contact] TURNSTILE_SECRET_KEY manquante en production — requête refusée (fail-closed).",
+      );
+      return false;
+    }
+    return true; // dev/local uniquement
+  }
   if (!token) return false;
 
   const body = new URLSearchParams({ secret, response: token, remoteip: ip });
@@ -55,12 +57,6 @@ export async function POST(req: NextRequest) {
   }
 
   const ip = getIp(req);
-  if (isRateLimited(ip)) {
-    return NextResponse.json(
-      { success: false, message: "Trop de tentatives. Réessayez plus tard." },
-      { status: 429 },
-    );
-  }
 
   let json: unknown;
   try {

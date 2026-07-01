@@ -17,11 +17,11 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://challenges.cloudflare.com https://plausible.io",
+      "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://plausible.io",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://images.pexels.com https://pixabay.com https://images.unsplash.com",
+      "img-src 'self' data: blob:",
       "font-src 'self'",
-      "connect-src 'self' https://plausible.io https://api.resend.com https://api.pexels.com https://pixabay.com https://api.unsplash.com https://api.openverse.org https://api.iconify.design",
+      "connect-src 'self' https://plausible.io https://challenges.cloudflare.com",
       "frame-src https://challenges.cloudflare.com",
       "base-uri 'self'",
       "form-action 'self'",
@@ -34,12 +34,8 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
+    // Tous les médias sont locaux (public/assets) : aucun domaine distant requis.
     formats: ["image/avif", "image/webp"],
-    remotePatterns: [
-      { protocol: "https", hostname: "images.pexels.com" },
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "pixabay.com" },
-    ],
   },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];

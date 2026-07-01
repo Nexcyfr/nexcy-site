@@ -5,8 +5,7 @@ import {
   legalLinks,
   CONTACT_EMAIL,
   BRAND_TAGLINE,
-  FOUNDING_YEAR,
-  CURRENT_YEAR,
+  NEXCY_FOUNDING_YEAR,
 } from "@/data/navigation";
 
 /**
@@ -66,7 +65,8 @@ export function Footer() {
 
         <div className="relative mt-12 border-t border-border pt-6">
           <p className="text-xs text-text-muted">
-            © {FOUNDING_YEAR}–{CURRENT_YEAR} NEXCY. Tous droits réservés.
+            © {NEXCY_FOUNDING_YEAR}–{new Date().getFullYear()} NEXCY. Tous droits
+            réservés.
           </p>
         </div>
       </div>

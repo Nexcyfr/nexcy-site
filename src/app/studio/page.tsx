@@ -26,7 +26,7 @@ const aboutLd = {
     "@type": "Organization",
     name: "NEXCY",
     url: SITE_URL,
-    foundingDate: "2019",
+    foundingDate: "2025",
     description:
       "Agence digitale premium à Bordeaux, conçue pour l'exigence.",
   },
