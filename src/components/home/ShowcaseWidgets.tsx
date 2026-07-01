@@ -155,7 +155,7 @@ export function DemoLine() {
     <span
       ref={ref}
       aria-hidden="true"
-      className="block h-px w-full bg-accent will-change-transform"
+      className="block h-px w-full bg-accent"
     />
   );
 }

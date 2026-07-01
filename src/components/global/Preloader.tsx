@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 
 const SESSION_KEY = "nexcy-loaded";
 
@@ -43,6 +43,13 @@ export function Preloader() {
         sessionStorage.setItem(SESSION_KEY, "1");
         document.documentElement.classList.remove("lenis-stopped");
         setActive(false);
+        // La hauteur de défilement était réduite pendant le verrou : on recalcule
+        // les positions ScrollTrigger, puis on signale la fin du préloader
+        // (le hero enchaîne alors son animation d'entrée — voir HomeHero).
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+          window.dispatchEvent(new Event("nexcy:preloader-done"));
+        });
       };
 
       if (reduce) {

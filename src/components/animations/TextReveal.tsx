@@ -43,7 +43,7 @@ export function TextReveal({
         return;
       }
 
-      gsap.set(inners, { yPercent: 110 });
+      gsap.set(inners, { yPercent: 110, willChange: "transform" });
       gsap.to(inners, {
         yPercent: 0,
         duration: 0.6,
@@ -55,6 +55,7 @@ export function TextReveal({
           start,
           once: true,
         },
+        onComplete: () => gsap.set(inners, { willChange: "auto" }),
       });
     },
     { scope: ref },
@@ -69,7 +70,7 @@ export function TextReveal({
         className="inline-block overflow-hidden align-bottom"
         style={{ marginRight: i < words.length - 1 ? "0.26em" : undefined }}
       >
-        <span data-word-inner className="inline-block will-change-transform">
+        <span data-word-inner className="inline-block">
           {word}
         </span>
       </span>

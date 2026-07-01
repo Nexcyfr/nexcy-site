@@ -153,7 +153,6 @@
   }
   .reveal-line > span {
     display: block;
-    will-change: transform;
   }
 }
 

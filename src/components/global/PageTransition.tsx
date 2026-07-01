@@ -28,25 +28,26 @@ export function PageTransition({ children }: { children: ReactNode }) {
         return;
       }
 
+      // will-change posé uniquement pendant l'animation, puis retiré : on évite
+      // de promouvoir toute la page en couche compositeur en permanence.
       gsap.fromTo(
         el,
-        { opacity: 0, y: 20 },
+        { opacity: 0, y: 20, willChange: "opacity, transform" },
         {
           opacity: 1,
           y: 0,
           duration: 0.4,
           ease: "power2.out",
           clearProps: "transform,opacity",
-          onComplete: () => ScrollTrigger.refresh(),
+          onComplete: () => {
+            gsap.set(el, { willChange: "auto" });
+            ScrollTrigger.refresh();
+          },
         },
       );
     },
     { dependencies: [pathname], scope: ref },
   );
 
-  return (
-    <div ref={ref} className="will-change-[opacity,transform]">
-      {children}
-    </div>
-  );
+  return <div ref={ref}>{children}</div>;
 }

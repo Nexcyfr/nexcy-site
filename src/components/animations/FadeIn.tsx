@@ -53,7 +53,7 @@ export function FadeIn({
 
       gsap.fromTo(
         el,
-        { opacity: 0, y, scale: scale ? 1.04 : 1 },
+        { opacity: 0, y, scale: scale ? 1.04 : 1, willChange: "transform, opacity" },
         {
           opacity: 1,
           y: 0,
@@ -62,6 +62,7 @@ export function FadeIn({
           ease: "power2.out",
           delay,
           scrollTrigger: { trigger: el, start, once: true },
+          onComplete: () => gsap.set(el, { willChange: "auto" }),
         },
       );
     },
@@ -70,7 +71,7 @@ export function FadeIn({
 
   const Tag = as;
   return (
-    <Tag ref={ref as never} className={cn("will-change-transform", className)}>
+    <Tag ref={ref as never} className={cn(className)}>
       {children}
     </Tag>
   );

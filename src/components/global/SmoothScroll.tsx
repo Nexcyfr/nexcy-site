@@ -20,8 +20,9 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     if (reduced) return;
 
     const instance = new Lenis({
-      duration: 1.1,
-      lerp: 0.09, // règle premium : lerp entre 0.06 et 0.10
+      // lerp seul (sans `duration`, sinon Lenis bascule en mode durée+easing
+      // et ignore lerp). Amortissement framerate-indépendant, règle premium 0.06–0.10.
+      lerp: 0.09,
       smoothWheel: true,
       syncTouch: false, // scroll natif sur mobile
       wheelMultiplier: 1,

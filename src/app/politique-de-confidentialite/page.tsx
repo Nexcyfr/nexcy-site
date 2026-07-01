@@ -4,7 +4,7 @@ import { loadLegal } from "@/lib/legal";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Politique de confidentialité",
+  title: "Politique de confidentialité | NEXCY",
   description:
     "Politique de confidentialité et traitement des données de NEXCY.",
   path: "/politique-de-confidentialite",

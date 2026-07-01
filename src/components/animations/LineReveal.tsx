@@ -43,13 +43,14 @@ export function LineReveal({
 
       gsap.fromTo(
         el,
-        { [prop]: 0 },
+        { [prop]: 0, willChange: "transform" },
         {
           [prop]: 1,
           duration: 0.9,
           ease: "power3.inOut",
           delay,
           scrollTrigger: { trigger: el, start, once: true },
+          onComplete: () => gsap.set(el, { willChange: "auto" }),
         },
       );
     },
@@ -61,7 +62,7 @@ export function LineReveal({
       ref={ref}
       aria-hidden="true"
       className={cn(
-        "block will-change-transform",
+        "block",
         color,
         isH ? "h-px w-full origin-left" : "w-px h-full origin-top",
         className,

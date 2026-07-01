@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { Button } from "@/components/ui/Button";
 import { WatermarkN } from "@/components/ui/WatermarkN";
@@ -21,6 +21,7 @@ const H1_LINE_2 = "d'un niveau rare.";
  */
 export function HomeHero() {
   const root = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   useGSAP(
     () => {
@@ -45,15 +46,23 @@ export function HomeHero() {
       }
 
       // État initial
-      gsap.set(words, { yPercent: 110 });
+      gsap.set(words, { yPercent: 110, willChange: "transform" });
       gsap.set([tagline, desc, ctas], { autoAlpha: 0, y: 20 });
       gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
       gsap.set(visual, { autoAlpha: 0, scale: 1.05 });
       gsap.set(hint, { autoAlpha: 0 });
 
-      // Séquence d'entrée au chargement
-      const tl = gsap.timeline({ delay: 0.15 });
-      tl.to(words, { yPercent: 0, duration: 0.8, ease: "power3.out", stagger: 0.09 })
+      // Séquence d'entrée — construite en pause, jouée au bon moment
+      // (à la disparition du préloader en 1re visite, sinon immédiatement).
+      const tl = gsap.timeline({ paused: true });
+      timelineRef.current = tl;
+      tl.to(words, {
+        yPercent: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.09,
+        onComplete: () => gsap.set(words, { willChange: "auto" }),
+      })
         .to(visual, { autoAlpha: 1, scale: 1, duration: 1.1, ease: "power2.out" }, 0.2)
         .to(tagline, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.5)
         .to(desc, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.7)
@@ -81,6 +90,31 @@ export function HomeHero() {
     { scope: root },
   );
 
+  // Déclenche l'entrée du hero au bon moment (Master Brief §46) :
+  // - 1re visite : à la fin du préloader (évènement « nexcy:preloader-done ») ;
+  // - visites suivantes (flag présent) : immédiatement ;
+  // - filet de sécurité : jouée après 3 s si aucun signal n'arrive.
+  useEffect(() => {
+    const tl = timelineRef.current;
+    if (!tl) return; // reduced-motion : contenu déjà visible, rien à jouer
+    let played = false;
+    const play = () => {
+      if (played) return;
+      played = true;
+      tl.play(0);
+    };
+    if (sessionStorage.getItem("nexcy-loaded")) {
+      play();
+    } else {
+      window.addEventListener("nexcy:preloader-done", play, { once: true });
+    }
+    const fallback = window.setTimeout(play, 3000);
+    return () => {
+      window.removeEventListener("nexcy:preloader-done", play);
+      window.clearTimeout(fallback);
+    };
+  }, []);
+
   return (
     <section
       ref={root}
@@ -105,7 +139,7 @@ export function HomeHero() {
                   className="inline-block overflow-hidden align-bottom"
                   style={{ marginRight: i < arr.length - 1 ? "0.24em" : undefined }}
                 >
-                  <span data-hero-word className="inline-block will-change-transform">
+                  <span data-hero-word className="inline-block">
                     {w}
                   </span>
                 </span>
@@ -118,7 +152,7 @@ export function HomeHero() {
                   className="inline-block overflow-hidden align-bottom"
                   style={{ marginRight: i < arr.length - 1 ? "0.24em" : undefined }}
                 >
-                  <span data-hero-word className="inline-block will-change-transform">
+                  <span data-hero-word className="inline-block">
                     {w}
                   </span>
                 </span>
