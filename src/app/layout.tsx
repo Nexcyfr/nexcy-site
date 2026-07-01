@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | NEXCY",
   },
   description:
-    "NEXCY conçoit des sites web, identités visuelles et systèmes digitaux d'un niveau rare pour les entreprises exigeantes. Basée à Bordeaux. Réponse sous 48h.",
+    "NEXCY conçoit des sites web, identités visuelles et systèmes d'automatisation conçus avec précision pour les entreprises exigeantes. Basée à Bordeaux. Réponse sous 48h.",
   applicationName: "NEXCY",
   authors: [{ name: "NEXCY" }],
   creator: "NEXCY",

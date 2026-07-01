@@ -5,7 +5,7 @@ export function HomeCTA() {
   return (
     <CtaSection
       title="Votre projet mérite mieux que la moyenne."
-      buttonLabel="Parlez-nous de votre projet"
+      buttonLabel="Démarrer un projet"
       buttonHref="/contact"
       note="Réponse sous 48 heures. Aucun engagement."
     />

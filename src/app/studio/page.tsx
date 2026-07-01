@@ -49,7 +49,7 @@ export default function StudioPage() {
       <StudioMethod />
       <CtaSection
         title="Un projet. Une vision. Une seule question : êtes-vous prêt à exiger davantage ?"
-        buttonLabel="Démarrer une conversation"
+        buttonLabel="Démarrer un projet"
         buttonHref="/contact"
       />
     </>

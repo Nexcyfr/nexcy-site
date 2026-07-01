@@ -1,16 +1,29 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/utils";
 
-/** Sitemap dynamique — Master Brief §19. Pages légales en priorité 0.3. */
+/**
+ * Sitemap — Master Brief §19. Pages légales en priorité 0.3.
+ * `lastModified` = dates STABLES (pas `new Date()` au build, qui produirait un
+ * signal de fraîcheur bruité à chaque déploiement). À mettre à jour manuellement
+ * lorsqu'une page change réellement.
+ */
+const LAST_MODIFIED: Record<string, string> = {
+  "/": "2026-07-01",
+  "/services": "2026-07-01",
+  "/studio": "2026-07-01",
+  "/contact": "2026-07-01",
+  "/mentions-legales": "2026-06-25",
+  "/politique-de-confidentialite": "2026-06-25",
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
   const page = (
     path: string,
     priority: number,
     frequency: "monthly" | "yearly",
   ): MetadataRoute.Sitemap[number] => ({
     url: `${SITE_URL}${path}`,
-    lastModified: now,
+    lastModified: LAST_MODIFIED[path],
     changeFrequency: frequency,
     priority,
   });

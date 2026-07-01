@@ -63,7 +63,7 @@ export default function ServicesPage() {
       <CtaSection
         title="Un projet à faire avancer ?"
         subtitle="Parlons de vos objectifs et construisons une réponse digitale à la hauteur de vos ambitions."
-        buttonLabel="Parler de votre projet"
+        buttonLabel="Démarrer un projet"
         buttonHref="/contact"
       />
     </>

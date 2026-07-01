@@ -9,7 +9,7 @@ import { HeroVisual } from "@/components/home/HeroVisual";
 import { BRAND_TAGLINE } from "@/data/navigation";
 
 const H1_LINE_1 = "Systèmes digitaux";
-const H1_LINE_2 = "d'un niveau rare.";
+const H1_LINE_2 = "conçus avec précision.";
 
 /**
  * Hero d'accueil (Master Brief §13 / §46).

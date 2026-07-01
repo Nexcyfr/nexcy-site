@@ -27,7 +27,7 @@ export function HomeShowcase() {
             id="home-showcase-title"
             className="text-3xl font-bold leading-tight tracking-tight text-text-primary md:text-4xl"
           >
-            Ce site est notre meilleure démonstration.
+            Ce site est notre démonstration.
           </TextReveal>
           <FadeIn>
             <p className="max-w-md text-base leading-relaxed text-text-secondary lg:mt-2">

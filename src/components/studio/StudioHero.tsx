@@ -40,8 +40,7 @@ export function StudioHero() {
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-text-secondary">
             NEXCY est née d&apos;un constat simple : le marché digital français
             manque d&apos;agences capables de combiner la précision technique, la
-            rigueur stratégique et le niveau esthétique des meilleures structures
-            internationales.
+            rigueur stratégique et une exigence esthétique de premier plan.
           </p>
         </FadeIn>
       </div>

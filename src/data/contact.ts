@@ -9,7 +9,6 @@ export const projectTypes = [
 ] as const;
 
 export const budgetRanges = [
-  "Moins de 2 000 €",
   "2 000 – 5 000 €",
   "5 000 – 10 000 €",
   "10 000 – 20 000 €",
