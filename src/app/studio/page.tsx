@@ -4,6 +4,7 @@ import { StudioManifesto } from "@/components/studio/StudioManifesto";
 import { StudioValues } from "@/components/studio/StudioValues";
 import { StudioMethod } from "@/components/studio/StudioMethod";
 import { CtaSection } from "@/components/ui/CtaSection";
+import { ImmersiveBand } from "@/components/ui/ImmersiveBand";
 import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 
@@ -40,6 +41,10 @@ export default function StudioPage() {
       />
       <StudioHero />
       <StudioManifesto />
+      <ImmersiveBand
+        src="/assets/studio/precision-band.avif"
+        alt="Matière minérale noire aux veines dorées"
+      />
       <StudioValues />
       <StudioMethod />
       <CtaSection

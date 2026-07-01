@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Monogram } from "@/components/ui/Monogram";
+import { Logo } from "@/components/ui/Logo";
 import { TextLink } from "@/components/ui/TextLink";
 import {
   legalLinks,
@@ -34,12 +34,8 @@ export function Footer() {
 
         <div className="relative grid gap-10 md:grid-cols-2">
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-3">
-              <Monogram className="h-7 w-7 text-text-primary" strokeWidth={12} />
-              <span className="text-lg font-bold tracking-tight text-text-primary">
-                NEXCY
-              </span>
-            </div>
+            <Logo width={150} />
+
             <p className="text-sm font-light uppercase tracking-widest2 text-accent">
               {BRAND_TAGLINE}
             </p>

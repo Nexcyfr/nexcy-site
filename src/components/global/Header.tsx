@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/ui/Logo";
 import { navLinks, headerCta } from "@/data/navigation";
 
 /**
@@ -110,11 +111,11 @@ export function Header() {
         href="/"
         aria-label="NEXCY — Accueil"
         className={cn(
-          "fixed left-4 top-4 z-50 text-lg font-bold tracking-tight text-text-primary transition-transform duration-300 ease-premium lg:left-6 lg:top-6",
+          "fixed left-4 top-5 z-50 transition-transform duration-300 ease-premium lg:left-6 lg:top-7",
           hidden && !menuOpen && "-translate-y-[150%]",
         )}
       >
-        NEXCY
+        <Logo width={104} priority />
       </Link>
 
       {/* Pilule de navigation — desktop */}

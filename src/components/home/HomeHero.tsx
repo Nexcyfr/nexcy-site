@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { Button } from "@/components/ui/Button";
 import { WatermarkN } from "@/components/ui/WatermarkN";
@@ -204,7 +205,16 @@ export function HomeHero() {
           data-hero-visual
           className="relative hidden aspect-square w-full overflow-hidden rounded-card border border-border lg:block"
         >
-          <HeroVisual className="h-full w-full" />
+          <Image
+            src="/assets/home/hero-abstract.avif"
+            alt="Composition abstraite — surfaces géométriques et lumière ambrée"
+            fill
+            priority
+            sizes="(min-width: 1024px) 42vw, 1px"
+            className="object-cover"
+          />
+          {/* Faisceaux ambrés codés superposés (signature « Precision in Motion ») */}
+          <HeroVisual className="absolute inset-0 h-full w-full opacity-50 mix-blend-screen" />
         </div>
       </div>
 

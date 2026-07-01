@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
@@ -110,14 +111,16 @@ export function DemoParallaxCard() {
       aria-hidden="true"
       className="relative h-24 w-full overflow-hidden rounded-card border border-border"
     >
-      <div
-        ref={layer}
-        className="absolute inset-[-12px] will-change-transform"
-        style={{
-          background:
-            "radial-gradient(circle at 60% 40%, color-mix(in srgb, var(--color-accent) 35%, transparent), transparent 55%), linear-gradient(135deg, var(--color-card), var(--color-black))",
-        }}
-      />
+      <div ref={layer} className="absolute inset-[-12px] will-change-transform">
+        <Image
+          src="/assets/home/showcase-texture.avif"
+          alt=""
+          fill
+          loading="lazy"
+          sizes="360px"
+          className="object-cover"
+        />
+      </div>
     </div>
   );
 }

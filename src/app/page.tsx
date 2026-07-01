@@ -5,6 +5,7 @@ import { HomeShowcase } from "@/components/home/HomeShowcase";
 import { HomeMethod } from "@/components/home/HomeMethod";
 import { HomeReassurance } from "@/components/home/HomeReassurance";
 import { HomeCTA } from "@/components/home/HomeCTA";
+import { ImmersiveBand } from "@/components/ui/ImmersiveBand";
 import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 import { CONTACT_EMAIL } from "@/data/navigation";
@@ -45,6 +46,11 @@ export default function HomePage() {
       <HomeHero />
       <HomeServices />
       <HomeShowcase />
+      <ImmersiveBand
+        src="/assets/home/immersive-light.avif"
+        alt="Traînées de lumière sur fond noir"
+        statement="Precision in Motion"
+      />
       <HomeMethod />
       <HomeReassurance />
       <HomeCTA />
