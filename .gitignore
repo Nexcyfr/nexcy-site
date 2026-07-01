@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Dev artifacts (screenshots, test scripts)
+/shots/
+/shot.mjs
+/scroll-shot.mjs
+/func-test.mjs

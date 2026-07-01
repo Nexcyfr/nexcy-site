@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" role="img" aria-label="NEXCY">
+  <!-- Monogramme N — tracé géométrique bold (Master Brief §6/§27). currentColor pour héritage. -->
+  <path d="M26 78 V22 L74 78 V22"
+        stroke="currentColor" stroke-width="11"
+        stroke-linecap="square" stroke-linejoin="miter" />
+</svg>

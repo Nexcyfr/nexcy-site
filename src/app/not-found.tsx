@@ -1,0 +1,35 @@
+import type { Metadata } from "next";
+import { Button } from "@/components/ui/Button";
+import { Monogram } from "@/components/ui/Monogram";
+
+export const metadata: Metadata = {
+  title: "Page introuvable",
+  robots: { index: false, follow: false },
+};
+
+/** Page 404 personnalisée — Master Brief §12/§97. */
+export default function NotFound() {
+  return (
+    <section className="flex min-h-screen flex-col items-center justify-center bg-black px-6 text-center">
+      <Monogram className="h-14 w-14 text-accent" strokeWidth={10} />
+      <p className="mt-8 text-sm font-medium uppercase tracking-widest2 text-text-muted">
+        Erreur 404
+      </p>
+      <h1 className="mt-4 text-4xl font-bold tracking-tight text-text-primary md:text-6xl">
+        Cette page n&apos;existe pas.
+      </h1>
+      <p className="mt-6 max-w-md text-base leading-relaxed text-text-secondary">
+        Le lien est peut-être obsolète ou l&apos;adresse incorrecte. Revenons à
+        l&apos;essentiel.
+      </p>
+      <div className="mt-10 flex flex-wrap justify-center gap-4">
+        <Button href="/" variant="primary">
+          Retour à l&apos;accueil
+        </Button>
+        <Button href="/contact" variant="secondary">
+          Nous contacter
+        </Button>
+      </div>
+    </section>
+  );
+}
