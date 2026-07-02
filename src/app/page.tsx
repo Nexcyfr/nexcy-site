@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/home/HomeHero";
 import { HomeServices } from "@/components/home/HomeServices";
-import { HomeShowcase } from "@/components/home/HomeShowcase";
+import { HomeDemonstrations } from "@/components/home/HomeDemonstrations";
 import { HomeMethod } from "@/components/home/HomeMethod";
 import { HomeReassurance } from "@/components/home/HomeReassurance";
+import { HomeProof } from "@/components/home/HomeProof";
 import { HomeCTA } from "@/components/home/HomeCTA";
 import { ImmersiveBand } from "@/components/ui/ImmersiveBand";
 import { buildMetadata } from "@/lib/metadata";
@@ -50,7 +51,7 @@ export default function HomePage() {
       />
       <HomeHero />
       <HomeServices />
-      <HomeShowcase />
+      <HomeDemonstrations />
       <ImmersiveBand
         src="/assets/home/immersive-light.avif"
         alt="Traînées de lumière sur fond noir"
@@ -58,6 +59,7 @@ export default function HomePage() {
       />
       <HomeMethod />
       <HomeReassurance />
+      <HomeProof />
       <HomeCTA />
     </>
   );
