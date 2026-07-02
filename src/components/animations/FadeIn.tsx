@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
-import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
+import { MotionReveal } from "./MotionReveal";
 
 interface FadeInProps {
   children: ReactNode;
@@ -10,15 +9,19 @@ interface FadeInProps {
   delay?: number;
   /** Distance de translation verticale initiale (px). */
   y?: number;
-  /** Applique un léger scale (images — Brief §12 FadeIn). */
+  /** Applique un léger scale (images). */
   scale?: boolean;
   start?: string;
   as?: "div" | "section" | "article" | "li" | "span";
 }
 
 /**
- * Révélation opacity + translateY (+ scale optionnel) au scroll.
- * GPU uniquement. prefers-reduced-motion : simple fondu, sans transform.
+ * @deprecated Utiliser `<MotionReveal>`. Alias de compatibilité conservé pour ne
+ * pas migrer en masse les appels existants (Motion System V3, sous-lot 2b).
+ * Comportement en vue identique à l'historique (y 24px, power2.out, 0.8 s,
+ * start "top 88%", scale 1.04 optionnel). Seule différence : sous
+ * prefers-reduced-motion, l'état final est désormais posé **instantanément**
+ * (au lieu d'un fondu de 0.4 s) — plus conforme, imperceptible en usage normal.
  */
 export function FadeIn({
   children,
@@ -29,50 +32,18 @@ export function FadeIn({
   start = "top 88%",
   as = "div",
 }: FadeInProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const el = ref.current;
-      if (!el) return;
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      if (reduce) {
-        gsap.fromTo(
-          el,
-          { opacity: 0 },
-          {
-            opacity: 1,
-            duration: 0.4,
-            delay,
-            scrollTrigger: { trigger: el, start, once: true },
-          },
-        );
-        return;
-      }
-
-      gsap.fromTo(
-        el,
-        { opacity: 0, y, scale: scale ? 1.04 : 1, willChange: "transform, opacity" },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: "power2.out",
-          delay,
-          scrollTrigger: { trigger: el, start, once: true },
-          onComplete: () => gsap.set(el, { willChange: "auto" }),
-        },
-      );
-    },
-    { scope: ref },
-  );
-
-  const Tag = as;
   return (
-    <Tag ref={ref as never} className={cn(className)}>
+    <MotionReveal
+      as={as}
+      className={className}
+      delay={delay}
+      start={start}
+      duration={0.8}
+      ease="power2.out"
+      y={y}
+      scaleFrom={scale ? 1.04 : undefined}
+    >
       {children}
-    </Tag>
+    </MotionReveal>
   );
 }

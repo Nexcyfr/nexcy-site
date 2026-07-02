@@ -141,7 +141,10 @@ export function Header() {
                   href={link.href}
                   aria-current={isActive(link.href) ? "page" : undefined}
                   className={cn(
-                    "rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200",
+                    "relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200",
+                    // Underline discret (scaleX) — hover / focus clavier / page active.
+                    "after:pointer-events-none after:absolute after:bottom-1 after:inset-x-3 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-200 after:ease-snappy after:content-['']",
+                    "hover:after:scale-x-100 focus-visible:after:scale-x-100 aria-[current=page]:after:scale-x-100",
                     isActive(link.href)
                       ? "text-text-primary"
                       : "text-text-secondary hover:text-text-primary",

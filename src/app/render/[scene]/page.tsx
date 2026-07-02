@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { TestScene } from "@/components/media/render/TestScene";
 import { HeroRenderTarget } from "@/components/media/render/HeroRenderTarget";
 import { AmbientMediaDemo } from "@/components/media/render/AmbientMediaDemo";
+import { MotionScene } from "@/components/media/render/MotionScene";
 
 /**
  * Harnais de rendu média — DEV UNIQUEMENT (§2 Lot 1).
@@ -20,8 +21,8 @@ export const metadata: Metadata = {
 };
 
 // Liste blanche EXPLICITE de la route (§2). "test"/"hero" = scènes capturables ;
-// "ambient" = démo DEV de AmbientMedia (§11), non capturable.
-const SCENES = ["test", "hero", "ambient"] as const;
+// "ambient" = démo AmbientMedia ; "motion" = vitrine du Motion System V3 (2e).
+const SCENES = ["test", "hero", "ambient", "motion"] as const;
 type Scene = (typeof SCENES)[number];
 
 function isScene(value: string): value is Scene {
@@ -34,6 +35,8 @@ export default function RenderScenePage({ params }: { params: { scene: string } 
 
   // Démo AmbientMedia : page défilable (tests scroll-in / pause hors-viewport).
   if (params.scene === "ambient") return <AmbientMediaDemo />;
+  // Vitrine Motion System V3 : page défilable (tests des primitives et hooks).
+  if (params.scene === "motion") return <MotionScene />;
 
   // Scènes de capture : plein cadre fixe pour le rendu frame par frame.
   return (

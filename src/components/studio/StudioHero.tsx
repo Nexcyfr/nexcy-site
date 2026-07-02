@@ -1,6 +1,5 @@
 import { TextReveal } from "@/components/animations/TextReveal";
 import { FadeIn } from "@/components/animations/FadeIn";
-import { WatermarkN } from "@/components/ui/WatermarkN";
 
 /** Hero de la page Studio — Master Brief §15. */
 export function StudioHero() {
@@ -9,8 +8,6 @@ export function StudioHero() {
       aria-labelledby="studio-hero-title"
       className="relative overflow-hidden border-b border-border bg-black pb-16 pt-40 md:pb-24 md:pt-48"
     >
-      <WatermarkN className="left-[-6%] top-[-10%] h-[130%] w-[50%]" />
-
       <div className="container-site relative z-10">
         <TextReveal
           as="h1"

@@ -56,13 +56,11 @@ export function HeroScene({ className }: { className?: string }) {
       const frags = q("[data-frag]");
       const light = svg.querySelector<SVGPolylineElement>("[data-light]");
       const lightHead = svg.querySelector("[data-light-head]");
-      const mono = svg.querySelector("[data-mono]");
 
       // État initial (pré-assemblage)
       gsap.set(grid, { opacity: 0 });
       gsap.set(nodes, { transformOrigin: "center", scale: 0, opacity: 0 });
       gsap.set(frags, { opacity: 0, y: 8 });
-      gsap.set(mono, { opacity: 0 });
       links.forEach((l) => {
         const len = l.getTotalLength();
         gsap.set(l, { strokeDasharray: len, strokeDashoffset: len });
@@ -76,7 +74,6 @@ export function HeroScene({ className }: { className?: string }) {
 
       const tl = gsap.timeline();
       tl.to(grid, { opacity: 1, duration: 0.6, stagger: 0.03, ease: "power1.out" })
-        .to(mono, { opacity: 0.08, duration: 0.8 }, 0.2)
         .to(nodes, { scale: 1, opacity: 1, duration: 0.5, stagger: 0.06, ease: "back.out(1.7)" }, 0.4)
         .to(links, { strokeDashoffset: 0, duration: 0.7, stagger: 0.05, ease: "power2.inOut" }, 0.7)
         .to(frags, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }, 1.1)
@@ -127,15 +124,6 @@ export function HeroScene({ className }: { className?: string }) {
           <line key={`h${y}`} data-grid x1="20" y1={y} x2="480" y2={y} />
         ))}
       </g>
-
-      {/* Monogramme N — ancrage en filigrane */}
-      <path
-        data-mono
-        d="M150 360 V150 L350 360 V150"
-        stroke="var(--color-white)"
-        strokeWidth="26"
-        opacity="0.08"
-      />
 
       {/* Couche lointaine : liens */}
       <g data-layer-far stroke="var(--color-border)" strokeWidth="1.25">

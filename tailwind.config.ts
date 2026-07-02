@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { cssEase } from "./src/lib/motion/easing";
 
 /**
  * NEXCY — Design tokens (Master Brief §7).
@@ -62,7 +63,13 @@ const config: Config = {
         widest2: "0.2em",
       },
       transitionTimingFunction: {
-        premium: "cubic-bezier(0.4, 0, 0.2, 1)",
+        // Motion System V3 — source unique : src/lib/motion/easing.ts (EASE_POINTS).
+        cinematic: cssEase("cinematic"),
+        standard: cssEase("standard"),
+        snappy: cssEase("snappy"),
+        media: cssEase("media"),
+        // @deprecated — alias de `standard`, conservé pour les usages ease-premium existants.
+        premium: cssEase("standard"),
       },
     },
   },

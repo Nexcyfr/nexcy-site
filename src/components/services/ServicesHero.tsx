@@ -1,6 +1,5 @@
 import { TextReveal } from "@/components/animations/TextReveal";
 import { FadeIn } from "@/components/animations/FadeIn";
-import { WatermarkN } from "@/components/ui/WatermarkN";
 
 /** Hero de la page Services — Master Brief §14. */
 export function ServicesHero() {
@@ -9,8 +8,6 @@ export function ServicesHero() {
       aria-labelledby="services-hero-title"
       className="relative overflow-hidden border-b border-border bg-black pb-16 pt-40 md:pb-24 md:pt-48"
     >
-      <WatermarkN className="right-[-8%] top-0 h-[120%] w-[55%]" />
-
       <div className="container-site relative z-10">
         <TextReveal
           as="h1"

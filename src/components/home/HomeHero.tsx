@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { Button } from "@/components/ui/Button";
-import { WatermarkN } from "@/components/ui/WatermarkN";
 import { HeroScene } from "@/components/home/HeroScene";
 import { BRAND_TAGLINE } from "@/data/navigation";
 
@@ -16,7 +15,7 @@ const H1_LINE_2 = "conçus avec précision.";
  *   mot → tagline → description → ligne dorée → CTA. Sert le « message dans les
  *   3 premières secondes » et la règle premium « animation au load ».
  * - Le mouvement lié au scroll (esprit « Precision in Motion ») est préservé par
- *   une parallaxe subtile sur le visuel et le filigrane (transform/opacity, GPU).
+ *   une parallaxe subtile sur le visuel (transform/opacity, GPU).
  * - prefers-reduced-motion : tout est visible immédiatement, aucune parallaxe.
  */
 export function HomeHero() {
@@ -35,7 +34,6 @@ export function HomeHero() {
       const ctas = scope.querySelector("[data-hero-ctas]");
       const hint = scope.querySelector("[data-hero-hint]");
       const visual = scope.querySelector("[data-hero-visual]");
-      const watermark = scope.querySelector("[data-hero-watermark]");
 
       if (reduce) {
         gsap.set([...words], { yPercent: 0 });
@@ -75,11 +73,6 @@ export function HomeHero() {
           ease: "none",
           scrollTrigger: { trigger: scope, start: "top top", end: "bottom top", scrub: true },
         });
-        gsap.to(watermark, {
-          yPercent: 10,
-          ease: "none",
-          scrollTrigger: { trigger: scope, start: "top top", end: "bottom top", scrub: true },
-        });
       });
 
       ScrollTrigger.refresh();
@@ -93,13 +86,6 @@ export function HomeHero() {
       aria-label="Introduction"
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-black"
     >
-      <div
-        data-hero-watermark
-        className="pointer-events-none absolute right-[-6%] top-1/2 h-[120%] w-[70%] -translate-y-1/2 lg:right-[2%] lg:w-[42%]"
-      >
-        <WatermarkN className="inset-0 h-full w-full" />
-      </div>
-
       <div className="container-site relative z-10 grid w-full items-center gap-12 pt-28 lg:grid-cols-[1.1fr_0.9fr] lg:pt-0">
         {/* Colonne texte */}
         <div className="max-w-2xl">

@@ -1,7 +1,6 @@
 import { TextReveal } from "@/components/animations/TextReveal";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { Button } from "@/components/ui/Button";
-import { WatermarkN } from "@/components/ui/WatermarkN";
 import { cn } from "@/lib/utils";
 
 interface CtaSectionProps {
@@ -32,8 +31,6 @@ export function CtaSection({
         className,
       )}
     >
-      <WatermarkN className="left-1/2 top-1/2 h-[140%] w-[60%] -translate-x-1/2 -translate-y-1/2" />
-
       <div className="container-site relative z-10 flex flex-col items-center">
         <TextReveal
           as="h2"

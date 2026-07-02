@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
-import { Monogram } from "@/components/ui/Monogram";
+import { Logo } from "@/components/ui/Logo";
 
 export const metadata: Metadata = {
   title: "Page introuvable",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <section className="flex min-h-screen flex-col items-center justify-center bg-black px-6 text-center">
-      <Monogram className="h-14 w-14 text-accent" strokeWidth={10} />
+      <Logo width={120} />
       <p className="mt-8 text-sm font-medium uppercase tracking-widest2 text-text-muted">
         Erreur 404
       </p>

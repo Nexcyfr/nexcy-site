@@ -1,7 +1,9 @@
 "use client";
 
-import { createElement, useRef, type ElementType } from "react";
+import { createElement, useRef, type CSSProperties, type ElementType } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { EASE, DURATION, STAGGER } from "@/lib/motion/tokens";
+import { MQ } from "@/lib/motion/mediaQueries";
 
 interface TextRevealProps {
   children: string;
@@ -12,14 +14,21 @@ interface TextRevealProps {
   /** Décalage de départ du ScrollTrigger. */
   start?: string;
   delay?: number;
+  /**
+   * `words` (défaut) : masque + décalage mot par mot (staggé) — comportement
+   * historique. `container` : un seul masque pour tout le bloc (signature V3).
+   */
+  mode?: "words" | "container";
 }
 
+/** Masque bas de ligne : les jambages ne sont pas rognés (compensé par marge). */
+const MASK_STYLE: CSSProperties = { paddingBottom: "0.12em", marginBottom: "-0.12em" };
+
 /**
- * Révélation de texte mot par mot (Master Brief §12 / §28).
- * - Split manuel par mots (pas de plugin SplitText payant).
- * - Chaque mot : masque overflow-hidden + translate y 110%→0 (GPU).
- * - Le texte reste présent dans le DOM (SEO / lecteurs d'écran).
- * - prefers-reduced-motion : apparition directe, aucune transformation.
+ * Révélation de texte au scroll — wrappers React déterministes (aucun découpage
+ * DOM non déterministe avant hydratation, pas de SplitText).
+ * Le texte reste présent et lisible dans le DOM (SEO / lecteurs d'écran).
+ * prefers-reduced-motion : apparition directe, aucune transformation.
  */
 export function TextReveal({
   children,
@@ -28,17 +37,17 @@ export function TextReveal({
   id,
   start = "top 85%",
   delay = 0,
+  mode = "words",
 }: TextRevealProps) {
   const ref = useRef<HTMLElement>(null);
   const words = children.split(" ");
 
   useGSAP(
     () => {
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const inners = ref.current?.querySelectorAll<HTMLElement>("[data-word-inner]");
+      const inners = ref.current?.querySelectorAll<HTMLElement>("[data-reveal-inner]");
       if (!inners || inners.length === 0) return;
 
-      if (reduce) {
+      if (window.matchMedia(MQ.reduce).matches) {
         gsap.set(inners, { yPercent: 0, opacity: 1 });
         return;
       }
@@ -46,20 +55,28 @@ export function TextReveal({
       gsap.set(inners, { yPercent: 110, willChange: "transform" });
       gsap.to(inners, {
         yPercent: 0,
-        duration: 0.6,
-        ease: "power3.out",
-        stagger: 0.06,
+        duration: mode === "words" ? 0.6 : DURATION.reveal,
+        ease: mode === "words" ? "power3.out" : EASE.cinematic,
+        stagger: mode === "words" ? STAGGER.uiGroup : 0,
         delay,
-        scrollTrigger: {
-          trigger: ref.current,
-          start,
-          once: true,
-        },
+        scrollTrigger: { trigger: ref.current, start, once: true },
         onComplete: () => gsap.set(inners, { willChange: "auto" }),
       });
     },
     { scope: ref },
   );
+
+  if (mode === "container") {
+    return createElement(
+      as,
+      { ref, id, className },
+      <span className="inline-block overflow-hidden align-bottom" style={MASK_STYLE}>
+        <span data-reveal-inner className="inline-block">
+          {children}
+        </span>
+      </span>,
+    );
+  }
 
   return createElement(
     as,
@@ -68,15 +85,9 @@ export function TextReveal({
       <span
         key={i}
         className="inline-block overflow-hidden align-bottom"
-        style={{
-          marginRight: i < words.length - 1 ? "0.26em" : undefined,
-          // Le masque descend un peu sous la ligne de base (jambages non rognés),
-          // compensé par une marge négative pour préserver l'interligne.
-          paddingBottom: "0.12em",
-          marginBottom: "-0.12em",
-        }}
+        style={{ ...MASK_STYLE, marginRight: i < words.length - 1 ? "0.26em" : undefined }}
       >
-        <span data-word-inner className="inline-block">
+        <span data-reveal-inner className="inline-block">
           {word}
         </span>
       </span>

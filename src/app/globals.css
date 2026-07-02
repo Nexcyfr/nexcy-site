@@ -74,7 +74,7 @@
   .lenis.lenis-stopped {
     overflow: hidden;
   }
-  /* Verrou de scroll indépendant de Lenis (préloader, menu mobile) */
+  /* Verrou de scroll indépendant de Lenis (menu mobile) */
   html.lenis-stopped,
   html.lenis-stopped body {
     overflow: hidden;
@@ -154,14 +154,6 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-
-  /* Filigrane monogramme N (Brief §6 — opacité 4–6%) */
-  .watermark-n {
-    color: var(--color-white);
-    opacity: 0.05;
-    pointer-events: none;
-    user-select: none;
   }
 
   /* Masque de révélation ligne par ligne (TextReveal) */
