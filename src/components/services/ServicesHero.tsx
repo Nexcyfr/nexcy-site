@@ -21,8 +21,9 @@ export function ServicesHero() {
         </TextReveal>
         <FadeIn delay={0.15}>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-text-secondary">
-            Cinq domaines d&apos;excellence, une approche commune : concevoir des
-            systèmes digitaux qui performent dans la durée.
+            De la création de sites web sur mesure au branding, au SEO et à
+            l&apos;automatisation &amp; IA : cinq domaines, une même exigence —
+            concevoir des systèmes digitaux qui performent dans la durée.
           </p>
         </FadeIn>
       </div>

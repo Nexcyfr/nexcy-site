@@ -15,7 +15,7 @@ const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "NEXCY — Agence Web Premium à Bordeaux | Precision in Motion",
+    default: "NEXCY — Agence web premium à Bordeaux",
     template: "%s | NEXCY",
   },
   description:
@@ -46,6 +46,7 @@ export const viewport: Viewport = {
 const organizationLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
   name: "NEXCY",
   url: SITE_URL,
   logo: `${SITE_URL}/assets/brand/logo-nexcy.svg`,
@@ -67,8 +68,10 @@ const organizationLd = {
 const websiteLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
   name: "NEXCY",
   url: SITE_URL,
+  publisher: { "@id": `${SITE_URL}/#organization` },
 };
 
 export default function RootLayout({

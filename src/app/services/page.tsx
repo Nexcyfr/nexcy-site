@@ -8,31 +8,29 @@ import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Services — Création Web, Branding, SEO & IA | NEXCY Bordeaux",
+  title: "Création de sites web sur mesure — NEXCY",
   description:
-    "Création de sites web sur mesure, branding, SEO et automatisation IA. NEXCY accompagne les entreprises exigeantes dans la durée.",
+    "Création de sites web sur mesure, branding, SEO et automatisation. NEXCY accompagne les entreprises exigeantes dans la durée.",
   path: "/services",
   ogImage: "/assets/og/og-services.png",
 });
 
-/** JSON-LD Service (×5) + BreadcrumbList — Master Brief §20 / §21. */
+/**
+ * JSON-LD Service ×4 (les 4 services détaillés dans le contenu visible ;
+ * maintenance exclue) + BreadcrumbList. `provider` référence l'Organization
+ * globale par @id (pas de duplication). Aucun prix/note/avis/durée non vérifié.
+ */
 const servicesLd = {
   "@context": "https://schema.org",
   "@graph": [
     ...serviceDetails.map((s) => ({
       "@type": "Service",
+      "@id": `${SITE_URL}/services#${s.slug}`,
       name: s.title,
       description: s.hook,
-      provider: { "@type": "Organization", name: "NEXCY", url: SITE_URL },
-      areaServed: "FR",
+      provider: { "@id": `${SITE_URL}/#organization` },
+      areaServed: { "@type": "Country", name: "France" },
     })),
-    {
-      "@type": "Service",
-      name: "Accompagnement continu",
-      description: "Abonnement mensuel d'accompagnement et de maintenance.",
-      provider: { "@type": "Organization", name: "NEXCY", url: SITE_URL },
-      areaServed: "FR",
-    },
     {
       "@type": "BreadcrumbList",
       itemListElement: [

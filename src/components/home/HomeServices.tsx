@@ -27,9 +27,9 @@ export function HomeServices() {
           </TextReveal>
           <FadeIn>
             <p className="max-w-md text-base leading-relaxed text-text-secondary lg:mt-2">
-              Chaque service NEXCY s&apos;articule autour d&apos;un objectif
-              commun : construire un écosystème digital précis, durable et
-              performant.
+              Agence web premium à Bordeaux, NEXCY articule chaque service autour
+              d&apos;un objectif commun : construire un écosystème digital précis,
+              durable et performant.
             </p>
           </FadeIn>
         </div>

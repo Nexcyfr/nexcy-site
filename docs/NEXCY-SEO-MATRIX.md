@@ -151,7 +151,7 @@ Conformité Schema.org/Google : pas de duplication Organization/LocalBusiness (L
 **Enseignements actionnables pour NEXCY** :
 1. **H1 keyword vs marque** : tous les concurrents utilisent un H1 avec mot-clé (« Agence Web Bordeaux »). NEXCY assume un **H1 de marque** (validé) — différenciation premium ; le mot-clé reste dans Title/meta/corps. Trade-off conscient.
 2. **Preuves** : les peers premium s'appuient sur **awards, portfolios nommés, témoignages, prix**. NEXCY (créée 2025, sans clients) **ne peut pas** rivaliser sur ce terrain sans inventer → différenciation par **méthode, standards, engagements et démonstration live** (cf. Livrable 5). **Ne jamais fabriquer** clients/avis/awards.
-3. **Avantage technique** : **aucun** concurrent audité n'expose de **données structurées JSON-LD** → le balisage NEXCY (Organization / WebSite / ProfessionalService / AboutPage / ContactPage / Service) est un **avantage SEO différenciant**.
+3. **Données structurées** : peu de concurrents audités exposent du JSON-LD. **À ne PAS interpréter comme un avantage de classement** : le balisage NEXCY (Organization / WebSite / ProfessionalService / AboutPage / ContactPage / Service) sert la **compréhension des entités** par les moteurs et l'**éligibilité éventuelle aux résultats enrichis** — ce n'est **pas un facteur de ranking direct**, et l'absence de JSON-LD chez un concurrent ne prouve aucun avantage SEO.
 4. **Éviter** la confrontation frontale sur « agence web Bordeaux » (généralistes établis) et « agence SEO Bordeaux » (spécialistes) → cohérent avec le ciblage « premium » + « sur mesure ».
 
 ## Décisions validées par Matéo (figées)

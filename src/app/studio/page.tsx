@@ -11,27 +11,23 @@ import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Studio — NEXCY, Agence Digitale Premium à Bordeaux",
+  title: "Studio NEXCY — Vision, méthode et standards",
   description:
-    "L'histoire, la vision et les valeurs de NEXCY. Une agence digitale conçue pour l'exigence, basée à Bordeaux.",
+    "L'histoire, la vision, les standards et le fonctionnement de NEXCY. Une agence conçue pour l'exigence.",
   path: "/studio",
   ogImage: "/assets/og/og-studio.png",
 });
 
-/** JSON-LD AboutPage + Organization — Master Brief §20. */
+/**
+ * JSON-LD AboutPage — référence l'Organization globale par @id (pas de
+ * duplication de l'objet Organization défini dans le layout).
+ */
 const aboutLd = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
-  name: "Studio — NEXCY",
+  name: "Studio NEXCY",
   url: `${SITE_URL}/studio`,
-  about: {
-    "@type": "Organization",
-    name: "NEXCY",
-    url: SITE_URL,
-    foundingDate: "2025",
-    description:
-      "Agence digitale premium à Bordeaux, conçue pour l'exigence.",
-  },
+  about: { "@id": `${SITE_URL}/#organization` },
 };
 
 export default function StudioPage() {

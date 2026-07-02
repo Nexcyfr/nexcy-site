@@ -11,7 +11,7 @@ import { SITE_URL } from "@/lib/utils";
 import { CONTACT_EMAIL } from "@/data/navigation";
 
 export const metadata: Metadata = buildMetadata({
-  title: "NEXCY — Agence Web Premium à Bordeaux | Precision in Motion",
+  title: "NEXCY — Agence web premium à Bordeaux",
   description:
     "NEXCY conçoit des sites web, identités visuelles et systèmes d'automatisation conçus avec précision pour les entreprises exigeantes. Basée à Bordeaux. Réponse sous 48h.",
   path: "/",
@@ -26,6 +26,7 @@ export const metadata: Metadata = buildMetadata({
 const professionalServiceLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": `${SITE_URL}/#professionalservice`,
   name: "NEXCY",
   url: SITE_URL,
   description:
