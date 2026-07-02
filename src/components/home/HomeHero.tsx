@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
+import { useRef } from "react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { Button } from "@/components/ui/Button";
 import { WatermarkN } from "@/components/ui/WatermarkN";
-import { HeroVisual } from "@/components/home/HeroVisual";
+import { HeroScene } from "@/components/home/HeroScene";
 import { BRAND_TAGLINE } from "@/data/navigation";
 
 const H1_LINE_1 = "Systèmes digitaux";
@@ -22,7 +21,6 @@ const H1_LINE_2 = "conçus avec précision.";
  */
 export function HomeHero() {
   const root = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   useGSAP(
     () => {
@@ -53,10 +51,8 @@ export function HomeHero() {
       gsap.set(visual, { autoAlpha: 0, scale: 1.05 });
       gsap.set(hint, { autoAlpha: 0 });
 
-      // Séquence d'entrée — construite en pause, jouée au bon moment
-      // (à la disparition du préloader en 1re visite, sinon immédiatement).
-      const tl = gsap.timeline({ paused: true });
-      timelineRef.current = tl;
+      // Séquence d'entrée jouée au chargement (préloader supprimé — DA P2).
+      const tl = gsap.timeline({ delay: 0.15 });
       tl.to(words, {
         yPercent: 0,
         duration: 0.8,
@@ -90,31 +86,6 @@ export function HomeHero() {
     },
     { scope: root },
   );
-
-  // Déclenche l'entrée du hero au bon moment (Master Brief §46) :
-  // - 1re visite : à la fin du préloader (évènement « nexcy:preloader-done ») ;
-  // - visites suivantes (flag présent) : immédiatement ;
-  // - filet de sécurité : jouée après 3 s si aucun signal n'arrive.
-  useEffect(() => {
-    const tl = timelineRef.current;
-    if (!tl) return; // reduced-motion : contenu déjà visible, rien à jouer
-    let played = false;
-    const play = () => {
-      if (played) return;
-      played = true;
-      tl.play(0);
-    };
-    if (sessionStorage.getItem("nexcy-loaded")) {
-      play();
-    } else {
-      window.addEventListener("nexcy:preloader-done", play, { once: true });
-    }
-    const fallback = window.setTimeout(play, 3000);
-    return () => {
-      window.removeEventListener("nexcy:preloader-done", play);
-      window.clearTimeout(fallback);
-    };
-  }, []);
 
   return (
     <section
@@ -200,21 +171,12 @@ export function HomeHero() {
           </div>
         </div>
 
-        {/* Colonne visuelle */}
+        {/* Colonne visuelle — scène codée « système en assemblage » (DA P2) */}
         <div
           data-hero-visual
           className="relative hidden aspect-square w-full overflow-hidden rounded-card border border-border lg:block"
         >
-          <Image
-            src="/assets/home/hero-abstract.avif"
-            alt="Composition abstraite — surfaces géométriques et lumière ambrée"
-            fill
-            priority
-            sizes="(min-width: 1024px) 42vw, 1px"
-            className="object-cover"
-          />
-          {/* Faisceaux ambrés codés superposés (signature « Precision in Motion ») */}
-          <HeroVisual className="absolute inset-0 h-full w-full opacity-50 mix-blend-screen" />
+          <HeroScene />
         </div>
       </div>
 

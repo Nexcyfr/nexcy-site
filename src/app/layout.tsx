@@ -4,7 +4,6 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 import { SmoothScroll } from "@/components/global/SmoothScroll";
-import { Preloader } from "@/components/global/Preloader";
 import { Header } from "@/components/global/Header";
 import { Footer } from "@/components/global/Footer";
 import { SITE_URL } from "@/lib/utils";
@@ -49,7 +48,7 @@ const organizationLd = {
   "@id": `${SITE_URL}/#organization`,
   name: "NEXCY",
   url: SITE_URL,
-  logo: `${SITE_URL}/assets/brand/logo-nexcy.svg`,
+  logo: `${SITE_URL}/assets/brand/logo-nexcy-blanc.png`,
   description:
     "Agence digitale premium spécialisée en création de sites web, branding, SEO et automatisation. Basée à Bordeaux, France.",
   foundingDate: "2025",
@@ -97,7 +96,6 @@ export default function RootLayout({
           Aller au contenu principal
         </a>
 
-        <Preloader />
         <SmoothScroll>
           <Header />
           <main id="main">{children}</main>

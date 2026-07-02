@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { TextReveal } from "@/components/animations/TextReveal";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { WatermarkN } from "@/components/ui/WatermarkN";
@@ -10,22 +9,6 @@ export function StudioHero() {
       aria-labelledby="studio-hero-title"
       className="relative overflow-hidden border-b border-border bg-black pb-16 pt-40 md:pb-24 md:pt-48"
     >
-      {/* Matière (formes ondulées) en fond droit, fondue vers le noir */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 hidden h-full w-3/5 md:block"
-      >
-        <Image
-          src="/assets/studio/manifesto-matter.avif"
-          alt=""
-          fill
-          priority
-          sizes="60vw"
-          className="object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-      </div>
-
       <WatermarkN className="left-[-6%] top-[-10%] h-[130%] w-[50%]" />
 
       <div className="container-site relative z-10">

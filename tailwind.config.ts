@@ -23,7 +23,7 @@ const config: Config = {
         white: "#FFFFFF",
         "text-primary": "#F0F0F0",
         "text-secondary": "#9A9A9A",
-        "text-muted": "#5A5A5A",
+        "text-muted": "#808080",
         border: "#222222",
         accent: {
           DEFAULT: "#C8883A",

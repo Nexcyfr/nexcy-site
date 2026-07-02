@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextReveal } from "@/components/animations/TextReveal";
 import { FadeIn } from "@/components/animations/FadeIn";
@@ -12,22 +11,9 @@ export function HomeReassurance() {
   return (
     <section
       aria-labelledby="home-reassurance-title"
-      className="relative overflow-hidden border-t border-border bg-surface section-y"
+      className="section-y border-t border-border bg-surface"
     >
-      {/* Fond matière très discret */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <Image
-          src="/assets/home/reassurance-bg.avif"
-          alt=""
-          fill
-          loading="lazy"
-          sizes="100vw"
-          className="object-cover opacity-[0.10]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
-      </div>
-
-      <div className="container-site relative z-10">
+      <div className="container-site">
         <SectionLabel label="04 / Pourquoi NEXCY" />
 
         <TextReveal
