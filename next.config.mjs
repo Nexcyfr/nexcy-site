@@ -2,6 +2,19 @@
 
 // Master Brief §26 — En-têtes de sécurité. Content-Security-Policy incluse.
 // (Next 14 ne supporte pas next.config.ts natif → fichier .mjs.)
+
+// En développement, webpack charge les modules via `eval` (source maps/HMR) :
+// 'unsafe-eval' est requis UNIQUEMENT en dev (jamais embarqué en production).
+// La CSP de production reste stricte (moindre privilège).
+const isDev = process.env.NODE_ENV !== "production";
+const scriptSrc = [
+  "script-src 'self' 'unsafe-inline'",
+  isDev ? "'unsafe-eval'" : "",
+  "https://challenges.cloudflare.com https://plausible.io",
+]
+  .filter(Boolean)
+  .join(" ");
+
 const securityHeaders = [
   { key: "X-DNS-Prefetch-Control", value: "on" },
   { key: "X-XSS-Protection", value: "1; mode=block" },
@@ -17,9 +30,11 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://plausible.io",
+      scriptSrc,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
+      // Vidéos auto-hébergées (public/assets) — moindre privilège.
+      "media-src 'self'",
       "font-src 'self'",
       "connect-src 'self' https://plausible.io https://challenges.cloudflare.com",
       "frame-src https://challenges.cloudflare.com",

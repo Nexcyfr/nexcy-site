@@ -40,3 +40,6 @@ next-env.d.ts
 /shot.mjs
 /scroll-shot.mjs
 /func-test.mjs
+
+# Media pipeline — frames intermédiaires & sorties temporaires (jamais commité)
+/.tmp/

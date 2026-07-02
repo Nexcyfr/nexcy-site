@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "media:render": "node scripts/media/render-scene.mjs",
+    "media:encode": "node scripts/media/encode-video.mjs",
+    "media:poster": "node scripts/media/make-poster.mjs",
+    "media:images": "node scripts/media/optimize-images.mjs",
+    "media:smoke": "node scripts/media/smoke-test.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
