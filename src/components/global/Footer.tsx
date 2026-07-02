@@ -2,20 +2,26 @@ import Image from "next/image";
 import { Logo } from "@/components/ui/Logo";
 import { TextLink } from "@/components/ui/TextLink";
 import {
+  navLinks,
   legalLinks,
   CONTACT_EMAIL,
   BRAND_TAGLINE,
   NEXCY_FOUNDING_YEAR,
 } from "@/data/navigation";
 
+/** Navigation interne du footer : Accueil + les liens de nav principaux. */
+const footerNav = [{ label: "Accueil", href: "/" }, ...navLinks];
+
 /**
  * Footer (Master Brief §5 / §11).
- * Logo + tagline + e-mail + liens légaux · skyline Bordeaux à droite (opacité 15 %).
+ * Trois colonnes équilibrées : identité (logo + tagline + e-mail) · navigation
+ * interne · informations légales. Skyline Bordeaux décorative à droite (15 %).
+ * Aucun réseau social non vérifié — e-mail réel uniquement.
  */
 export function Footer() {
   return (
     <footer className="relative border-t border-border bg-black">
-      <div className="container-site relative py-12 md:py-16">
+      <div className="container-site relative py-space-6 md:py-space-7">
         {/* Skyline Bordeaux — décoratif, masqué sur mobile (Brief §29) */}
         <div
           aria-hidden="true"
@@ -31,10 +37,10 @@ export function Footer() {
           />
         </div>
 
-        <div className="relative grid gap-10 md:grid-cols-2">
-          <div className="flex flex-col gap-6">
+        <div className="relative grid gap-space-6 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-space-5">
+          {/* Colonne identité */}
+          <div className="flex flex-col gap-space-4">
             <Logo width={150} />
-
             <p className="text-sm font-light uppercase tracking-widest2 text-accent">
               {BRAND_TAGLINE}
             </p>
@@ -46,24 +52,36 @@ export function Footer() {
             </a>
           </div>
 
-          <nav
-            aria-label="Navigation du pied de page"
-            className="flex flex-col gap-4 md:items-end md:text-right"
-          >
-            <ul className="flex flex-col gap-3 text-sm md:items-end">
+          {/* Colonne navigation interne */}
+          <nav aria-label="Navigation du site">
+            <p className="mb-space-4 text-xs uppercase tracking-widest2 text-text-muted">
+              Navigation
+            </p>
+            <ul className="flex flex-col gap-space-3 text-sm">
+              {footerNav.map((link) => (
+                <li key={link.href}>
+                  <TextLink href={link.href}>{link.label}</TextLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Colonne informations légales */}
+          <nav aria-label="Informations légales">
+            <p className="mb-space-4 text-xs uppercase tracking-widest2 text-text-muted">
+              Informations
+            </p>
+            <ul className="flex flex-col gap-space-3 text-sm">
               {legalLinks.map((link) => (
                 <li key={link.href}>
                   <TextLink href={link.href}>{link.label}</TextLink>
                 </li>
               ))}
-              <li>
-                <TextLink href="/contact">Contact</TextLink>
-              </li>
             </ul>
           </nav>
         </div>
 
-        <div className="relative mt-12 border-t border-border pt-6">
+        <div className="relative mt-space-7 border-t border-border pt-space-4">
           <p className="text-xs text-text-muted">
             © {NEXCY_FOUNDING_YEAR}–{new Date().getFullYear()} NEXCY. Tous droits
             réservés.

@@ -1,6 +1,7 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextReveal } from "@/components/animations/TextReveal";
 import { FadeIn } from "@/components/animations/FadeIn";
+import { cn } from "@/lib/utils";
 
 const standards = [
   "Performance (Core Web Vitals)",
@@ -30,9 +31,17 @@ export function StudioStandards() {
           Ce sur quoi nous ne transigeons pas.
         </TextReveal>
 
-        <ul className="mt-12 grid gap-px overflow-hidden rounded-card border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+        {/* 5 standards : grille 2 colonnes, dernier item pleine largeur —
+            aucune cellule vide, quel que soit le breakpoint. */}
+        <ul className="mt-space-6 grid gap-px overflow-hidden rounded-card border border-border bg-border sm:grid-cols-2">
           {standards.map((item, i) => (
-            <li key={item} className="bg-black">
+            <li
+              key={item}
+              className={cn(
+                "bg-black",
+                i === standards.length - 1 && "sm:col-span-2",
+              )}
+            >
               <FadeIn as="div" delay={i * 0.04} y={16} className="h-full">
                 <div className="flex h-full items-start gap-4 p-8">
                   <span aria-hidden="true" className="mt-3 h-px w-5 shrink-0 bg-accent" />

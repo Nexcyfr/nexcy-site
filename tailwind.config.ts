@@ -41,6 +41,17 @@ const config: Config = {
       spacing: {
         // py-30 = 120px (padding vertical de section desktop, Brief §7)
         "30": "7.5rem",
+        // Échelle d'espacements centralisée (source : --space-* dans globals.css).
+        // Utilitaires : p-space-6, gap-space-4, py-space-8, mt-space-5, …
+        "space-1": "var(--space-1)",
+        "space-2": "var(--space-2)",
+        "space-3": "var(--space-3)",
+        "space-4": "var(--space-4)",
+        "space-5": "var(--space-5)",
+        "space-6": "var(--space-6)",
+        "space-7": "var(--space-7)",
+        "space-8": "var(--space-8)",
+        "space-9": "var(--space-9)",
       },
       borderRadius: {
         card: "4px",
