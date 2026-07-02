@@ -77,6 +77,25 @@ export function ServiceBlock({
                   {service.problem}
                 </p>
               ) : null}
+
+              {/* Résultat visé */}
+              <p className="mt-6 flex max-w-md gap-3 text-base leading-relaxed text-text-primary">
+                <span aria-hidden="true" className="mt-2 h-px w-4 shrink-0 bg-accent" />
+                <span>
+                  <span className="text-text-muted">Résultat visé — </span>
+                  {service.result}
+                </span>
+              </p>
+
+              {/* Méthode */}
+              <div className="mt-8 max-w-md">
+                <p className="text-xs uppercase tracking-widest2 text-text-muted">
+                  Méthode
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                  {service.method}
+                </p>
+              </div>
             </FadeIn>
 
             {SERVICE_IMAGES[service.slug] ? (
@@ -120,6 +139,17 @@ export function ServiceBlock({
                   {service.technologies}
                 </p>
               ) : null}
+
+              <div className="mt-6 border-t border-border pt-6">
+                <p className="text-sm leading-relaxed text-text-secondary">
+                  <span className="text-text-muted">Critères de réussite — </span>
+                  {service.criteria}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                  <span className="text-text-secondary">Notre limite — </span>
+                  {service.limit}
+                </p>
+              </div>
 
               <div className="mt-8">
                 <Button href="/contact" variant="secondary">

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { StudioHero } from "@/components/studio/StudioHero";
+import { StudioHistory } from "@/components/studio/StudioHistory";
 import { StudioManifesto } from "@/components/studio/StudioManifesto";
 import { StudioValues } from "@/components/studio/StudioValues";
 import { StudioMethod } from "@/components/studio/StudioMethod";
+import { StudioStandards } from "@/components/studio/StudioStandards";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { ImmersiveBand } from "@/components/ui/ImmersiveBand";
 import { buildMetadata } from "@/lib/metadata";
@@ -40,6 +42,7 @@ export default function StudioPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutLd) }}
       />
       <StudioHero />
+      <StudioHistory />
       <StudioManifesto />
       <ImmersiveBand
         src="/assets/studio/precision-band.avif"
@@ -47,6 +50,7 @@ export default function StudioPage() {
       />
       <StudioValues />
       <StudioMethod />
+      <StudioStandards />
       <CtaSection
         title="Un projet. Une vision. Une seule question : êtes-vous prêt à exiger davantage ?"
         buttonLabel="Démarrer un projet"

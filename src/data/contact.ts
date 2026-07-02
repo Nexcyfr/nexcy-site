@@ -13,7 +13,7 @@ export const budgetRanges = [
   "5 000 – 10 000 €",
   "10 000 – 20 000 €",
   "Plus de 20 000 €",
-  "Non défini",
+  "Budget à définir",
 ] as const;
 
 export const deadlineOptions = [

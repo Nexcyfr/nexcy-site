@@ -50,9 +50,17 @@ export interface ServiceDetail {
   title: string;
   hook: string;
   problem?: string;
+  /** Résultat visé pour le client. */
+  result: string;
+  /** Étapes de la méthode (résumé en une ligne). */
+  method: string;
   deliverablesTitle: string;
   deliverables: string[];
   technologies?: string;
+  /** Critères de réussite mesurables/observables. */
+  criteria: string;
+  /** Limite assumée (une phrase). */
+  limit: string;
   ctaLabel: string;
 }
 
@@ -61,9 +69,13 @@ export const serviceDetails: ServiceDetail[] = [
     index: "01",
     slug: "creation-web",
     title: "Création de sites web",
-    hook: "Un site web n'est pas une plaquette en ligne. C'est votre meilleur commercial — disponible 24h/24.",
+    hook: "Un site web doit soutenir votre crédibilité, votre visibilité et votre conversion.",
     problem:
       "Des sites génériques, lents, difficiles à trouver et incapables de convertir. Des prestataires qui livrent et disparaissent.",
+    result:
+      "Un site rapide, trouvable et pensé pour transformer un visiteur en prise de contact.",
+    method:
+      "Diagnostic des objectifs → architecture et copywriting → design → développement → optimisation Core Web Vitals → mise en ligne et transfert.",
     deliverablesTitle: "Ce que nous livrons",
     deliverables: [
       "Site vitrine ou applicatif sur mesure",
@@ -75,7 +87,11 @@ export const serviceDetails: ServiceDetail[] = [
       "Documentation de prise en main",
     ],
     technologies:
-      "Next.js, TypeScript, Tailwind CSS, Vercel — ou WordPress sur mesure selon les besoins.",
+      "Next.js, TypeScript, Tailwind CSS et Vercel pour le sur-mesure ; WordPress lorsque l'autonomie éditoriale prime. Le choix est dicté par vos besoins, pas par une mode.",
+    criteria:
+      "Temps de chargement maîtrisé, site administrable, base SEO saine et une base technique propre, documentée et maintenable.",
+    limit:
+      "Nous ne livrons pas de site que nous ne pourrions pas maintenir proprement.",
     ctaLabel: "Discuter de votre projet",
   },
   {
@@ -85,6 +101,10 @@ export const serviceDetails: ServiceDetail[] = [
     hook: "Une marque cohérente n'est pas un luxe. C'est la condition d'une croissance durable.",
     problem:
       "Des identités visuelles incohérentes entre le logo, le site et les supports. Une marque que personne ne retient.",
+    result:
+      "Une identité claire, cohérente sur tous les points de contact, réutilisable sans nous.",
+    method:
+      "Cadrage du positionnement → territoire visuel → logotype et système → déclinaisons → guide d'utilisation.",
     deliverablesTitle: "Ce que nous livrons",
     deliverables: [
       "Logotype et déclinaisons",
@@ -93,6 +113,10 @@ export const serviceDetails: ServiceDetail[] = [
       "Templates de supports (présentations, e-mails, réseaux)",
       "Guide d'utilisation",
     ],
+    criteria:
+      "Cohérence vérifiable sur chaque support et autonomie de vos équipes via le guide.",
+    limit:
+      "Le branding ne remplace pas une offre claire — nous cadrons d'abord le positionnement.",
     ctaLabel: "Parler de votre identité",
   },
   {
@@ -102,6 +126,10 @@ export const serviceDetails: ServiceDetail[] = [
     hook: "Le meilleur site du monde ne sert à rien si personne ne le trouve.",
     problem:
       "Absence de stratégie éditoriale. Technique bâclée. Résultats mesurés en vanity metrics, pas en leads.",
+    result:
+      "Une visibilité durable sur des requêtes qui amènent des clients, pas du trafic vide.",
+    method:
+      "Audit technique et éditorial → stratégie de mots-clés → optimisation on-page → contenu → suivi mensuel.",
     deliverablesTitle: "Ce que nous livrons",
     deliverables: [
       "Audit SEO technique et éditorial",
@@ -110,6 +138,10 @@ export const serviceDetails: ServiceDetail[] = [
       "Création de contenu optimisé",
       "Suivi mensuel et reporting clair",
     ],
+    criteria:
+      "Progression sur les requêtes cibles et reporting lisible (positions, trafic qualifié).",
+    limit:
+      "Le SEO est un travail de fond : nous ne promettons ni première place ni résultats immédiats.",
     ctaLabel: "Analyser votre visibilité",
   },
   {
@@ -119,6 +151,10 @@ export const serviceDetails: ServiceDetail[] = [
     hook: "Automatiser les tâches répétitives, c'est libérer du temps pour ce qui compte vraiment.",
     problem:
       "Des processus manuels chronophages. Des outils qui ne communiquent pas. Des opportunités manquées par manque de ressources.",
+    result:
+      "Des processus fiabilisés, du temps rendu à vos équipes, des outils qui se parlent.",
+    method:
+      "Audit des processus → cartographie → workflows (n8n, Make, Zapier) → intégration d'agents IA → documentation et formation.",
     deliverablesTitle: "Ce que nous livrons",
     deliverables: [
       "Audit des processus automatisables",
@@ -127,6 +163,10 @@ export const serviceDetails: ServiceDetail[] = [
       "Connexion entre vos outils existants",
       "Documentation et formation",
     ],
+    criteria:
+      "Réduction observable des tâches manuelles et des erreurs, et autonomie via la documentation.",
+    limit:
+      "Nous automatisons ce qui doit l'être — pas d'IA gadget sans gain réel.",
     ctaLabel: "Explorer les possibilités",
   },
 ];
