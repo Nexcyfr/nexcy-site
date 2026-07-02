@@ -130,20 +130,37 @@ Conformité Schema.org/Google : pas de duplication Organization/LocalBusiness (L
 
 ---
 
-## Concurrents étudiés
-> Deep-dive complet (Title/H1/structure/preuves) **partiel** : la limite de session a interrompu 4 analyses concurrents. Données ci-dessous = SERP + 1 fetch. **À compléter** (voir « lacunes »).
+## Concurrents étudiés (deep-dive complété)
+> Deep-dive relancé après la limite de session. Analyse Title/H1/angle/preuves/local/
+> données structurées/profondeur sur les **peers premium réels** (identifiés via SERP)
+> + généraliste établi + leader SEO. **Note** : la liste de concurrents du Master Brief
+> (Konvict, Humana Studio, Tiz, Karussel) est **obsolète/inexacte** — « Humana Studio »
+> ne ressort pas comme agence web bordelaise (résultats = « HUMAN Immobilier », sans
+> rapport). Les concurrents pertinents réels sont ci-dessous.
 
-| Concurrent | Positionnement observé | Signal |
-|---|---|---|
-| **LATOUTFRANCAIS** | Title : « Agence web premium à Bordeaux \| Stratégie, Design, Développement » | **concurrent premium direct** ; home JS, peu de contenu crawlable, pas de preuves visibles |
-| **Beaucoup (studio)** | sur-mesure, branding, 3D ; budgets affichés (~25 k€ site / 7,5 k€ identité) | premium, **transparence tarifaire** |
-| **ITS ARTY Studio** | sites premium Showit/WordPress pour entrepreneurs | premium, cible entrepreneurs |
-| **Socreativ'** | offre « Premium » dès 4 590 € HT | premium accessible |
-| Appalga / Sympozium / Natural-net / Dernier Cri | généralistes établis (15–25 ans, B Corp) | dominent « agence web Bordeaux » |
-| Première Page / Eskimoz / Keyweo / Stratedge | agences SEO spécialisées (depuis 2012) | dominent « agence SEO Bordeaux » |
-| Sortlist (annuaire) | comparateur | capte le haut de SERP sur la plupart des requêtes locales |
+| Concurrent | Title / H1 | Angle | Preuves | Local | JSON-LD | Profondeur |
+|---|---|---|---|---|---|---|
+| **LATOUTFRANCAIS** | « Agence web premium à Bordeaux \| Stratégie, Design, Développement » | premium 3 piliers | non visibles (home JS) | Bordeaux (title) | aucun détecté | faible (crawlable) |
+| **Beaucoup** | T: « Agence web Bordeaux \| Devenez unique » · H1: « Agence Web Bordeaux » | studio premium design | **Awwwards « Studio of the Year » ×2**, 7 experts, portfolio nommé (Caeli, Anima, Oakame), **prix ~25 k€ / 7,5 k€**, délais 2–4 mois, FAQ | Bordeaux + 5 villes, pas d'adresse | aucun détecté | moyen-élevé |
+| **ITS ARTY** | T: « Agence web à Bordeaux (Gironde)… » · H1: « Agence web bordeaux en gironde » | orienté résultats/entrepreneurs, « bienveillance » | **15+ témoignages nommés**, avant/après, **certifié Showit** | Bordeaux/Gironde + villes, France + int'l | aucun détecté | moyen-élevé (FAQ, blog, process 3 phases) |
+| **Sympozium** | T: « Agence web à Bordeaux \| Création de sites internet » · H1: « Sympozium, 25 ans d'expertise… » | généraliste établi | portfolio 7 clients nommés (pas d'avis/prix/awards) | **adresse réelle** 1 rue Lucien Faure 33300, tél, Google Maps | aucun détecté | moyen |
+| Appalga / Natural-net / Dernier Cri | généralistes (2015 / 18 ans / B Corp) | généraliste | ancienneté, réalisations | Bordeaux | (non audité en détail) | — |
+| Première Page / Eskimoz / Keyweo | agences SEO spécialisées (depuis 2012) | SEO/GEO | ancienneté, cas | Bordeaux + national | (non audité) | élevé |
+| Sortlist (annuaire) | comparateur | mise en relation | avis agrégés | multi-ville | oui (annuaire) | — |
 
-**Enseignements** : (1) le créneau « premium » est occupé mais **atteignable** et cohérent ; (2) plusieurs premium affichent des **preuves/prix** — NEXCY se différencie par la **méthode, les standards et la démonstration live** (sans inventer de clients) ; (3) éviter la confrontation frontale sur les requêtes généralistes/SEO saturées.
+**Enseignements actionnables pour NEXCY** :
+1. **H1 keyword vs marque** : tous les concurrents utilisent un H1 avec mot-clé (« Agence Web Bordeaux »). NEXCY assume un **H1 de marque** (validé) — différenciation premium ; le mot-clé reste dans Title/meta/corps. Trade-off conscient.
+2. **Preuves** : les peers premium s'appuient sur **awards, portfolios nommés, témoignages, prix**. NEXCY (créée 2025, sans clients) **ne peut pas** rivaliser sur ce terrain sans inventer → différenciation par **méthode, standards, engagements et démonstration live** (cf. Livrable 5). **Ne jamais fabriquer** clients/avis/awards.
+3. **Avantage technique** : **aucun** concurrent audité n'expose de **données structurées JSON-LD** → le balisage NEXCY (Organization / WebSite / ProfessionalService / AboutPage / ContactPage / Service) est un **avantage SEO différenciant**.
+4. **Éviter** la confrontation frontale sur « agence web Bordeaux » (généralistes établis) et « agence SEO Bordeaux » (spécialistes) → cohérent avec le ciblage « premium » + « sur mesure ».
+
+## Décisions validées par Matéo (figées)
+- ✅ Accueil principal = **« agence web premium Bordeaux »**.
+- ✅ H1 Accueil = **message de marque** (« Systèmes digitaux conçus avec précision. »).
+- ✅ Pages légales = **indexables** (retrait du `noindex` du Lot 1).
+- ✅ Studio = intention de marque (Title sans « agence digitale Bordeaux »).
+- ✅ Service schema = **×4** (hors maintenance).
+- Volumes : restés qualitatifs (non chiffrés) — priorisation sur intention/SERP.
 
 ---
 
@@ -164,11 +181,13 @@ Conformité Schema.org/Google : pas de duplication Organization/LocalBusiness (L
 5. **Service schema ×4** (exclure la maintenance).
 6. **Titles raccourcis** (tous ≤ 60 car.).
 
-## Éléments nécessitant ta validation
-- [ ] Mot-clé principal Accueil : « agence web premium Bordeaux » **OK ?**
-- [ ] H1 Accueil : garder le message de marque **ou** basculer sur un H1 avec mot-clé ?
-- [ ] Pages légales : **indexables** (changement vs Lot 1) **OK ?**
-- [ ] Studio : Title de marque sans « agence digitale Bordeaux » **OK ?**
-- [ ] Service schema **×4** (sans maintenance) **OK ?**
-- [ ] Faut-il **confirmer les volumes** via un outil payant avant intégration, ou **procéder** sur la base qualitative SERP ?
-- [ ] Dois-je **relancer le deep-dive concurrents** (limite de session) pour compléter l'analyse, ou est-ce suffisant ?
+## Statut de validation
+- [x] Mot-clé principal Accueil : **« agence web premium Bordeaux »** — validé.
+- [x] H1 Accueil : **message de marque** — validé.
+- [x] Pages légales : **indexables** (retrait du noindex) — validé.
+- [x] Studio : Title de marque sans « agence digitale Bordeaux » — validé.
+- [x] Service schema **×4** (sans maintenance) — validé.
+- [x] Deep-dive concurrents : **complété** (peers premium réels ; liste du brief obsolète).
+- [~] Volumes : procédé sur base **qualitative SERP** (chiffrage payant non requis pour cette phase).
+
+➡️ **Matrice figée. Prête pour l'intégration (sous-lot SEO).**
