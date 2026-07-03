@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { StudioHero } from "@/components/studio/StudioHero";
 import { StudioHistory } from "@/components/studio/StudioHistory";
+import { StudioTimeline } from "@/components/studio/StudioTimeline";
 import { StudioManifesto } from "@/components/studio/StudioManifesto";
 import { StudioValues } from "@/components/studio/StudioValues";
 import { StudioMethod } from "@/components/studio/StudioMethod";
@@ -39,6 +40,7 @@ export default function StudioPage() {
       />
       <StudioHero />
       <StudioHistory />
+      <StudioTimeline />
       <StudioManifesto />
       <ImmersiveBand
         src="/assets/studio/precision-band.avif"
