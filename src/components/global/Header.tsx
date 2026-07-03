@@ -105,7 +105,7 @@ export function Header() {
   }, [menuOpen]);
 
   return (
-    <>
+    <header>
       {/* Logo fixe à gauche */}
       <Link
         href="/"
@@ -230,6 +230,6 @@ export function Header() {
           </Link>
         </div>
       </div>
-    </>
+    </header>
   );
 }

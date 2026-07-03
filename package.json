@@ -11,7 +11,12 @@
     "media:encode": "node scripts/media/encode-video.mjs",
     "media:poster": "node scripts/media/make-poster.mjs",
     "media:images": "node scripts/media/optimize-images.mjs",
-    "media:smoke": "node scripts/media/smoke-test.mjs"
+    "media:smoke": "node scripts/media/smoke-test.mjs",
+    "test:e2e": "playwright test",
+    "test:a11y": "playwright test tests/e2e/a11y.spec.ts",
+    "audit:lighthouse": "pnpm build && lhci autorun",
+    "analyze": "ANALYZE=true next build",
+    "optimize:svg": "svgo public -r --multipass"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -31,14 +36,20 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@lhci/cli": "^0.15.1",
+    "@next/bundle-analyzer": "^16.2.10",
+    "@playwright/test": "^1.49",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.5.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
+    "lighthouse": "^13.4.0",
     "playwright-core": "1.49",
     "postcss": "^8",
+    "svgo": "^4.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

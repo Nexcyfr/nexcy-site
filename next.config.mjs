@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
+import withBundleAnalyzerInit from "@next/bundle-analyzer";
+
+const withBundleAnalyzer = withBundleAnalyzerInit({
+  enabled: process.env.ANALYZE === "true",
+});
 
 // Master Brief §26 — En-têtes de sécurité. Content-Security-Policy incluse.
 // (Next 14 ne supporte pas next.config.ts natif → fichier .mjs.)
@@ -57,4 +62,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

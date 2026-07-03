@@ -62,7 +62,7 @@ export function DemoWorkflow() {
                     className={cn(
                       "rounded px-1.5 py-0.5 text-[9px] uppercase tracking-wide",
                       s.kind === "human"
-                        ? "bg-accent/20 text-accent"
+                        ? "bg-accent/20 text-accent-light"
                         : "bg-surface text-text-muted",
                     )}
                   >
