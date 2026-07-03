@@ -3,6 +3,9 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
+import { EASE, AMPLITUDE } from "@/lib/motion/tokens";
+import { usePointerMotion } from "@/hooks/usePointerMotion";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 // Coordonnées DÉTERMINISTES (aucun Math.random → hydratation SSR stable).
 const NODES = [
@@ -29,32 +32,55 @@ const FRAGMENTS = [
 ];
 
 /**
- * Scène hero codée « système en assemblage » (DA P2 — architecture invisible
- * en mouvement). SVG + GSAP (aucune lib ajoutée, aucun Canvas/WebGL).
- * - Markup = état final assemblé (contenu jamais masqué ; reduced-motion OK).
- * - Hors reduced-motion : la grille, les nœuds, les liens, les fragments, la
- *   ligne de lumière cuivrée et le monogramme N s'assemblent une fois, puis repos
- *   (aucune boucle permanente). Parallaxe pointeur subtile (desktop, transforms).
- * - Décorative : aria-hidden (le message vit dans le texte du hero).
+ * Scène hero codée « architecture en mouvement » (DA P2).
+ * SVG + GSAP — aucune lib ajoutée, aucun Canvas/WebGL.
+ * - Markup = état final assemblé → lisible sans JS, reduced-motion OK.
+ * - Hors reduced-motion : assemblage en 1,8 s (grille → terminaux → liens →
+ *   modules → impulsion lumineuse), puis repos.
+ * - Parallaxe pointeur via usePointerMotion (desktop + pointeur fin uniquement).
+ * - Décoratif : aria-hidden (le message vit dans le texte du hero).
  */
 export function HeroScene({ className }: { className?: string }) {
-  const root = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const reduced = useReducedMotion();
 
   const lightPoints = LIGHT.map((i) => `${NODES[i].x},${NODES[i].y}`).join(" ");
 
+  // Parallaxe pointeur sur les couches lointaine et proche.
+  usePointerMotion(
+    containerRef,
+    (nx, ny) => {
+      const svg = svgRef.current;
+      if (!svg) return;
+      const far = svg.querySelector("[data-layer-far]");
+      const near = svg.querySelector("[data-layer-near]");
+      gsap.to(far, { x: nx * AMPLITUDE.pointerFar, y: ny * AMPLITUDE.pointerFar, duration: 0.6, ease: EASE.standard });
+      gsap.to(near, { x: nx * AMPLITUDE.pointerNear, y: ny * AMPLITUDE.pointerNear, duration: 0.6, ease: EASE.standard });
+    },
+    { disabled: reduced },
+  );
+
   useGSAP(
     () => {
-      const svg = root.current;
+      const svg = svgRef.current;
       if (!svg) return;
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce) return; // markup déjà en état final
 
       const q = <T extends Element>(s: string) => Array.from(svg.querySelectorAll<T>(s));
+
+      if (reduced) {
+        // Garantit l'état final visible si reduced-motion s'active après le montage.
+        gsap.set([...q("[data-grid],[data-node],[data-frag],[data-light],[data-light-glow],[data-light-head]")], { clearProps: "all" });
+        gsap.set(q<SVGLineElement>("[data-link]"), { strokeDasharray: "none", strokeDashoffset: "0" });
+        return;
+      }
+
       const grid = q("[data-grid]");
       const nodes = q("[data-node]");
       const links = q<SVGLineElement>("[data-link]");
       const frags = q("[data-frag]");
       const light = svg.querySelector<SVGPolylineElement>("[data-light]");
+      const lightGlow = svg.querySelector<SVGPolylineElement>("[data-light-glow]");
       const lightHead = svg.querySelector("[data-light-head]");
 
       // État initial (pré-assemblage)
@@ -68,122 +94,116 @@ export function HeroScene({ className }: { className?: string }) {
       let lightLen = 0;
       if (light) {
         lightLen = light.getTotalLength();
-        gsap.set(light, { strokeDasharray: lightLen, strokeDashoffset: lightLen });
+        gsap.set([light, lightGlow], { strokeDasharray: lightLen, strokeDashoffset: lightLen });
       }
-      gsap.set(lightHead, { opacity: 0 });
+      gsap.set(lightHead, { opacity: 0, scale: 0, transformOrigin: "center" });
 
+      // Séquence d'assemblage (1,8 s)
       const tl = gsap.timeline();
-      tl.to(grid, { opacity: 1, duration: 0.6, stagger: 0.03, ease: "power1.out" })
-        .to(nodes, { scale: 1, opacity: 1, duration: 0.5, stagger: 0.06, ease: "back.out(1.7)" }, 0.4)
-        .to(links, { strokeDashoffset: 0, duration: 0.7, stagger: 0.05, ease: "power2.inOut" }, 0.7)
-        .to(frags, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }, 1.1)
-        .to(light, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, 1.2)
-        .to(lightHead, { opacity: 1, duration: 0.3 }, 1.4);
-
-      // Parallaxe pointeur subtile (desktop + pointeur fin uniquement)
-      const canHover = window.matchMedia("(min-width:1024px) and (hover:hover)").matches;
-      if (!canHover) return;
-      const layerFar = svg.querySelector("[data-layer-far]");
-      const layerNear = svg.querySelector("[data-layer-near]");
-      let raf = 0;
-      const onMove = (e: PointerEvent) => {
-        if (raf) return;
-        raf = requestAnimationFrame(() => {
-          raf = 0;
-          const r = svg.getBoundingClientRect();
-          const dx = (e.clientX - r.left) / r.width - 0.5;
-          const dy = (e.clientY - r.top) / r.height - 0.5;
-          gsap.to(layerFar, { x: dx * 10, y: dy * 10, duration: 0.6, ease: "power2.out" });
-          gsap.to(layerNear, { x: dx * 22, y: dy * 22, duration: 0.6, ease: "power2.out" });
-        });
-      };
-      const parent = svg.parentElement;
-      parent?.addEventListener("pointermove", onMove);
-      return () => {
-        parent?.removeEventListener("pointermove", onMove);
-        if (raf) cancelAnimationFrame(raf);
-      };
+      tl.to(grid, { opacity: 1, duration: 0.55, stagger: 0.025, ease: "power1.out" })
+        .to(nodes, { scale: 1, opacity: 1, duration: 0.42, stagger: 0.052, ease: "back.out(1.4)" }, 0.4)
+        .to(links, { strokeDashoffset: 0, duration: 0.62, stagger: 0.038, ease: "power2.inOut" }, 0.65)
+        .to(frags, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }, 1.05)
+        .to([light, lightGlow], { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, 1.15)
+        .to(lightHead, { opacity: 1, scale: 1, duration: 0.28 }, 1.5);
     },
-    { scope: root },
+    { scope: svgRef, dependencies: [reduced] },
   );
 
   return (
-    <svg
-      ref={root}
-      viewBox="0 0 500 500"
-      className={cn("block h-full w-full", className)}
-      aria-hidden="true"
-      fill="none"
-    >
-      {/* Grille architecturale */}
-      <g stroke="var(--color-border)" strokeWidth="1">
-        {[83, 166, 249, 332, 415].map((x) => (
-          <line key={`v${x}`} data-grid x1={x} y1="20" x2={x} y2="480" />
-        ))}
-        {[83, 166, 249, 332, 415].map((y) => (
-          <line key={`h${y}`} data-grid x1="20" y1={y} x2="480" y2={y} />
-        ))}
-      </g>
+    <div ref={containerRef} className={cn("relative h-full w-full", className)}>
+      <svg
+        ref={svgRef}
+        viewBox="0 0 500 500"
+        className="block h-full w-full"
+        aria-hidden="true"
+        fill="none"
+      >
+        {/* Grille architecturale */}
+        <g stroke="var(--color-border)" strokeWidth="0.75">
+          {[83, 166, 249, 332, 415].map((x) => (
+            <line key={`v${x}`} data-grid x1={x} y1="20" x2={x} y2="480" />
+          ))}
+          {[83, 166, 249, 332, 415].map((y) => (
+            <line key={`h${y}`} data-grid x1="20" y1={y} x2="480" y2={y} />
+          ))}
+        </g>
 
-      {/* Couche lointaine : liens */}
-      <g data-layer-far stroke="var(--color-border)" strokeWidth="1.25">
-        {LINKS.map(([a, b], i) => (
-          <line
-            key={i}
-            data-link
-            x1={NODES[a].x}
-            y1={NODES[a].y}
-            x2={NODES[b].x}
-            y2={NODES[b].y}
-          />
-        ))}
-      </g>
+        {/* Couche lointaine : liens de connexion */}
+        <g data-layer-far stroke="var(--color-border)" strokeWidth="1.25">
+          {LINKS.map(([a, b], i) => (
+            <line
+              key={i}
+              data-link
+              x1={NODES[a].x}
+              y1={NODES[a].y}
+              x2={NODES[b].x}
+              y2={NODES[b].y}
+            />
+          ))}
+        </g>
 
-      {/* Fragments d'interface */}
-      <g data-layer-far>
-        {FRAGMENTS.map((f, i) => (
-          <g key={i} data-frag transform={`translate(${f.x} ${f.y})`}>
-            <rect width="44" height="30" rx="3" fill="var(--color-card)" stroke="var(--color-border)" />
-            <rect x="6" y="7" width="24" height="3" rx="1.5" fill="var(--color-text-muted)" />
-            <rect x="6" y="15" width="32" height="2.5" rx="1.25" fill="var(--color-border)" />
-            <rect x="6" y="21" width="18" height="2.5" rx="1.25" fill="var(--color-border)" />
-          </g>
-        ))}
-      </g>
+        {/* Couche lointaine : modules système */}
+        <g data-layer-far>
+          {FRAGMENTS.map((f, i) => (
+            <g key={i} data-frag transform={`translate(${f.x} ${f.y})`}>
+              <rect width="44" height="30" rx="2" fill="var(--color-card)" stroke="var(--color-border)" strokeWidth="0.75" />
+              <rect x="6" y="7" width="20" height="2.5" rx="1.25" fill="var(--color-text-muted)" opacity="0.55" />
+              <rect x="6" y="13" width="32" height="1.75" rx="0.875" fill="var(--color-border)" />
+              <rect x="6" y="19" width={i === 1 ? "24" : "16"} height="1.75" rx="0.875" fill="var(--color-border)" />
+              {/* Indicateur d'état */}
+              <circle cx="38" cy="8" r="2" fill={i === 0 ? "var(--color-accent)" : "var(--color-border)"} opacity={i === 0 ? 0.85 : 1} />
+            </g>
+          ))}
+        </g>
 
-      {/* Ligne de lumière cuivrée (trajectoire) */}
-      <polyline
-        data-light
-        points={lightPoints}
-        stroke="var(--color-accent)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-
-      {/* Couche proche : nœuds */}
-      <g data-layer-near>
-        {NODES.map((n, i) => (
-          <circle
-            key={i}
-            data-node
-            cx={n.x}
-            cy={n.y}
-            r="4.5"
-            fill="var(--color-black)"
-            stroke="var(--color-text-secondary)"
-            strokeWidth="1.5"
-          />
-        ))}
-        {/* tête lumineuse en bout de trajectoire */}
-        <circle
-          data-light-head
-          cx={NODES[LIGHT[LIGHT.length - 1]].x}
-          cy={NODES[LIGHT[LIGHT.length - 1]].y}
-          r="5"
-          fill="var(--color-accent)"
+        {/* Lueur de l'impulsion lumineuse (large, faible opacité) */}
+        <polyline
+          data-light-glow
+          points={lightPoints}
+          stroke="var(--color-accent)"
+          strokeWidth="7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeOpacity="0.18"
         />
-      </g>
-    </svg>
+
+        {/* Trace lumineuse cuivrée (fine, précise) */}
+        <polyline
+          data-light
+          points={lightPoints}
+          stroke="var(--color-accent)"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        {/* Couche proche : terminaux (losanges) */}
+        <g data-layer-near>
+          {NODES.map((n, i) => (
+            <rect
+              key={i}
+              data-node
+              x={n.x - 3.5}
+              y={n.y - 3.5}
+              width="7"
+              height="7"
+              transform={`rotate(45 ${n.x} ${n.y})`}
+              fill="var(--color-black)"
+              stroke="var(--color-text-secondary)"
+              strokeWidth="1.25"
+            />
+          ))}
+          {/* Terminal actif en bout de trajectoire */}
+          <circle
+            data-light-head
+            cx={NODES[LIGHT[LIGHT.length - 1]].x}
+            cy={NODES[LIGHT[LIGHT.length - 1]].y}
+            r="4.5"
+            fill="var(--color-accent)"
+          />
+        </g>
+      </svg>
+    </div>
   );
 }

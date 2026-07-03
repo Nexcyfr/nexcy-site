@@ -4,19 +4,31 @@ import { useRef } from "react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { Button } from "@/components/ui/Button";
 import { HeroScene } from "@/components/home/HeroScene";
+import { HeroMedia } from "@/components/home/HeroMedia";
 import { BRAND_TAGLINE } from "@/data/navigation";
 
 const H1_LINE_1 = "Systèmes digitaux";
 const H1_LINE_2 = "conçus avec précision.";
 
 /**
- * Hero d'accueil (Master Brief §13 / §46).
- * - Révélation séquentielle AU CHARGEMENT (message visible en < 2 s) : H1 mot par
- *   mot → tagline → description → ligne dorée → CTA. Sert le « message dans les
- *   3 premières secondes » et la règle premium « animation au load ».
- * - Le mouvement lié au scroll (esprit « Precision in Motion ») est préservé par
- *   une parallaxe subtile sur le visuel (transform/opacity, GPU).
- * - prefers-reduced-motion : tout est visible immédiatement, aucune parallaxe.
+ * Hero d'accueil hybride (Lot 3 — quatre couches).
+ *
+ * Architecture visuelle (colonne droite) :
+ *   1. HeroScene  — scène SVG codée, toujours présente (fallback + reduced-motion)
+ *   2. HeroMedia  — boucle vidéo ambiante, desktop + pointeur fin uniquement
+ *   3. Vignette   — dégradé atmosphérique bas (CSS, pointer-events none)
+ *
+ * Chorégraphie d'entrée :
+ *   0.15 s → mots H1 (yPercent 110→0, stagger)
+ *   0.20 s → colonne visuelle (autoAlpha + scale)
+ *   0.50 s → tagline
+ *   0.70 s → description
+ *   0.80 s → ligne dorée (scaleX)
+ *   0.95 s → CTA
+ *   1.20 s → indicateur scroll
+ *
+ * Scroll : légère parallaxe yPercent sur le visuel (desktop uniquement).
+ * prefers-reduced-motion : tout visible immédiatement, aucune parallaxe.
  */
 export function HomeHero() {
   const root = useRef<HTMLDivElement>(null);
@@ -36,7 +48,7 @@ export function HomeHero() {
       const visual = scope.querySelector("[data-hero-visual]");
 
       if (reduce) {
-        gsap.set([...words], { yPercent: 0 });
+        gsap.set(words, { yPercent: 0 });
         gsap.set([tagline, desc, ctas, visual, hint], { autoAlpha: 1, y: 0, scale: 1 });
         gsap.set(line, { scaleX: 1 });
         return;
@@ -46,10 +58,10 @@ export function HomeHero() {
       gsap.set(words, { yPercent: 110, willChange: "transform" });
       gsap.set([tagline, desc, ctas], { autoAlpha: 0, y: 20 });
       gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
-      gsap.set(visual, { autoAlpha: 0, scale: 1.05 });
+      gsap.set(visual, { autoAlpha: 0, scale: 1.04 });
       gsap.set(hint, { autoAlpha: 0 });
 
-      // Séquence d'entrée jouée au chargement (préloader supprimé — DA P2).
+      // Séquence d'entrée
       const tl = gsap.timeline({ delay: 0.15 });
       tl.to(words, {
         yPercent: 0,
@@ -65,11 +77,11 @@ export function HomeHero() {
         .to(ctas, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.95)
         .to(hint, { autoAlpha: 1, duration: 0.6 }, 1.2);
 
-      // Parallaxe subtile au scroll (uniquement desktop, sans reduced-motion)
+      // Parallaxe subtile au scroll (desktop uniquement)
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1024px)", () => {
         gsap.to(visual, {
-          yPercent: -12,
+          yPercent: -10,
           ease: "none",
           scrollTrigger: { trigger: scope, start: "top top", end: "bottom top", scrub: true },
         });
@@ -157,12 +169,29 @@ export function HomeHero() {
           </div>
         </div>
 
-        {/* Colonne visuelle — scène codée « système en assemblage » (DA P2) */}
+        {/* Colonne visuelle — quatre couches empilées */}
         <div
           data-hero-visual
           className="relative hidden aspect-square w-full overflow-hidden rounded-card border border-border lg:block"
         >
-          <HeroScene />
+          {/* Couche 2 : scène codée (toujours présente, fallback + reduced-motion) */}
+          <div className="absolute inset-0">
+            <HeroScene />
+          </div>
+
+          {/* Couche 3 : boucle vidéo ambiante (desktop + pointeur fin uniquement) */}
+          <HeroMedia
+            mp4="/assets/video/hero.mp4"
+            webm="/assets/video/hero.webm"
+            poster="/assets/posters/hero-poster.avif"
+            priority
+          />
+
+          {/* Couche 4 : vignette atmosphérique bas de cadre */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/35"
+          />
         </div>
       </div>
 

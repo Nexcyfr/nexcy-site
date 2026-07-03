@@ -110,4 +110,93 @@ test.describe("Page d'accueil", () => {
     await expect(page.locator("h1").first()).toBeVisible();
     expect(await hasHorizontalOverflow(page)).toBe(false);
   });
+
+  // ─── Lot 3 — Hero hybride ──────────────────────────────────────────────────
+
+  test("hero : scène codée SVG présente et décorative", async ({ page, viewport }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    const isDesktop = (viewport?.width ?? 0) >= 1024;
+    if (isDesktop) {
+      // La scène SVG doit être dans le DOM, aria-hidden (décoration pure)
+      const scene = page.locator("[data-hero-visual] svg[aria-hidden='true']");
+      await expect(scene).toBeAttached();
+    }
+  });
+
+  test("hero : colonne visuelle présente et visible (desktop)", async ({ page, viewport }) => {
+    const isDesktop = (viewport?.width ?? 0) >= 1024;
+    if (!isDesktop) return; // mobile : seule la colonne texte est rendue
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    const visual = page.locator("[data-hero-visual]");
+    await expect(visual).toBeVisible({ timeout: 5_000 });
+  });
+
+  test("hero : vidéo muted, playsInline et poster si présente (desktop)", async ({
+    page,
+    viewport,
+  }) => {
+    const isDesktop = (viewport?.width ?? 0) >= 1024;
+    if (!isDesktop) return;
+
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+
+    const video = page.locator("[data-hero-visual] video");
+    const count = await video.count();
+    // La vidéo peut ne pas être montée si le pointer:fine n'est pas détecté en headless
+    // On vérifie les propriétés de sécurité si elle est présente
+    if (count > 0) {
+      // React 18 ne sérialise pas l'attribut HTML `muted` — on vérifie la propriété DOM
+      const isMuted = await page.evaluate(() => {
+        const v = document.querySelector<HTMLVideoElement>("[data-hero-visual] video");
+        return v ? v.muted : true;
+      });
+      expect(isMuted).toBe(true);
+      await expect(video.first()).toHaveAttribute("playsinline", "");
+      const loop = await video.first().getAttribute("loop");
+      expect(loop).not.toBeNull();
+    }
+  });
+
+  test("hero : pas de texte essentiel uniquement dans le visuel", async ({ page }) => {
+    await page.goto("/");
+    // Le H1, tagline, description et CTAs doivent être dans le DOM texte réel
+    const h1 = await page.locator("h1").first().textContent();
+    expect(h1).toBeTruthy();
+    const desc = page.locator("[data-hero-desc]");
+    await expect(desc).toBeAttached();
+  });
+
+  test("hero : route publique sans dépendance à /render", async ({ page }) => {
+    const requests: string[] = [];
+    page.on("request", (req) => {
+      if (req.url().includes("/render/")) requests.push(req.url());
+    });
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    expect(requests, "La page publique ne doit pas requêter /render/").toHaveLength(0);
+  });
+
+  test("hero : aucun logo N codé détecté", async ({ page }) => {
+    await page.goto("/");
+    // Vérifie que data-mono (monogramme généré) n'existe pas dans le DOM
+    const monoEl = await page.locator("[data-mono]").count();
+    expect(monoEl).toBe(0);
+  });
+
+  test("hero reduced-motion : colonne visuelle immédiatement visible (desktop)", async ({
+    page,
+    viewport,
+  }) => {
+    const isDesktop = (viewport?.width ?? 0) >= 1024;
+    if (!isDesktop) return;
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    await page.waitForLoadState("domcontentloaded");
+    const visual = page.locator("[data-hero-visual]");
+    // En reduced-motion, GSAP met autoAlpha: 1 immédiatement → visible
+    await expect(visual).toBeVisible({ timeout: 3_000 });
+  });
 });
