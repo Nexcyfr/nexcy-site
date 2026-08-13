@@ -23,10 +23,10 @@ interface TextRevealProps {
  *
  * Le texte est rendu tel quel (visible au SSR, lisible sans JS, parfait pour le
  * SEO et les lecteurs d'écran). `useGSAP` (layout effect) pose l'état initial
- * avant le paint, puis anime `autoAlpha + y` à l'entrée dans le viewport.
+ * avant le paint, puis anime `opacity + y` à l'entrée dans le viewport.
  * prefers-reduced-motion : état final immédiat, aucune transformation.
  *
- * NB : implémentation alignée sur MotionReveal (autoAlpha + y en px), fiable avec
+ * NB : implémentation alignée sur MotionReveal (opacity + y en px), fiable avec
  * ScrollTrigger + Lenis — contrairement à l'ancien masquage par mot en `yPercent`
  * qui restait bloqué dans son état initial (contenu invisible).
  */
@@ -46,18 +46,21 @@ export function TextReveal({
       if (!el) return;
 
       if (window.matchMedia(MQ.reduce).matches) {
-        gsap.set(el, { autoAlpha: 1, y: 0 });
+        gsap.set(el, { opacity: 1, y: 0 });
         return;
       }
 
       const mobile = window.matchMedia(MQ.mobile).matches;
+      // `opacity` et non `autoAlpha` : un titre en `visibility: hidden` n'est
+      // pas annoncé par les lecteurs d'écran, qui naviguent justement de
+      // titre en titre. Voir la note d'accessibilité dans MotionReveal.
       gsap.set(el, {
-        autoAlpha: 0,
+        opacity: 0,
         y: mobile ? AMPLITUDE.revealYMobile : AMPLITUDE.revealY,
         willChange: "transform, opacity",
       });
       gsap.to(el, {
-        autoAlpha: 1,
+        opacity: 1,
         y: 0,
         duration: DURATION.reveal,
         ease: EASE.cinematic,

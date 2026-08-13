@@ -141,7 +141,7 @@ export function HomeHero() {
         <div className="pointer-events-none absolute inset-0 z-10">
           <div className="container-site relative flex h-full flex-col justify-between">
             {/* Cote haute — une donnée vraie, pas un ornement de HUD */}
-            <p className="t-tech pt-[calc(var(--header-h)+1rem)] text-stone/60">
+            <p className="t-tech pt-[calc(var(--header-h)+1rem)] text-stone">
               {COORDS}
             </p>
 

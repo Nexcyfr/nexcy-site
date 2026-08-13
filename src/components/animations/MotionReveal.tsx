@@ -32,6 +32,14 @@ interface MotionRevealProps {
  * - reduced-motion : état final immédiat, aucune transformation.
  * - `will-change` posé puis retiré ; ScrollTrigger `once` par défaut ; cleanup
  *   automatique via useGSAP.
+ *
+ * Accessibilité — l'état initial est `opacity: 0`, jamais `autoAlpha`.
+ * `autoAlpha` pose `visibility: hidden`, ce qui sort le bloc de l'ordre de
+ * tabulation ET de l'arbre d'accessibilité tant que le ScrollTrigger n'a pas
+ * tiré. Au clavier, la première traversée de la page sautait alors tout le
+ * corps de l'accueil pour aller du Hero au footer. Avec `opacity`, le contenu
+ * reste annoncé et atteignable ; `focusin` termine la révélation
+ * immédiatement si le focus arrive avant le scroll.
  */
 export function MotionReveal({
   children,
@@ -55,12 +63,12 @@ export function MotionReveal({
       if (!el) return;
 
       if (window.matchMedia(MQ.reduce).matches) {
-        gsap.set(el, { autoAlpha: 1, x: 0, y: 0, scale: 1 });
+        gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 });
         return;
       }
 
       const mobile = window.matchMedia(MQ.mobile).matches;
-      const from: gsap.TweenVars = { autoAlpha: 0, willChange: "transform, opacity" };
+      const from: gsap.TweenVars = { opacity: 0, willChange: "transform, opacity" };
       if (variant === "rise" || y != null) {
         from.y = y ?? (mobile ? AMPLITUDE.revealYMobile : AMPLITUDE.revealY);
       }
@@ -72,8 +80,8 @@ export function MotionReveal({
       }
 
       gsap.set(el, from);
-      gsap.to(el, {
-        autoAlpha: 1,
+      const tween = gsap.to(el, {
+        opacity: 1,
         x: 0,
         y: 0,
         scale: 1,
@@ -83,6 +91,16 @@ export function MotionReveal({
         scrollTrigger: { trigger: el, start, once },
         onComplete: () => gsap.set(el, { willChange: "auto" }),
       });
+
+      // Filet clavier : si le focus atteint le bloc avant que le scroll ne
+      // l'ait révélé, on termine la révélation sur-le-champ.
+      const onFocusIn = () => {
+        tween.scrollTrigger?.kill();
+        tween.progress(1);
+        gsap.set(el, { willChange: "auto" });
+      };
+      el.addEventListener("focusin", onFocusIn);
+      return () => el.removeEventListener("focusin", onFocusIn);
     },
     { scope: ref },
   );

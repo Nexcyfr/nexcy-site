@@ -8,10 +8,10 @@ import { SITE_URL } from "@/lib/utils";
  * lorsqu'une page change réellement.
  */
 const LAST_MODIFIED: Record<string, string> = {
-  "/": "2026-07-01",
-  "/services": "2026-07-01",
-  "/studio": "2026-07-01",
-  "/contact": "2026-07-01",
+  "/": "2026-08-13",
+  "/services": "2026-08-13",
+  "/studio": "2026-08-13",
+  "/contact": "2026-08-13",
   "/mentions-legales": "2026-06-25",
   "/politique-de-confidentialite": "2026-06-25",
 };

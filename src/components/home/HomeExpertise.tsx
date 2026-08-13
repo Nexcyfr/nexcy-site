@@ -63,7 +63,7 @@ export function HomeExpertise() {
 
                   <span
                     aria-hidden="true"
-                    className="t-tech text-accent/50 transition-colors duration-300 group-hover:text-accent"
+                    className="t-tech text-accent/80 transition-colors duration-300 group-hover:text-accent"
                   >
                     {row.index}
                   </span>

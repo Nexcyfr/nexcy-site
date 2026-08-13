@@ -16,7 +16,13 @@
     "test:a11y": "playwright test tests/e2e/a11y.spec.ts",
     "audit:lighthouse": "pnpm build && lhci autorun",
     "analyze": "ANALYZE=true next build",
-    "optimize:svg": "svgo public -r --multipass"
+    "optimize:svg": "svgo public -r --multipass",
+    "qa:hero": "node scripts/qa/capture.mjs hero",
+    "qa:pages": "node scripts/qa/capture.mjs pages",
+    "qa:viewports": "node scripts/qa/capture.mjs viewports",
+    "qa:a11y": "node scripts/qa/a11y.mjs",
+    "qa:robustness": "node scripts/qa/robustness.mjs",
+    "qa:sections": "node scripts/qa/sections.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

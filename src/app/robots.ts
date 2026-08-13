@@ -7,7 +7,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/api/",
+      // /render/ est un harnais de rendu réservé au dev : il renvoie 404 en
+      // production, mais on l'exclut aussi explicitement du crawl.
+      disallow: ["/api/", "/render/"],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

@@ -82,7 +82,7 @@ export function Footer() {
           <p className="t-tech text-text-muted">
             © {NEXCY_FOUNDING_YEAR}–{new Date().getFullYear()} NEXCY
           </p>
-          <p className="t-tech text-text-muted/70">
+          <p className="t-tech text-text-muted">
             Bordeaux · 44.8378° N — 0.5792° O
           </p>
         </div>
