@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/ui/Logo";
-import { navLinks, headerCta } from "@/data/navigation";
+import { navLinks, headerCta, CONTACT_EMAIL } from "@/data/navigation";
 
 /**
  * Header (Master Brief §5 / §11).
@@ -198,36 +198,60 @@ export function Header() {
         aria-modal="true"
         aria-label="Menu de navigation"
         className={cn(
-          "fixed inset-0 z-50 flex flex-col justify-center bg-black px-8 transition-opacity duration-300 lg:hidden",
+          "fixed inset-0 z-50 flex flex-col justify-between bg-void px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(var(--header-h)+2rem)] transition-opacity duration-300 md:px-10 lg:hidden",
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         )}
         aria-hidden={!menuOpen}
       >
-        <ul className="flex flex-col gap-6">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                aria-current={isActive(link.href) ? "page" : undefined}
-                className={cn(
-                  "text-4xl font-semibold tracking-tight transition-colors",
-                  isActive(link.href) ? "text-accent" : "text-text-primary",
-                )}
-                tabIndex={menuOpen ? 0 : -1}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-12">
+        {/* Même trame que le Hero : le menu appartient au système, il ne
+            se contente pas de recouvrir la page d'un aplat noir. */}
+        <div
+          aria-hidden="true"
+          className="plan-grid plan-grid-fade pointer-events-none absolute inset-0"
+        />
+
+        <p className="t-tech relative text-stone">44.8378° N — 0.5792° O</p>
+
+        <nav aria-label="Menu mobile" className="relative">
+          <ul className="flex flex-col">
+            {navLinks.map((link, i) => (
+              <li key={link.href} className="border-t border-border last:border-b">
+                <Link
+                  href={link.href}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={cn(
+                    "flex items-baseline gap-5 py-5 transition-colors",
+                    isActive(link.href) ? "text-accent" : "text-text-primary",
+                  )}
+                  tabIndex={menuOpen ? 0 : -1}
+                >
+                  <span aria-hidden="true" className="t-tech text-accent/80">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="t-h2">{link.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
           <Link
             href={headerCta.href}
             tabIndex={menuOpen ? 0 : -1}
-            className="inline-flex min-h-[44px] items-center rounded-btn bg-accent px-7 py-3 text-sm font-medium text-black"
+            className="mt-10 inline-flex min-h-[52px] items-center rounded-btn bg-accent px-7 text-sm font-medium text-black"
           >
             {headerCta.label}
           </Link>
+        </nav>
+
+        <div className="relative">
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            tabIndex={menuOpen ? 0 : -1}
+            className="break-all text-sm text-text-secondary transition-colors hover:text-accent"
+          >
+            {CONTACT_EMAIL}
+          </a>
+          <p className="t-tech mt-2 text-text-muted">Réponse sous 48 h ouvrées</p>
         </div>
       </div>
     </header>
