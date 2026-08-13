@@ -21,6 +21,12 @@ const COL = {
   accentLight: "231,170,98",
 } as const;
 
+/**
+ * Largeur maximale de la colonne de contenu — doit rester en phase avec
+ * `maxWidth.site` (tailwind.config.ts) et `.container-site` (globals.css).
+ */
+const SITE_MAX_WIDTH = 1440;
+
 /** Projection axonométrique isométrique classique (30°). */
 const ISO_X = Math.cos(Math.PI / 6);
 const ISO_Y = Math.sin(Math.PI / 6);
@@ -126,14 +132,20 @@ export function fitCamera(
     return { minX, maxX, minY, maxY };
   };
 
-  // Le plan est l'objet dominant : il occupe le cadre, le titre se pose dessus.
+  // Le plan est dimensionné et centré sur la colonne de contenu, pas sur le
+  // viewport. Au-delà de 1440px il grossirait indéfiniment et se détacherait de
+  // la composition, alors que le titre et le rail des phases, eux, restent
+  // bornés par .container-site.
+  const layoutW = Math.min(width, SITE_MAX_WIDTH);
+  const originX = (width - layoutW) / 2;
+
   const unit = bounds(1);
   // La marge basse doit laisser passer la ligne de cote, qui vit sous l'objet.
   const padX = compact ? 0.98 : 0.94;
   const padY = compact ? 0.62 : 0.8;
   const scale =
     Math.min(
-      (width * padX) / (unit.maxX - unit.minX),
+      (layoutW * padX) / (unit.maxX - unit.minX),
       (height * padY) / (unit.maxY - unit.minY),
     ) * zoom;
 
@@ -147,7 +159,7 @@ export function fitCamera(
 
   return {
     scale,
-    cx: width * (compact ? 0.5 : 0.58) - (b.minX + b.maxX) / 2,
+    cx: originX + layoutW * (compact ? 0.5 : 0.58) - (b.minX + b.maxX) / 2,
     cy: cyGround + (cyEnvelope - cyGround) * envelope,
   };
 }

@@ -191,10 +191,13 @@ export function HomeHero() {
             </div>
           </div>
 
-          {/* Rail des phases — la lecture du système, à droite, desktop seul */}
+          {/* Rail des phases — la lecture du système, à droite, desktop seul.
+              Calé sur la colonne de contenu (mêmes retraits que .container-site)
+              et non sur le bord du viewport : au-delà de 1440px il resterait
+              sinon isolé à l'extrême droite, détaché de la composition. */}
           <ol
             aria-hidden="true"
-            className="absolute right-[max(2rem,5vw)] top-1/2 hidden -translate-y-1/2 flex-col gap-3 lg:flex"
+            className="absolute left-1/2 top-1/2 hidden w-full max-w-site -translate-x-1/2 -translate-y-1/2 flex-col items-end gap-3 pr-5 md:pr-10 lg:flex lg:pr-20"
           >
             {PHASES.map((ph, i) => (
               <li
