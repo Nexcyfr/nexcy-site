@@ -1,8 +1,8 @@
 "use client";
 
-import { createElement, useRef, type CSSProperties, type ElementType } from "react";
+import { createElement, useRef, type ElementType } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { EASE, DURATION, STAGGER } from "@/lib/motion/tokens";
+import { EASE, DURATION, AMPLITUDE } from "@/lib/motion/tokens";
 import { MQ } from "@/lib/motion/mediaQueries";
 
 interface TextRevealProps {
@@ -14,21 +14,21 @@ interface TextRevealProps {
   /** Décalage de départ du ScrollTrigger. */
   start?: string;
   delay?: number;
-  /**
-   * `words` (défaut) : masque + décalage mot par mot (staggé) — comportement
-   * historique. `container` : un seul masque pour tout le bloc (signature V3).
-   */
+  /** Conservé pour compatibilité d'API (les deux modes révèlent le bloc). */
   mode?: "words" | "container";
 }
 
-/** Masque bas de ligne : les jambages ne sont pas rognés (compensé par marge). */
-const MASK_STYLE: CSSProperties = { paddingBottom: "0.12em", marginBottom: "-0.12em" };
-
 /**
- * Révélation de texte au scroll — wrappers React déterministes (aucun découpage
- * DOM non déterministe avant hydratation, pas de SplitText).
- * Le texte reste présent et lisible dans le DOM (SEO / lecteurs d'écran).
- * prefers-reduced-motion : apparition directe, aucune transformation.
+ * Révélation de titre au scroll — rise + fade sur le bloc (Motion System V3).
+ *
+ * Le texte est rendu tel quel (visible au SSR, lisible sans JS, parfait pour le
+ * SEO et les lecteurs d'écran). `useGSAP` (layout effect) pose l'état initial
+ * avant le paint, puis anime `autoAlpha + y` à l'entrée dans le viewport.
+ * prefers-reduced-motion : état final immédiat, aucune transformation.
+ *
+ * NB : implémentation alignée sur MotionReveal (autoAlpha + y en px), fiable avec
+ * ScrollTrigger + Lenis — contrairement à l'ancien masquage par mot en `yPercent`
+ * qui restait bloqué dans son état initial (contenu invisible).
  */
 export function TextReveal({
   children,
@@ -37,60 +37,37 @@ export function TextReveal({
   id,
   start = "top 85%",
   delay = 0,
-  mode = "words",
 }: TextRevealProps) {
   const ref = useRef<HTMLElement>(null);
-  const words = children.split(" ");
 
   useGSAP(
     () => {
-      const inners = ref.current?.querySelectorAll<HTMLElement>("[data-reveal-inner]");
-      if (!inners || inners.length === 0) return;
+      const el = ref.current;
+      if (!el) return;
 
       if (window.matchMedia(MQ.reduce).matches) {
-        gsap.set(inners, { yPercent: 0, opacity: 1 });
+        gsap.set(el, { autoAlpha: 1, y: 0 });
         return;
       }
 
-      gsap.set(inners, { yPercent: 110, willChange: "transform" });
-      gsap.to(inners, {
-        yPercent: 0,
-        duration: mode === "words" ? 0.6 : DURATION.reveal,
-        ease: mode === "words" ? "power3.out" : EASE.cinematic,
-        stagger: mode === "words" ? STAGGER.uiGroup : 0,
+      const mobile = window.matchMedia(MQ.mobile).matches;
+      gsap.set(el, {
+        autoAlpha: 0,
+        y: mobile ? AMPLITUDE.revealYMobile : AMPLITUDE.revealY,
+        willChange: "transform, opacity",
+      });
+      gsap.to(el, {
+        autoAlpha: 1,
+        y: 0,
+        duration: DURATION.reveal,
+        ease: EASE.cinematic,
         delay,
-        scrollTrigger: { trigger: ref.current, start, once: true },
-        onComplete: () => gsap.set(inners, { willChange: "auto" }),
+        scrollTrigger: { trigger: el, start, once: true },
+        onComplete: () => gsap.set(el, { willChange: "auto" }),
       });
     },
     { scope: ref },
   );
 
-  if (mode === "container") {
-    return createElement(
-      as,
-      { ref, id, className },
-      <span className="inline-block overflow-hidden align-bottom" style={MASK_STYLE}>
-        <span data-reveal-inner className="inline-block">
-          {children}
-        </span>
-      </span>,
-    );
-  }
-
-  return createElement(
-    as,
-    { ref, id, className },
-    words.map((word, i) => (
-      <span
-        key={i}
-        className="inline-block overflow-hidden align-bottom"
-        style={{ ...MASK_STYLE, marginRight: i < words.length - 1 ? "0.26em" : undefined }}
-      >
-        <span data-reveal-inner className="inline-block">
-          {word}
-        </span>
-      </span>
-    )),
-  );
+  return createElement(as, { ref, id, className }, children);
 }

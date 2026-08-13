@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/home/HomeHero";
+import { HomeProjects } from "@/components/home/HomeProjects";
+import { HomeHorizontalGallery } from "@/components/home/HomeHorizontalGallery";
 import { HomeServices } from "@/components/home/HomeServices";
-import { HomeDemonstrations } from "@/components/home/HomeDemonstrations";
-import { HomeMethod } from "@/components/home/HomeMethod";
+import { HomeMethodSticky } from "@/components/home/HomeMethodSticky";
 import { HomeReassurance } from "@/components/home/HomeReassurance";
 import { HomeProof } from "@/components/home/HomeProof";
 import { HomeCTA } from "@/components/home/HomeCTA";
-import { ImmersiveBand } from "@/components/ui/ImmersiveBand";
+import { HomeMonolith } from "@/components/home/HomeMonolith";
 import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 import { CONTACT_EMAIL } from "@/data/navigation";
@@ -50,14 +51,11 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceLd) }}
       />
       <HomeHero />
+      <HomeProjects />
+      <HomeHorizontalGallery />
       <HomeServices />
-      <HomeDemonstrations />
-      <ImmersiveBand
-        src="/assets/home/immersive-light.avif"
-        alt="Traînées de lumière sur fond noir"
-        statement="Precision in Motion"
-      />
-      <HomeMethod />
+      <HomeMonolith />
+      <HomeMethodSticky />
       <HomeReassurance />
       <HomeProof />
       <HomeCTA />

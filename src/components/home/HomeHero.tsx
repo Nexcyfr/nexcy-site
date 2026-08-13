@@ -1,220 +1,129 @@
 "use client";
 
-import { useRef } from "react";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
-import { Button } from "@/components/ui/Button";
-import { HeroScene } from "@/components/home/HeroScene";
-import { HeroMedia } from "@/components/home/HeroMedia";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { useGSAP, ScrollTrigger } from "@/lib/gsap";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { BRAND_TAGLINE } from "@/data/navigation";
+import { heroProgress } from "@/components/home/hero/progress";
+import { HeroErrorBoundary } from "@/components/home/hero/HeroErrorBoundary";
+import { HeroLoader } from "@/components/home/hero/HeroLoader";
 
-const H1_LINE_1 = "Systèmes digitaux";
-const H1_LINE_2 = "conçus avec précision.";
+const HeroScene = dynamic(
+  () => import("@/components/home/hero/HeroScene").then((m) => m.HeroScene),
+  { ssr: false },
+);
+
+const MOBILE_BREAKPOINT_PX = 1024; // le GLB (137 Mo) ne charge qu'à partir de ce seuil
+
+function webglAvailable(): boolean {
+  try {
+    const c = document.createElement("canvas");
+    return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl")));
+  } catch {
+    return false;
+  }
+}
+
+function hasSaveDataOrSlowConnection(): boolean {
+  const nav = navigator as Navigator & {
+    connection?: { saveData?: boolean; effectiveType?: string };
+  };
+  const conn = nav.connection;
+  if (!conn) return false;
+  if (conn.saveData) return true;
+  // Uniquement 2G réel : le seuil desktop (>=1024px) filtre déjà le mobile.
+  // "3g" produit trop de faux positifs sur desktop (Wi-Fi/4G mal classés).
+  return conn.effectiveType === "slow-2g" || conn.effectiveType === "2g";
+}
+
+/** Poster statique — utilisé tant qu'aucune capture réelle n'a été fournie. */
+function HeroPoster() {
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,#1a1712_0%,#0a0908_55%,#060607_100%)]"
+    />
+  );
+}
 
 /**
- * Hero d'accueil hybride (Lot 3 — quatre couches).
+ * Hero d'accueil — ville Manhattan / Fold (bake Blender) pilotée au scroll.
  *
- * Architecture visuelle (colonne droite) :
- *   1. HeroScene  — scène SVG codée, toujours présente (fallback + reduced-motion)
- *   2. HeroMedia  — boucle vidéo ambiante, desktop + pointeur fin uniquement
- *   3. Vignette   — dégradé atmosphérique bas (CSS, pointer-events none)
+ * Conteneur 400vh + zone sticky 100vh : le scroll à travers les 400vh mappe
+ * linéairement sur heroProgress (0→1), lu directement par la scène R3F
+ * (City : mixer.setTime + caméra). Lenis↔ScrollTrigger déjà synchronisé
+ * globalement (SmoothScroll), donc scrub natif sans proxy supplémentaire.
  *
- * Chorégraphie d'entrée :
- *   0.15 s → mots H1 (yPercent 110→0, stagger)
- *   0.20 s → colonne visuelle (autoAlpha + scale)
- *   0.50 s → tagline
- *   0.70 s → description
- *   0.80 s → ligne dorée (scaleX)
- *   0.95 s → CTA
- *   1.20 s → indicateur scroll
+ * La scène 3D (137 Mo) ne charge que desktop + sans prefers-reduced-motion +
+ * sans Save-Data/connexion lente + WebGL disponible. Sinon : poster statique,
+ * texte/CTA toujours utilisables, page toujours navigable.
  *
- * Scroll : légère parallaxe yPercent sur le visuel (desktop uniquement).
- * prefers-reduced-motion : tout visible immédiatement, aucune parallaxe.
+ * Les textes restent du vrai DOM en overlay (SEO / a11y), jamais dans le canvas.
  */
 export function HomeHero() {
-  const root = useRef<HTMLDivElement>(null);
+  const [mount3D, setMount3D] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+
+  useEffect(() => {
+    const isDesktopWidth = window.innerWidth >= MOBILE_BREAKPOINT_PX;
+    const eligible =
+      !reduced && isDesktopWidth && webglAvailable() && !hasSaveDataOrSlowConnection();
+    setMount3D(eligible);
+  }, [reduced]);
 
   useGSAP(
     () => {
-      const scope = root.current;
-      if (!scope) return;
+      if (!mount3D) return;
+      const section = sectionRef.current;
+      if (!section) return;
 
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const words = gsap.utils.toArray<HTMLElement>("[data-hero-word]", scope);
-      const tagline = scope.querySelector("[data-hero-tagline]");
-      const desc = scope.querySelector("[data-hero-desc]");
-      const line = scope.querySelector("[data-hero-line]");
-      const ctas = scope.querySelector("[data-hero-ctas]");
-      const hint = scope.querySelector("[data-hero-hint]");
-      const visual = scope.querySelector("[data-hero-visual]");
-
-      if (reduce) {
-        gsap.set(words, { yPercent: 0 });
-        gsap.set([tagline, desc, ctas, visual, hint], { autoAlpha: 1, y: 0, scale: 1 });
-        gsap.set(line, { scaleX: 1 });
-        return;
-      }
-
-      // État initial
-      gsap.set(words, { yPercent: 110, willChange: "transform" });
-      gsap.set([tagline, desc, ctas], { autoAlpha: 0, y: 20 });
-      gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
-      gsap.set(visual, { autoAlpha: 0, scale: 1.04 });
-      gsap.set(hint, { autoAlpha: 0 });
-
-      // Séquence d'entrée
-      const tl = gsap.timeline({ delay: 0.15 });
-      tl.to(words, {
-        yPercent: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.09,
-        onComplete: () => gsap.set(words, { willChange: "auto" }),
-      })
-        .to(visual, { autoAlpha: 1, scale: 1, duration: 1.1, ease: "power2.out" }, 0.2)
-        .to(tagline, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.5)
-        .to(desc, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.7)
-        .to(line, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 0.8)
-        .to(ctas, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.95)
-        .to(hint, { autoAlpha: 1, duration: 0.6 }, 1.2);
-
-      // Parallaxe subtile au scroll (desktop uniquement)
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 1024px)", () => {
-        gsap.to(visual, {
-          yPercent: -10,
-          ease: "none",
-          scrollTrigger: { trigger: scope, start: "top top", end: "bottom top", scrub: true },
-        });
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        onUpdate: (self) => {
+          heroProgress.value = self.progress;
+        },
       });
-
-      ScrollTrigger.refresh();
     },
-    { scope: root },
+    { scope: sectionRef, dependencies: [mount3D] },
   );
 
   return (
     <section
-      ref={root}
-      aria-label="Introduction"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-black"
+      ref={sectionRef}
+      aria-label="NEXCY — Precision in Motion"
+      className="relative w-full bg-[#080808]"
+      style={{ height: mount3D ? "400vh" : "100svh" }}
     >
-      <div className="container-site relative z-10 grid w-full items-center gap-12 pt-28 lg:grid-cols-[1.1fr_0.9fr] lg:pt-0">
-        {/* Colonne texte */}
-        <div className="max-w-2xl">
-          <h1 className="font-bold leading-[0.98] tracking-tight text-text-primary">
-            <span className="block text-5xl sm:text-6xl lg:text-8xl">
-              {H1_LINE_1.split(" ").map((w, i, arr) => (
-                <span
-                  key={i}
-                  className="inline-block overflow-hidden align-bottom"
-                  style={{
-                    marginRight: i < arr.length - 1 ? "0.24em" : undefined,
-                    paddingBottom: "0.1em",
-                    marginBottom: "-0.1em",
-                  }}
-                >
-                  <span data-hero-word className="inline-block">
-                    {w}
-                  </span>
-                </span>
-              ))}
-            </span>
-            <span className="block text-5xl sm:text-6xl lg:text-8xl">
-              {H1_LINE_2.split(" ").map((w, i, arr) => (
-                <span
-                  key={i}
-                  className="inline-block overflow-hidden align-bottom"
-                  style={{
-                    marginRight: i < arr.length - 1 ? "0.24em" : undefined,
-                    paddingBottom: "0.1em",
-                    marginBottom: "-0.1em",
-                  }}
-                >
-                  <span data-hero-word className="inline-block">
-                    {w}
-                  </span>
-                </span>
-              ))}
-            </span>
-          </h1>
-
-          <p
-            data-hero-tagline
-            className="mt-8 text-sm font-light uppercase tracking-widest2 text-accent"
-          >
-            {BRAND_TAGLINE}
-          </p>
-
-          <p
-            data-hero-desc
-            className="mt-6 max-w-[480px] text-lg leading-relaxed text-text-secondary"
-          >
-            Nous concevons des sites web, des identités visuelles et des systèmes
-            d&apos;automatisation pour les entreprises qui refusent le compromis.
-          </p>
-
-          <span
-            data-hero-line
-            aria-hidden="true"
-            className="mt-8 block h-px w-24 bg-accent"
-          />
-
-          <div data-hero-ctas className="mt-10 flex flex-wrap gap-4">
-            <Button href="/contact" variant="primary">
-              Démarrer un projet
-            </Button>
-            <Button href="/services" variant="secondary">
-              Découvrir nos services
-            </Button>
-          </div>
+      <div className="sticky top-0 h-svh w-full overflow-hidden">
+        {/* Scène 3D (décorative) ou poster statique selon éligibilité */}
+        <div className="absolute inset-0" aria-hidden="true">
+          {mount3D ? (
+            <HeroErrorBoundary fallback={<HeroPoster />}>
+              <HeroScene />
+            </HeroErrorBoundary>
+          ) : (
+            <HeroPoster />
+          )}
         </div>
 
-        {/* Colonne visuelle — quatre couches empilées */}
-        <div
-          data-hero-visual
-          className="relative hidden aspect-square w-full overflow-hidden rounded-card border border-border lg:block"
-        >
-          {/* Couche 2 : scène codée (toujours présente, fallback + reduced-motion) */}
-          <div className="absolute inset-0">
-            <HeroScene />
+        {mount3D ? <HeroLoader /> : null}
+
+        {/* Overlay texte (DOM) — bloc titre bas-gauche */}
+        <div className="pointer-events-none absolute inset-0 z-10">
+          <div className="container-site flex h-full flex-col justify-end pb-16 lg:pb-24">
+            <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.28em] text-[#99958F]">
+              {BRAND_TAGLINE}
+            </p>
+            <h1 className="text-[clamp(3rem,9vw,9rem)] font-medium leading-[0.92] tracking-[-0.02em] text-[#F4F1EB]">
+              NEXCY
+            </h1>
           </div>
-
-          {/* Couche 3 : boucle vidéo ambiante (desktop + pointeur fin uniquement) */}
-          <HeroMedia
-            mp4="/assets/video/hero.mp4"
-            webm="/assets/video/hero.webm"
-            poster="/assets/posters/hero-poster.avif"
-            priority
-          />
-
-          {/* Couche 4 : vignette atmosphérique bas de cadre */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/35"
-          />
         </div>
-      </div>
-
-      {/* Indicateur de scroll */}
-      <div
-        data-hero-hint
-        aria-hidden="true"
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center text-text-muted"
-      >
-        <span className="h-8 w-px bg-border" />
-        <svg
-          viewBox="0 0 16 10"
-          className="mt-1 h-2.5 w-4 animate-bounce text-text-muted"
-          fill="none"
-        >
-          <path
-            d="M2 2l6 6 6-6"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
       </div>
     </section>
   );

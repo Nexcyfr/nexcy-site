@@ -26,6 +26,17 @@
   --color-accent-light: #e4a85b;
   --color-accent-dark: #a06428;
 
+  /* Charte Hero « Monolith » (amber, Hero uniquement — ne remplace pas l'accent) */
+  --nx-carbon: #080808;
+  --nx-graphite: #141414;
+  --nx-mineral: #1d1d1b;
+  --nx-charcoal: #30302e;
+  --nx-warm-white: #f4f1eb;
+  --nx-stone: #99958f;
+  --nx-amber: #d9913d;
+  --nx-amber-deep: #b96e27;
+  --nx-amber-light: #e7aa62;
+
   /* Graisses Geist */
   --font-light: 300;
   --font-regular: 400;

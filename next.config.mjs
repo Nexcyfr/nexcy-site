@@ -11,9 +11,15 @@ const withBundleAnalyzer = withBundleAnalyzerInit({
 // En développement, webpack charge les modules via `eval` (source maps/HMR) :
 // 'unsafe-eval' est requis UNIQUEMENT en dev (jamais embarqué en production).
 // La CSP de production reste stricte (moindre privilège).
+//
+// 'wasm-unsafe-eval' (dev + prod) : directive dédiée, distincte de 'unsafe-eval'
+// — autorise uniquement WebAssembly.instantiate/compile, pas eval()/Function()
+// arbitraire. Nécessaire pour le décodeur Draco (glTF) qui compile un module WASM
+// dans son Worker ; sans elle le décodeur échoue silencieusement en production
+// (bloqué au chargement, jamais d'erreur explicite avant ce diagnostic CSP).
 const isDev = process.env.NODE_ENV !== "production";
 const scriptSrc = [
-  "script-src 'self' 'unsafe-inline'",
+  "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'",
   isDev ? "'unsafe-eval'" : "",
   "https://challenges.cloudflare.com https://plausible.io",
 ]
@@ -41,7 +47,11 @@ const securityHeaders = [
       // Vidéos auto-hébergées (public/assets) — moindre privilège.
       "media-src 'self'",
       "font-src 'self'",
-      "connect-src 'self' https://plausible.io https://challenges.cloudflare.com",
+      // Décodeur Draco (glTF/GLB) : tourne dans un Worker instancié depuis un blob.
+      "worker-src 'self' blob:",
+      // blob: nécessaire : three.js ImageBitmapLoader charge les textures glTF
+      // embarquées via fetch(blobURL), régi par connect-src (pas img-src).
+      "connect-src 'self' blob: https://plausible.io https://challenges.cloudflare.com",
       "frame-src https://challenges.cloudflare.com",
       "base-uri 'self'",
       "form-action 'self'",
