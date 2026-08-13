@@ -197,7 +197,9 @@ export function HomeHero() {
               sinon isolé à l'extrême droite, détaché de la composition. */}
           <ol
             aria-hidden="true"
-            className="absolute left-1/2 top-1/2 hidden w-full max-w-site -translate-x-1/2 -translate-y-1/2 flex-col items-end gap-3 pr-5 md:pr-10 lg:flex lg:pr-20"
+            // À partir de 1280px seulement : en dessous, le plan occupe presque
+            // toute la largeur et le rail viendrait se poser sur le dessin.
+            className="absolute left-1/2 top-1/2 hidden w-full max-w-site -translate-x-1/2 -translate-y-1/2 flex-col items-end gap-3 pr-20 xl:flex"
           >
             {PHASES.map((ph, i) => (
               <li
