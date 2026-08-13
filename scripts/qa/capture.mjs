@@ -12,7 +12,7 @@
  * Les captures vont dans .tmp/qa/ (ignoré par git).
  */
 import { chromium } from "playwright-core";
-import { mkdir, readdir, rm } from "node:fs/promises";
+import { mkdir, readdir } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
@@ -81,7 +81,6 @@ function watch(page, errors) {
 
 async function main() {
   const mode = process.argv[2] ?? "hero";
-  await rm(OUT, { recursive: true, force: true });
   await mkdir(OUT, { recursive: true });
 
   const browser = await chromium.launch({

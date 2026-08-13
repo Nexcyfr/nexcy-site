@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/home/HomeHero";
-import { HomeProjects } from "@/components/home/HomeProjects";
-import { HomeHorizontalGallery } from "@/components/home/HomeHorizontalGallery";
-import { HomeServices } from "@/components/home/HomeServices";
-import { HomeMethodSticky } from "@/components/home/HomeMethodSticky";
-import { HomeReassurance } from "@/components/home/HomeReassurance";
-import { HomeProof } from "@/components/home/HomeProof";
+import { HomePosition } from "@/components/home/HomePosition";
+import { HomeExpertise } from "@/components/home/HomeExpertise";
+import { HomeMethod } from "@/components/home/HomeMethod";
+import { HomeEngagements } from "@/components/home/HomeEngagements";
+import { HomeStudio } from "@/components/home/HomeStudio";
 import { HomeCTA } from "@/components/home/HomeCTA";
-import { HomeMonolith } from "@/components/home/HomeMonolith";
 import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 import { CONTACT_EMAIL } from "@/data/navigation";
@@ -51,13 +49,11 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceLd) }}
       />
       <HomeHero />
-      <HomeProjects />
-      <HomeHorizontalGallery />
-      <HomeServices />
-      <HomeMonolith />
-      <HomeMethodSticky />
-      <HomeReassurance />
-      <HomeProof />
+      <HomePosition />
+      <HomeExpertise />
+      <HomeMethod />
+      <HomeEngagements />
+      <HomeStudio />
       <HomeCTA />
     </>
   );

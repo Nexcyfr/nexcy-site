@@ -31,20 +31,23 @@ export function CtaSection({
         className,
       )}
     >
+      {/* Trame de plan — la bande de conversion appartient au même système. */}
+      <div
+        aria-hidden="true"
+        className="plan-grid plan-grid-fade pointer-events-none absolute inset-0 opacity-70"
+      />
       <div className="container-site relative z-10 flex flex-col items-center">
         <TextReveal
           as="h2"
           id="cta-title"
-          className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-text-primary md:text-5xl"
+          className="t-h2 max-w-3xl text-text-primary"
         >
           {title}
         </TextReveal>
 
         {subtitle ? (
           <FadeIn className="mt-6">
-            <p className="mx-auto max-w-xl text-lg leading-relaxed text-text-secondary">
-              {subtitle}
-            </p>
+            <p className="t-lead measure mx-auto">{subtitle}</p>
           </FadeIn>
         ) : null}
 
@@ -55,7 +58,7 @@ export function CtaSection({
         </FadeIn>
 
         {note ? (
-          <p className="mt-6 text-xs text-text-muted">{note}</p>
+          <p className="t-tech mt-6 text-text-muted">{note}</p>
         ) : null}
       </div>
     </section>

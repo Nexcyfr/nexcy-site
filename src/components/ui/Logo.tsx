@@ -21,7 +21,10 @@ export function Logo({ width = 118, className, priority = false }: LogoProps) {
       width={width}
       height={height}
       priority={priority}
-      className={cn("h-auto w-auto select-none", className)}
+      // Largeur imposée en style : `w-auto` laissait l'image s'étirer à la
+      // largeur de son conteneur flex (footer rendu à 520px au lieu de 150px).
+      style={{ width, height: "auto" }}
+      className={cn("select-none", className)}
       sizes={`${width}px`}
     />
   );
