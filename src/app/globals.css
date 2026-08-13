@@ -3,12 +3,14 @@
 @tailwind utilities;
 
 /* ============================================================
-   NEXCY — Variables CSS (Master Brief §6 / §7)
-   Thème entièrement sombre · accent doré cuivré · aucune couleur bleue
+   NEXCY — Système visuel unique
+   Une seule palette, du Hero aux mentions légales.
+   Fond graphite quasi-noir · accent ambre cuivré · aucune couleur froide.
    ============================================================ */
 :root {
-  /* Fonds */
-  --color-black: #0a0a0a;
+  /* Fonds — du plus profond (Hero, plan) au plus élevé (cartes) */
+  --color-void: #080808; /* fond du plan technique */
+  --color-black: #0a0a0a; /* fond de page */
   --color-surface: #111111;
   --color-card: #161616;
 
@@ -17,25 +19,20 @@
   --color-text-primary: #f0f0f0;
   --color-text-secondary: #9a9a9a;
   --color-text-muted: #808080;
+  /* Blanc chaud — titres du plan et surfaces éclairées */
+  --color-warm-white: #f4f1eb;
+  --color-stone: #99958f;
 
   /* Structurel */
   --color-border: #222222;
+  /* Langage « plan technique » : traits de grille et de cote */
+  --color-line: rgba(153, 149, 143, 0.14);
+  --color-line-strong: rgba(153, 149, 143, 0.3);
 
-  /* Accent doré cuivré */
-  --color-accent: #c8883a;
-  --color-accent-light: #e4a85b;
-  --color-accent-dark: #a06428;
-
-  /* Charte Hero « Monolith » (amber, Hero uniquement — ne remplace pas l'accent) */
-  --nx-carbon: #080808;
-  --nx-graphite: #141414;
-  --nx-mineral: #1d1d1b;
-  --nx-charcoal: #30302e;
-  --nx-warm-white: #f4f1eb;
-  --nx-stone: #99958f;
-  --nx-amber: #d9913d;
-  --nx-amber-deep: #b96e27;
-  --nx-amber-light: #e7aa62;
+  /* Accent ambre cuivré — signal contrôlé, jamais un aplat */
+  --color-accent: #d9913d;
+  --color-accent-light: #e7aa62;
+  --color-accent-dark: #b96e27;
 
   /* Graisses Geist */
   --font-light: 300;
@@ -59,6 +56,30 @@
   --space-7: 4rem; /* 64px */
   --space-8: 6rem; /* 96px */
   --space-9: 8rem; /* 128px */
+
+  /* ──────────────────────────────────────────────
+     Échelle typographique fluide — 360px → 1728px.
+     Une seule échelle pour tout le site. Les tailles interpolent au viewport ;
+     aucune media-query typographique ne doit être ajoutée par-dessus.
+     ────────────────────────────────────────────── */
+  --type-micro: 0.6875rem; /* 11px — sur-titres, cotes, labels techniques */
+  --type-caption: clamp(0.75rem, 0.71rem + 0.18vw, 0.875rem);
+  --type-body: clamp(0.9375rem, 0.9rem + 0.22vw, 1.0625rem);
+  --type-body-lg: clamp(1.0625rem, 1rem + 0.33vw, 1.25rem);
+  --type-lead: clamp(1.125rem, 1.02rem + 0.52vw, 1.5rem);
+  --type-h3: clamp(1.25rem, 1.11rem + 0.66vw, 1.75rem);
+  --type-h2: clamp(1.75rem, 1.34rem + 1.95vw, 3.25rem);
+  --type-h1: clamp(2.5rem, 1.6rem + 4.3vw, 5.5rem);
+  /* Affichage hors-norme — réservé au Hero et aux nombres du plan */
+  --type-display: clamp(3rem, 1.2rem + 8.6vw, 9rem);
+
+  /* Interlignages solidaires de l'échelle */
+  --leading-display: 0.9;
+  --leading-title: 0.98;
+  --leading-body: 1.6;
+
+  /* Chrome de navigation — réservation d'espace en haut de page */
+  --header-h: 4.5rem;
 }
 
 @layer base {
@@ -160,6 +181,65 @@
       padding-block: 7.5rem; /* 120px */
     }
   }
+
+  /* ──────────────────────────────────────────────
+     Typographie — classes du système, à préférer aux tailles ad hoc.
+     ────────────────────────────────────────────── */
+  .t-display {
+    font-size: var(--type-display);
+    line-height: var(--leading-display);
+    letter-spacing: -0.035em;
+    font-weight: var(--font-medium);
+  }
+  .t-h1 {
+    font-size: var(--type-h1);
+    line-height: var(--leading-title);
+    letter-spacing: -0.03em;
+    font-weight: var(--font-medium);
+  }
+  .t-h2 {
+    font-size: var(--type-h2);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    font-weight: var(--font-medium);
+  }
+  .t-h3 {
+    font-size: var(--type-h3);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    font-weight: var(--font-medium);
+  }
+  .t-lead {
+    font-size: var(--type-lead);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: var(--color-text-secondary);
+  }
+  .t-body {
+    font-size: var(--type-body);
+    line-height: var(--leading-body);
+  }
+  .t-body-lg {
+    font-size: var(--type-body-lg);
+    line-height: 1.55;
+  }
+  /* Label technique — la voix « plan » du système (cotes, index, phases) */
+  .t-tech {
+    font-size: var(--type-micro);
+    line-height: 1;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: var(--font-medium);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Longueur de ligne maîtrisée — jamais de paragraphe pleine largeur */
+  .measure {
+    max-width: 62ch;
+  }
+  .measure-tight {
+    max-width: 46ch;
+  }
 }
 
 @layer utilities {
@@ -174,6 +254,39 @@
   }
   .reveal-line > span {
     display: block;
+  }
+
+  /* ──────────────────────────────────────────────
+     Langage « plan technique » — le même trait que le Hero, en CSS.
+     Utilisé pour relier les sections au système visuel du plan.
+     ────────────────────────────────────────────── */
+
+  /* Trame de fond : grille de plan, très basse intensité. */
+  .plan-grid {
+    background-image:
+      linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+    background-size: 5rem 5rem;
+  }
+  /* Atténue la trame vers les bords pour qu'elle ne pave jamais la page. */
+  .plan-grid-fade {
+    -webkit-mask-image: radial-gradient(80% 60% at 50% 40%, #000 0%, transparent 100%);
+    mask-image: radial-gradient(80% 60% at 50% 40%, #000 0%, transparent 100%);
+  }
+
+  /* Filet horizontal de cote, avec une amorce ambre à gauche. */
+  .plan-rule {
+    position: relative;
+    border-top: 1px solid var(--color-border);
+  }
+  .plan-rule::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: var(--space-6);
+    height: 1px;
+    background-color: var(--color-accent);
   }
 }
 

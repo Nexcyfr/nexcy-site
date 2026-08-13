@@ -43,3 +43,9 @@ next-env.d.ts
 
 # Media pipeline — frames intermédiaires & sorties temporaires (jamais commité)
 /.tmp/
+
+# Modèles 3D lourds — servis hors dépôt (voir docs/), jamais commités
+/public/models/
+
+# Captures QA
+/.tmp/qa/

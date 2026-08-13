@@ -18,6 +18,7 @@ const config: Config = {
     },
     extend: {
       colors: {
+        void: "#080808",
         black: "#0A0A0A",
         surface: "#111111",
         card: "#161616",
@@ -25,11 +26,15 @@ const config: Config = {
         "text-primary": "#F0F0F0",
         "text-secondary": "#9A9A9A",
         "text-muted": "#808080",
+        "warm-white": "#F4F1EB",
+        stone: "#99958F",
         border: "#222222",
+        line: "rgba(153,149,143,0.14)",
+        "line-strong": "rgba(153,149,143,0.30)",
         accent: {
-          DEFAULT: "#C8883A",
-          light: "#E4A85B",
-          dark: "#A06428",
+          DEFAULT: "#D9913D",
+          light: "#E7AA62",
+          dark: "#B96E27",
         },
       },
       fontFamily: {
