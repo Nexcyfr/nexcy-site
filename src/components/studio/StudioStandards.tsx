@@ -26,7 +26,7 @@ export function StudioStandards() {
         <TextReveal
           as="h2"
           id="studio-standards-title"
-          className="mt-6 max-w-2xl text-3xl font-bold leading-tight tracking-tight text-text-primary md:text-4xl"
+          className="mt-6 max-w-2xl t-h2 text-text-primary"
         >
           Ce sur quoi nous ne transigeons pas.
         </TextReveal>
@@ -45,7 +45,7 @@ export function StudioStandards() {
               <FadeIn as="div" delay={i * 0.04} y={16} className="h-full">
                 <div className="flex h-full items-start gap-4 p-8">
                   <span aria-hidden="true" className="mt-3 h-px w-5 shrink-0 bg-accent" />
-                  <p className="text-lg font-medium leading-snug text-text-primary">
+                  <p className="t-body-lg font-medium text-text-primary">
                     {item}
                   </p>
                 </div>
@@ -57,7 +57,7 @@ export function StudioStandards() {
         {/* Notre cadre — critères d'acceptation */}
         <FadeIn delay={0.1} className="mt-16">
           <div className="max-w-3xl border-l-2 border-accent pl-6">
-            <p className="text-2xl font-medium leading-snug tracking-tight text-text-primary md:text-3xl">
+            <p className="t-h3 text-text-primary">
               Nous choisissons les projets sur lesquels nous pouvons créer une
               réelle valeur.
             </p>

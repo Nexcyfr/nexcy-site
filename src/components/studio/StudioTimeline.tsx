@@ -104,7 +104,7 @@ export function StudioTimeline() {
                     i === 1 ? "lg:items-center lg:text-center" : i === 2 ? "lg:items-end lg:text-right" : "",
                   ].join(" ")}
                 >
-                  <span className="text-xl font-bold tracking-tight text-text-primary">
+                  <span className="t-h3 text-text-primary">
                     {m.year}
                   </span>
                   <span className="text-sm font-medium text-text-secondary">

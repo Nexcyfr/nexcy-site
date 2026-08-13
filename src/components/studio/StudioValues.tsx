@@ -15,7 +15,7 @@ export function StudioValues() {
         <TextReveal
           as="h2"
           id="studio-values-title"
-          className="mt-6 max-w-2xl text-3xl font-bold leading-tight tracking-tight text-text-primary md:text-4xl"
+          className="mt-6 max-w-2xl t-h2 text-text-primary"
         >
           Cinq valeurs. Pas davantage.
         </TextReveal>
@@ -31,7 +31,7 @@ export function StudioValues() {
                   >
                     {value.index}
                   </span>
-                  <h3 className="text-xl font-medium text-text-primary">
+                  <h3 className="t-h3 text-text-primary">
                     {value.title}
                   </h3>
                   <p className="text-base leading-relaxed text-text-secondary">

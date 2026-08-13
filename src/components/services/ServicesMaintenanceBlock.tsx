@@ -22,12 +22,12 @@ export function ServicesMaintenanceBlock() {
             <TextReveal
               as="h2"
               id="service-maintenance"
-              className="text-3xl font-bold leading-tight tracking-tight text-text-primary md:text-4xl"
+              className="t-h2 text-text-primary"
             >
               {m.title}
             </TextReveal>
             <FadeIn delay={0.1}>
-              <p className="mt-8 max-w-md text-xl font-light leading-relaxed text-text-primary">
+              <p className="mt-8 max-w-md t-lead text-text-primary">
                 {m.hook}
               </p>
               <p className="mt-6 max-w-md text-sm leading-relaxed text-text-muted">

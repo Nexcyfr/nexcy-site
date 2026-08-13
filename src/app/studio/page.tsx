@@ -7,7 +7,6 @@ import { StudioValues } from "@/components/studio/StudioValues";
 import { StudioMethod } from "@/components/studio/StudioMethod";
 import { StudioStandards } from "@/components/studio/StudioStandards";
 import { CtaSection } from "@/components/ui/CtaSection";
-import { ImmersiveBand } from "@/components/ui/ImmersiveBand";
 import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 
@@ -42,15 +41,12 @@ export default function StudioPage() {
       <StudioHistory />
       <StudioTimeline />
       <StudioManifesto />
-      <ImmersiveBand
-        src="/assets/studio/precision-band.avif"
-        alt="Matière minérale noire aux veines dorées"
-      />
       <StudioValues />
       <StudioMethod />
       <StudioStandards />
       <CtaSection
-        title="Un projet. Une vision. Une seule question : êtes-vous prêt à exiger davantage ?"
+        title="Travaillons ensemble."
+        subtitle="Dites-nous où vous en êtes. Nous vous dirons franchement si nous sommes le bon interlocuteur."
         buttonLabel="Démarrer un projet"
         buttonHref="/contact"
       />

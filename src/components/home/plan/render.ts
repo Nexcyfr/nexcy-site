@@ -94,6 +94,12 @@ export function fitCamera(
   height: number,
   compact: boolean,
   zoom = 1,
+  /**
+   * 0 → on centre le sol (rien n'est encore bâti, inutile de réserver le ciel) ;
+   * 1 → on centre l'enveloppe complète, réseau compris.
+   * Sans cela, l'image d'accueil laisse un grand vide au-dessus du terrain.
+   */
+  envelope = 1,
 ): Camera {
   const r = model.radius + 1;
   /** Enveloppe du plan projetée à l'échelle 1 — indépendante du viewport. */
@@ -134,10 +140,15 @@ export function fitCamera(
   // Recentrage à l'échelle finale : le cadrage reste exact à tout zoom.
   // Décalé à droite en desktop pour dégager la colonne de titre, centré sinon.
   const b = bounds(scale);
+  const anchorY = height * (compact ? 0.38 : 0.44);
+  // project(0, 0, 0).sy vaut cy : centrer le sol revient donc à poser cy = ancre.
+  const cyGround = anchorY;
+  const cyEnvelope = anchorY - (b.minY + b.maxY) / 2;
+
   return {
     scale,
     cx: width * (compact ? 0.5 : 0.58) - (b.minX + b.maxX) / 2,
-    cy: height * (compact ? 0.38 : 0.44) - (b.minY + b.maxY) / 2,
+    cy: cyGround + (cyEnvelope - cyGround) * envelope,
   };
 }
 
@@ -152,7 +163,10 @@ export function drawPlan(ctx: CanvasRenderingContext2D, o: DrawOptions): void {
   // `fitCamera` recentre à l'échelle finale, donc aucune dérive cumulée.
   const zoom = lerp(0.88, 1.0, easeOut(seg(p, 0, 0.62)));
   const recede = lerp(1, 0.965, smooth(seg(p, 0.88, 1)));
-  const cam = fitCamera(model, w, h, compact, zoom * recede);
+  // Le cadre s'ouvre vers le haut au rythme de l'extrusion : on ne réserve le
+  // ciel qu'à mesure que les volumes le remplissent.
+  const envelope = smooth(seg(p, 0.06, 0.5));
+  const cam = fitCamera(model, w, h, compact, zoom * recede, envelope);
 
   // Respiration : ±6 % sur l'intensité ambre. Décoratif, jamais structurel.
   const breath = 0.94 + 0.06 * Math.sin(time * 0.9);

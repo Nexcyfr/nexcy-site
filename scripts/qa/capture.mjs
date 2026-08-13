@@ -89,8 +89,12 @@ async function main() {
   });
 
   if (mode === "hero") {
+    // `node scripts/qa/capture.mjs hero 390 844` pour auditer le Hero mobile.
+    const hw = Number(process.argv[3] ?? 1440);
+    const hh = Number(process.argv[4] ?? 900);
+    const tag = hw === 1440 ? "" : `-${hw}`;
     const ctx = await browser.newContext({
-      viewport: { width: 1440, height: 900 },
+      viewport: { width: hw, height: hh },
       deviceScaleFactor: 1,
     });
     const page = await ctx.newPage();
@@ -106,11 +110,11 @@ async function main() {
 
     for (const p of [0, 0.16, 0.34, 0.52, 0.68, 0.84, 1]) {
       await scrollTo(page, Math.round(heroScroll * p));
-      await page.screenshot({ path: `${OUT}/hero-${String(p).replace(".", "_")}.png` });
+      await page.screenshot({ path: `${OUT}/hero${tag}-${String(p).replace(".", "_")}.png` });
     }
     // Retour arrière : la réversibilité doit être exacte.
     await scrollTo(page, 0);
-    await page.screenshot({ path: `${OUT}/hero-back-to-0.png` });
+    await page.screenshot({ path: `${OUT}/hero${tag}-back-to-0.png` });
 
     console.log("heroScrollRange:", Math.round(heroScroll));
     console.log("console errors:", errors.length ? errors : "none");

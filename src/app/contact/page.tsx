@@ -41,7 +41,7 @@ export default function ContactPage() {
       />
       <section
         aria-labelledby="contact-hero-title"
-        className="min-h-screen border-b border-border bg-black pb-24 pt-40 md:pt-48"
+        className="min-h-screen border-b border-border bg-black pb-24 pt-[calc(var(--header-h)+4rem)] md:pt-[calc(var(--header-h)+6rem)]"
       >
         <div className="container-site grid gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
           {/* Colonne gauche : intro + infos (sticky desktop) */}

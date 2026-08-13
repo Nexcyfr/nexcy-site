@@ -13,7 +13,7 @@ export const metadata: Metadata = buildMetadata({
 export default function PolitiqueConfidentialitePage() {
   const blocks = loadLegal("politique-de-confidentialite");
   return (
-    <section className="border-b border-border bg-black pb-24 pt-40 md:pt-48">
+    <section className="border-b border-border bg-black pb-24 pt-[calc(var(--header-h)+4rem)] md:pt-[calc(var(--header-h)+6rem)]">
       <div className="container-site">
         <LegalContent blocks={blocks} />
       </div>

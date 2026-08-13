@@ -32,7 +32,7 @@ function ManifestoBlock({
           <TextReveal
             as="h2"
             id={titleId}
-            className="mt-6 text-4xl font-bold leading-tight tracking-tight text-text-primary md:text-5xl"
+            className="mt-6 t-h2 text-text-primary"
           >
             {title}
           </TextReveal>
@@ -42,7 +42,7 @@ function ManifestoBlock({
             {paragraphs.map((p, i) => (
               <p
                 key={i}
-                className="text-lg leading-relaxed text-text-secondary"
+                className="t-body-lg text-text-secondary"
               >
                 {p}
               </p>

@@ -15,7 +15,7 @@ export default function NotFound() {
       <p className="mt-8 text-sm font-medium uppercase tracking-widest2 text-text-muted">
         Erreur 404
       </p>
-      <h1 className="mt-4 text-4xl font-bold tracking-tight text-text-primary md:text-6xl">
+      <h1 className="mt-4 t-h1 text-text-primary">
         Cette page n&apos;existe pas.
       </h1>
       <p className="mt-6 max-w-md text-base leading-relaxed text-text-secondary">

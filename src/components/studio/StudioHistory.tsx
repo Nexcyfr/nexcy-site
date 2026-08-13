@@ -19,19 +19,19 @@ export function StudioHistory() {
           <TextReveal
             as="h2"
             id="studio-history-title"
-            className="mt-6 text-3xl font-bold leading-tight tracking-tight text-text-primary md:text-4xl"
+            className="mt-6 t-h2 text-text-primary"
           >
             Une pratique affinée, une structure dédiée.
           </TextReveal>
         </div>
         <FadeIn delay={0.1}>
           <div className="flex flex-col gap-6">
-            <p className="text-lg leading-relaxed text-text-secondary">
+            <p className="t-body-lg text-text-secondary">
               NEXCY s&apos;appuie sur une expérience du digital construite depuis
               2019. En 2025, cette pratique s&apos;est structurée sous la marque
               NEXCY.
             </p>
-            <p className="text-lg leading-relaxed text-text-secondary">
+            <p className="t-body-lg text-text-secondary">
               Un haut niveau d&apos;exigence, de la stratégie à l&apos;exécution.
             </p>
           </div>

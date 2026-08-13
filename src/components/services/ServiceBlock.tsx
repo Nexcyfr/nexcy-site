@@ -1,17 +1,20 @@
 import { TextReveal } from "@/components/animations/TextReveal";
-import { FadeIn } from "@/components/animations/FadeIn";
+import { MotionReveal } from "@/components/animations/MotionReveal";
 import { Button } from "@/components/ui/Button";
-import { LineReveal } from "@/components/animations/LineReveal";
-import { ServiceMotif } from "@/components/services/ServiceMotif";
 import type { ServiceDetail } from "@/data/services";
 import { cn } from "@/lib/utils";
 
-type MotifVariant = "creation-web" | "branding" | "seo" | "automatisation-ia";
-const MOTIF_SLUGS: MotifVariant[] = ["creation-web", "branding", "seo", "automatisation-ia"];
-
 /**
- * Bloc de service pleine largeur — Master Brief §14.
- * Alternance de disposition gauche/droite sur desktop (Brief §29).
+ * Bloc de service pleine largeur.
+ *
+ * Deux colonnes : l'argument à gauche, ce qui est livré à droite. La position
+ * s'inverse d'un bloc à l'autre pour donner du rythme sans recourir à des
+ * illustrations.
+ *
+ * Les anciens « motifs » SVG par service (schéma arborescent, maquette de
+ * navigateur factice) ont été retirés : décoratifs, sans rapport avec le
+ * langage du plan, et le faux chrome de navigateur relevait du visuel
+ * d'interface fictive. Le rythme vient désormais de la structure elle-même.
  */
 export function ServiceBlock({
   service,
@@ -25,101 +28,91 @@ export function ServiceBlock({
   return (
     <section
       aria-labelledby={titleId}
-      className="section-y border-t border-border bg-black"
+      className={cn(
+        "section-y border-t border-border",
+        // Alternance de fond : la lecture progresse par paliers, pas par images.
+        reversed ? "bg-surface" : "bg-black",
+      )}
     >
       <div className="container-site">
         <div
           className={cn(
-            "grid gap-10 lg:grid-cols-2 lg:gap-20",
+            "grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-20",
             reversed && "lg:[&>*:first-child]:order-2",
           )}
         >
-          {/* Colonne titre + accroche */}
+          {/* Colonne argument */}
           <div>
-            <div className="flex items-baseline gap-4">
-              <span
-                aria-hidden="true"
-                className="text-4xl font-semibold text-accent/30"
-              >
+            <div className="plan-rule pt-6">
+              <p aria-hidden="true" className="t-tech text-accent">
                 {service.index}
-              </span>
-              <TextReveal
-                as="h2"
-                id={titleId}
-                className="text-3xl font-bold leading-tight tracking-tight text-text-primary md:text-4xl"
-              >
-                {service.title}
-              </TextReveal>
+              </p>
             </div>
-            <FadeIn delay={0.1}>
-              <p className="mt-8 max-w-md text-xl font-light leading-relaxed text-text-primary">
+
+            <TextReveal as="h2" id={titleId} className="t-h2 mt-6 text-text-primary">
+              {service.title}
+            </TextReveal>
+
+            <MotionReveal delay={0.08}>
+              <p className="t-lead measure mt-7 text-text-primary">
                 {service.hook}
               </p>
+
               {service.problem ? (
-                <p className="mt-6 max-w-md text-base leading-relaxed text-text-secondary">
+                <p className="t-body measure mt-6 text-text-secondary">
                   {service.problem}
                 </p>
               ) : null}
 
-              {/* Résultat visé */}
-              <p className="mt-6 flex max-w-md gap-3 text-base leading-relaxed text-text-primary">
-                <span aria-hidden="true" className="mt-2 h-px w-4 shrink-0 bg-accent" />
+              <p className="t-body measure mt-6 flex gap-4 text-text-primary">
+                <span
+                  aria-hidden="true"
+                  className="mt-[0.7em] h-px w-4 shrink-0 bg-accent"
+                />
                 <span>
                   <span className="text-text-muted">Résultat visé — </span>
                   {service.result}
                 </span>
               </p>
 
-              {/* Méthode */}
-              <div className="mt-8 max-w-md">
-                <p className="text-xs uppercase tracking-widest2 text-text-muted">
-                  Méthode
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                  {service.method}
-                </p>
+              <div className="measure mt-10 border-t border-border pt-6">
+                <p className="t-tech text-text-muted">Méthode</p>
+                <p className="t-body mt-4 text-text-secondary">{service.method}</p>
               </div>
-            </FadeIn>
-
-            {MOTIF_SLUGS.includes(service.slug as MotifVariant) ? (
-              <FadeIn delay={0.2} y={16} className="mt-10">
-                <ServiceMotif variant={service.slug as MotifVariant} />
-              </FadeIn>
-            ) : null}
+            </MotionReveal>
           </div>
 
           {/* Colonne livrables */}
-          <FadeIn delay={0.15} y={20}>
-            <div className="rounded-card border border-border bg-card p-8 md:p-10">
-              <p className="text-xs uppercase tracking-widest2 text-text-muted">
-                {service.deliverablesTitle}
-              </p>
-              <LineReveal className="mt-4 w-16" />
-              <ul className="mt-6 flex flex-col gap-4">
+          <MotionReveal delay={0.14}>
+            <div className="border border-border bg-card p-8 md:p-10">
+              <p className="t-tech text-text-muted">{service.deliverablesTitle}</p>
+              <span aria-hidden="true" className="mt-4 block h-px w-12 bg-accent" />
+
+              <ul className="mt-7 flex flex-col gap-4">
                 {service.deliverables.map((item) => (
-                  <li
-                    key={item}
-                    className="flex gap-3 text-base leading-relaxed text-text-secondary"
-                  >
-                    <span aria-hidden="true" className="mt-2 h-px w-4 shrink-0 bg-accent" />
+                  <li key={item} className="t-body flex gap-4 text-text-secondary">
+                    <span
+                      aria-hidden="true"
+                      className="mt-[0.7em] h-px w-4 shrink-0 bg-accent"
+                    />
                     {item}
                   </li>
                 ))}
               </ul>
 
               {service.technologies ? (
-                <p className="mt-8 border-t border-border pt-6 text-sm leading-relaxed text-text-muted">
+                <p className="t-body mt-8 border-t border-border pt-6 text-text-muted">
                   <span className="text-text-secondary">Technologies : </span>
                   {service.technologies}
                 </p>
               ) : null}
 
               <div className="mt-6 border-t border-border pt-6">
-                <p className="text-sm leading-relaxed text-text-secondary">
+                <p className="t-body text-text-secondary">
                   <span className="text-text-muted">Critères de réussite — </span>
                   {service.criteria}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                <p className="t-body mt-3 text-text-muted">
                   <span className="text-text-secondary">Notre limite — </span>
                   {service.limit}
                 </p>
@@ -131,7 +124,7 @@ export function ServiceBlock({
                 </Button>
               </div>
             </div>
-          </FadeIn>
+          </MotionReveal>
         </div>
       </div>
     </section>
