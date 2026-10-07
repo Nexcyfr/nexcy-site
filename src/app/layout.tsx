@@ -14,11 +14,11 @@ const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "NEXCY — Studio digital à Bordeaux : sites web, IA et automatisation",
+    default: "NEXCY — Studio web à Bordeaux : sites web et applications sur mesure",
     template: "%s | NEXCY",
   },
   description:
-    "NEXCY, studio digital à Bordeaux : sites web, SEO, automatisation et agents IA pour entreprises exigeantes. Un interlocuteur unique, réponse sous 48 h.",
+    "NEXCY, studio digital à Bordeaux : création de sites web et développement d'applications sur mesure (SaaS, plateformes métier, outils internes). Réponse sous 48 h.",
   applicationName: "NEXCY",
   authors: [{ name: "NEXCY" }],
   creator: "NEXCY",
@@ -52,7 +52,7 @@ const organizationLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/assets/brand/icon-512.png`,
   description:
-    "Studio digital basé à Bordeaux : création de sites web, branding, SEO, automatisation et agents IA.",
+    "Studio digital basé à Bordeaux : création de sites web et développement d'applications sur mesure.",
   foundingDate: "2025-02-01",
   address: {
     "@type": "PostalAddress",

@@ -84,6 +84,26 @@ const nextConfig = {
     // Tous les médias sont locaux (public/assets) : aucun domaine distant requis.
     formats: ["image/avif", "image/webp"],
   },
+  // Anciennes URLs de l'offre (cinq services) → les deux pages actuelles.
+  // 308 : redirections permanentes, le référencement est transmis.
+  async redirects() {
+    const toWebsites = ["creation-web", "creation-de-sites-web", "branding", "seo", "referencement"];
+    const toApplications = ["automatisation-ia", "automatisation", "ia", "agents-ia"];
+    return [
+      ...toWebsites.map((slug) => ({
+        source: `/services/${slug}`,
+        destination: "/services/sites-web",
+        permanent: true,
+      })),
+      ...toApplications.map((slug) => ({
+        source: `/services/${slug}`,
+        destination: "/services/applications",
+        permanent: true,
+      })),
+      // La maintenance n'est plus un service isolé : elle accompagne chaque projet livré.
+      { source: "/services/maintenance", destination: "/services", permanent: true },
+    ];
+  },
   async headers() {
     return [
       { source: "/(.*)", headers: securityHeaders },

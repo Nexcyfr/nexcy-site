@@ -4,10 +4,10 @@ import { jumpTo } from "./_utils";
 test.describe("Accueil", () => {
   test("le hero porte le message, les deux actions et le plan", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("La complexité, mise en ordre.");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Sites web et applications sur mesure.");
     const hero = page.locator("section[aria-labelledby='hero-title']");
     await expect(hero.getByRole("link", { name: "Démarrer un projet" })).toHaveAttribute("href", "/contact");
-    await expect(hero.getByRole("link", { name: "Voir les expertises" })).toHaveAttribute("href", "/services");
+    await expect(hero.getByRole("link", { name: "Voir les services" })).toHaveAttribute("href", "/services");
     await expect(hero.locator("canvas")).toHaveCount(1);
     await expect(hero.locator("canvas")).toHaveAttribute("aria-hidden", "true");
   });
@@ -37,13 +37,17 @@ test.describe("Accueil", () => {
     await ctx.close();
   });
 
-  test("les expertises renvoient vers les pages dédiées et la maintenance", async ({ page }) => {
+  test("l'accueil présente deux offres, et seulement deux", async ({ page }) => {
     await page.goto("/");
-    const list = page.locator("section[aria-labelledby='home-expertise-title']");
-    for (const slug of ["creation-web", "branding", "seo", "automatisation-ia"]) {
-      await expect(list.locator(`a[href='/services/${slug}']`)).toHaveCount(1);
+    const offers = page.locator("section[aria-labelledby='home-offers-title']");
+    await expect(offers.locator("a[href='/services/sites-web']")).toHaveCount(1);
+    await expect(offers.locator("a[href='/services/applications']")).toHaveCount(1);
+    await expect(offers.locator("a[href^='/services/']")).toHaveCount(2);
+    // Les anciens services ne sont plus des offres.
+    const body = (await page.locator("main").innerText()).toLowerCase();
+    for (const old of ["branding", "maintenance", "automatisation & ia", "référencement naturel"]) {
+      expect(body, old).not.toContain(old);
     }
-    await expect(list.locator("a[href='/services#maintenance']")).toHaveCount(1);
   });
 
   test("aucun lien promet un créneau tant que Cal.com n'est pas configuré", async ({ page }) => {
@@ -55,27 +59,46 @@ test.describe("Accueil", () => {
 });
 
 test.describe("Services", () => {
-  test("la page liste les quatre expertises et la maintenance", async ({ page }) => {
+  test("/services présente Sites web et Applications, rien d'autre", async ({ page }) => {
     await page.goto("/services");
-    for (const slug of ["creation-web", "branding", "seo", "automatisation-ia"]) {
-      const block = page.locator(`#service-${slug}`);
+    for (const slug of ["sites-web", "applications"]) {
+      const block = page.locator(`#offre-${slug}`);
       await expect(block).toHaveCount(1);
       await expect(block.getByRole("link", { name: "Voir le détail" })).toHaveAttribute("href", `/services/${slug}`);
     }
-    await expect(page.locator("#maintenance")).toHaveCount(1);
+    await expect(page.locator("section[id^='offre-']")).toHaveCount(2);
+    await expect(page.locator("#capabilities-title")).toHaveCount(1);
+    const body = (await page.locator("main").innerText()).toLowerCase();
+    expect(body).not.toContain("accompagnement continu");
+    expect(body).not.toContain("abonnement");
   });
 
-  for (const slug of ["creation-web", "branding", "seo", "automatisation-ia"]) {
-    test(`/services/${slug} : constat, méthode, livrables, cadre, prochaine étape`, async ({ page }) => {
+  for (const slug of ["sites-web", "applications"]) {
+    test(`/services/${slug} : périmètre, public, méthode, capacités, cadre, prochaine étape`, async ({ page }) => {
       await page.goto(`/services/${slug}`);
-      for (const id of ["service-context-title", "service-method-title", "service-deliverables-title", "service-frame-title"]) {
+      for (const id of ["offer-scope-title", "offer-audience-title", "offer-method-title", "offer-included-title", "offer-frame-title"]) {
         await expect(page.locator(`h2#${id}`)).toHaveCount(1);
       }
       await expect(page.locator("section[aria-labelledby='cta-title']").getByRole("link", { name: "Démarrer un projet" })).toHaveAttribute("href", "/contact");
-      // Chaque page renvoie vers les autres expertises (maillage interne).
-      await expect(page.locator("section[aria-labelledby='service-others-title'] a")).toHaveCount(3);
+      await expect(page.getByRole("link", { name: /Autre métier du studio/ })).toHaveCount(1);
     });
   }
+
+  test("Sites web : couvre création, refonte, e-commerce et expériences interactives", async ({ page }) => {
+    await page.goto("/services/sites-web");
+    const text = await page.locator("main").innerText();
+    for (const k of ["Sites vitrines", "Sites corporate", "Sites e-commerce", "Landing pages", "Refonte complète ou partielle", "Optimisation d'un site existant", "Expériences web haut de gamme"]) {
+      expect(text).toContain(k);
+    }
+  });
+
+  test("Applications : couvre applications web, SaaS, plateformes métier, outils internes, dashboards, portails", async ({ page }) => {
+    await page.goto("/services/applications");
+    const text = await page.locator("main").innerText();
+    for (const k of ["Applications web", "SaaS et MVP", "Plateformes métier", "Outils internes", "Dashboards", "Extranets et portails clients", "Authentification et droits"]) {
+      expect(text).toContain(k);
+    }
+  });
 
   test("un slug inconnu renvoie 404", async ({ page }) => {
     const res = await page.goto("/services/inconnu");

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/home/HomeHero";
 import { HomePosition } from "@/components/home/HomePosition";
-import { HomeExpertise } from "@/components/home/HomeExpertise";
+import { HomeOffers } from "@/components/home/HomeOffers";
 import { HomeMethod } from "@/components/home/HomeMethod";
 import { HomeEngagements } from "@/components/home/HomeEngagements";
 import { HomeStudio } from "@/components/home/HomeStudio";
@@ -11,9 +11,9 @@ import { SITE_URL } from "@/lib/utils";
 import { CONTACT_EMAIL } from "@/data/navigation";
 
 export const metadata: Metadata = buildMetadata({
-  title: "NEXCY — Studio digital à Bordeaux : sites web, IA et automatisation",
+  title: "NEXCY — Studio web à Bordeaux : sites web et applications sur mesure",
   description:
-    "NEXCY, studio digital à Bordeaux : sites web, SEO, automatisation et agents IA pour entreprises exigeantes. Un interlocuteur unique, réponse sous 48 h.",
+    "NEXCY, studio digital à Bordeaux : création de sites web et développement d'applications sur mesure (SaaS, plateformes métier, outils internes). Réponse sous 48 h.",
   path: "/",
   ogImage: "/assets/og/og-home.png",
 });
@@ -30,7 +30,7 @@ const professionalServiceLd = {
   name: "NEXCY",
   url: SITE_URL,
   description:
-    "Studio digital à Bordeaux — création de sites web, branding, SEO, automatisation et agents IA.",
+    "Studio digital à Bordeaux — création de sites web et développement d'applications sur mesure.",
   areaServed: [
     { "@type": "City", name: "Bordeaux" },
     { "@type": "Country", name: "France" },
@@ -53,7 +53,7 @@ export default function HomePage() {
       />
       <HomeHero />
       <HomePosition />
-      <HomeExpertise />
+      <HomeOffers />
       <HomeMethod />
       <HomeEngagements />
       <HomeStudio />

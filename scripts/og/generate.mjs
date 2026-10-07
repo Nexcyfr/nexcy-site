@@ -19,14 +19,12 @@ const outDir = path.join(root, "public/assets/og");
 
 /** Pages à décliner. `title` accepte un saut de ligne explicite (\n). */
 const PAGES = [
-  { file: "og-home.png", label: "Studio digital · Bordeaux", title: "La complexité,\nmise en ordre.", sub: "Sites web, IA et automatisation pour les entreprises exigeantes." },
-  { file: "og-services.png", label: "Expertises", title: "Cinq domaines,\nune seule exigence.", sub: "Création web, branding, SEO, automatisation et agents IA." },
+  { file: "og-home.png", label: "Studio web · Bordeaux", title: "Sites web et\napplications\nsur mesure.", sub: "Conçus et développés avec précision, de l'idée à la mise en ligne." },
+  { file: "og-services.png", label: "Services", title: "Deux métiers.\nUn seul niveau\nd'exigence.", sub: "Sites web et applications sur mesure." },
+  { file: "og-service-sites-web.png", label: "Services · 01", title: "Création et\nrefonte de\nsites web.", sub: "Vitrine, corporate, e-commerce, expériences interactives." },
+  { file: "og-service-applications.png", label: "Services · 02", title: "Applications\nweb et SaaS\nsur mesure.", sub: "Plateformes métier, outils internes, dashboards." },
   { file: "og-studio.png", label: "Le studio", title: "Précision et\nexigence assumées.", sub: "Vision, méthode et standards de NEXCY." },
   { file: "og-contact.png", label: "Contact", title: "Parlons de\nvotre projet.", sub: "Réponse sous 48 heures ouvrées." },
-  { file: "og-service-creation-web.png", label: "Expertise · 01", title: "Création de\nsites web.", sub: "Rapides, accessibles, pensés pour la conversion." },
-  { file: "og-service-branding.png", label: "Expertise · 02", title: "Branding et\nidentité visuelle.", sub: "Une marque cohérente sur tous les points de contact." },
-  { file: "og-service-seo.png", label: "Expertise · 03", title: "SEO et\nréférencement naturel.", sub: "Un travail de fond, mesuré, sans promesse de première place." },
-  { file: "og-service-automatisation-ia.png", label: "Expertise · 04", title: "Automatisation\net agents IA.", sub: "Du temps rendu à vos équipes, sans IA gadget." },
 ];
 
 const [font, logo, plan] = await Promise.all([
@@ -53,7 +51,7 @@ body { width: 1200px; height: 630px; background: #0a0a0a; color: #f4f1eb; font-f
 .rule::before { content: ""; position: absolute; left: 0; top: -1px; height: 1px; width: 56px; background: #d9913d; }
 .label { font-size: 15px; letter-spacing: .24em; text-transform: uppercase; color: #99958f; font-weight: 500; }
 .label b { color: #d9913d; font-weight: 500; }
-h1 { font-size: 70px; line-height: .98; letter-spacing: -.035em; font-weight: 500; margin-top: 40px; white-space: pre-line; }
+h1 { font-size: 66px; line-height: .98; letter-spacing: -.035em; font-weight: 500; margin-top: 40px; white-space: pre-line; }
 .sub { margin-top: 28px; font-size: 25px; line-height: 1.4; color: #9a9a9a; max-width: 520px; letter-spacing: -.01em; }
 .foot { display: flex; align-items: center; justify-content: space-between; }
 .foot img { width: 150px; }

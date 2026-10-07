@@ -307,13 +307,17 @@
    n'est qu'un habillage. Sans prise en charge de `animation-timeline`
    (ou en mouvement réduit), tout est affiché directement.
    ============================================================ */
+/* Révélation par masque (clip-path) + léger déplacement, JAMAIS par fondu :
+   à aucun moment le texte n'est semi-transparent, donc son contraste mesuré
+   (axe, Lighthouse) reste celui du design. La marge négative de l'état final
+   laisse déborder les anneaux de focus et les ombres. */
 @keyframes nx-rise {
   from {
-    opacity: 0;
+    clip-path: inset(-1rem -1rem 100% -1rem);
     transform: translate3d(0, var(--nx-y, 1.25rem), 0);
   }
   to {
-    opacity: 1;
+    clip-path: inset(-1rem);
     transform: translate3d(0, 0, 0);
   }
 }

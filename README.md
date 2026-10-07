@@ -1,10 +1,23 @@
 # NEXCY — Site officiel
 
-Site de **NEXCY**, studio digital à Bordeaux : sites web, branding, SEO, automatisation et agents IA.
+Site de **NEXCY**, studio digital à Bordeaux. NEXCY conçoit et développe des **sites web** et des **applications** sur mesure.
 Signature : _Precision in Motion_.
 
 Direction visuelle : thème sombre, grille « plan technique », accent **ambre** `#D9913D` utilisé avec parcimonie
 (CTA, traits, états actifs). Aucune couleur froide. Typographie Geist.
+
+## Offre
+
+Deux métiers, et uniquement deux :
+
+1. **Sites web** — vitrines, corporate, e-commerce, landing pages, éditoriaux, expériences haut de gamme, refontes, optimisation.
+2. **Applications** — applications web, SaaS, plateformes métier, outils internes, dashboards, portails clients, MVP.
+
+SEO technique, automatisation, IA, direction artistique, sécurité, infrastructure et maintenance sont des **capacités
+transversales** réunies lorsque le projet l'exige, jamais des services vendus à part. Source unique : `src/data/services.ts`.
+
+Anciennes URLs (`/services/creation-web`, `/seo`, `/branding`, `/automatisation-ia`, `/maintenance`…) : redirections 308
+déclarées dans `next.config.mjs`, testées dans `tests/e2e/redirects.spec.ts`.
 
 ## Stack
 
@@ -71,16 +84,16 @@ Aucun secret n'est versionné. Sur Vercel en production, le contrôle strict est
 
 ```
 src/
-  app/            routes : /, /services, /services/[slug], /studio, /contact, pages légales, 404,
+  app/            routes : /, /services, /services/sites-web, /services/applications, /studio, /contact, pages légales, 404,
                   api/contact, sitemap, robots, manifest, icônes
   components/     global · ui · animations · home (+ plan/ : moteur canvas) · services · studio · contact · legal
-  data/           contenus typés (services, méthode, valeurs, navigation, formulaire)
+  data/           contenus typés (offres, méthode, valeurs, navigation, formulaire)
   hooks/          useLenis · useReducedMotion
   lib/            metadata · utils · site-config · env · contact-schema · legal · motion/easing
   content/legal/  textes juridiques (texte brut, rendu verbatim par lib/legal.ts)
 config/           liste des variables requises en production (partagée avec next.config.mjs)
 scripts/          og/ (visuels sociaux) · assets/ (icônes)
-tests/e2e/        Playwright
+tests/e2e/        Playwright (routes, navigation, ancres, redirections, contact/API, SEO, accessibilité)
 ```
 
 ## Qualité

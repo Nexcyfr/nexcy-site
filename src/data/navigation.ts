@@ -16,6 +16,12 @@ export const headerCta: NavLink = {
   href: "/contact",
 };
 
+/** Les deux offres — liens directs depuis le pied de page. */
+export const serviceLinks: NavLink[] = [
+  { label: "Sites web", href: "/services/sites-web" },
+  { label: "Applications", href: "/services/applications" },
+];
+
 export const legalLinks: NavLink[] = [
   { label: "Mentions légales", href: "/mentions-legales" },
   { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },

@@ -1,11 +1,9 @@
 /** Options du formulaire de contact — Master Brief §16 / §9. */
 
 export const projectTypes = [
-  "Site web",
-  "Branding",
-  "SEO",
-  "Automatisation & IA",
-  "Autre",
+  "Site web (création ou refonte)",
+  "Application",
+  "Autre ou pas encore défini",
 ] as const;
 
 export const budgetRanges = [

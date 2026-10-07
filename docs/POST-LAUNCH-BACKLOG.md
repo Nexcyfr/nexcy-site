@@ -10,8 +10,8 @@ Classement : P1 = premier mois, P2 = trimestre, P3 = opportuniste.
 - Brancher Cal.com si ce n'est pas fait au lancement.
 
 ## P1 — SEO
-- Contenu éditorial ciblé (articles / ressources) : audit SEO, site web et IA pour TPE-PME, automatisation.
-- Pages sectorielles (hôtellerie-restauration, immobilier, conseil, professions libérales) lorsque des références existent.
+- Contenu éditorial ciblé (articles / ressources) : refonte de site internet, création de site à Bordeaux, développement d'application web, SaaS, plateformes métier.
+- Pages sectorielles (hôtellerie-restauration, immobilier, conseil, professions libérales) pour les sites web ; cas d'usage pour les applications (outil interne, portail client, SaaS), lorsque des références existent.
 - Page « Bordeaux » ou section locale étoffée ; fiche Google Business Profile ; citations locales.
 - Suivi mensuel Search Console (requêtes, indexation, Core Web Vitals réels).
 

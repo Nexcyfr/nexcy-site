@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import { ServicesHero } from "@/components/services/ServicesHero";
-import { ServiceBlock } from "@/components/services/ServiceBlock";
-import { ServicesMaintenanceBlock } from "@/components/services/ServicesMaintenanceBlock";
+import { OfferBlock } from "@/components/services/OfferBlock";
+import { CapabilitiesSection } from "@/components/services/CapabilitiesSection";
 import { CtaSection } from "@/components/ui/CtaSection";
-import { serviceDetails } from "@/data/services";
+import { offers } from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Services — sites web, SEO, automatisation et IA à Bordeaux | NEXCY",
+  title: "Services — création de sites web et d'applications sur mesure | NEXCY",
   description:
-    "Création de sites web, branding, SEO, automatisation et agents IA, plus un accompagnement continu. Studio digital à Bordeaux, interventions dans toute la France.",
+    "NEXCY, studio digital à Bordeaux, conçoit et développe des sites web et des applications sur mesure : e-commerce, SaaS, plateformes métier, outils internes.",
   path: "/services",
   ogImage: "/assets/og/og-services.png",
 });
 
 /**
- * JSON-LD : liste ordonnée des expertises (chacune renvoie vers sa page, qui
+ * JSON-LD : liste ordonnée des deux offres (chacune renvoie vers sa page, qui
  * porte son propre schéma Service) + fil d'Ariane. Aucun prix, note, avis ni
  * durée non vérifié.
  */
@@ -25,12 +25,12 @@ const servicesLd = {
   "@graph": [
     {
       "@type": "ItemList",
-      name: "Expertises NEXCY",
-      itemListElement: serviceDetails.map((s, i) => ({
+      name: "Offres NEXCY",
+      itemListElement: offers.map((o, i) => ({
         "@type": "ListItem",
         position: i + 1,
-        name: s.title,
-        url: `${SITE_URL}/services/${s.slug}`,
+        name: o.title,
+        url: `${SITE_URL}/services/${o.slug}`,
       })),
     },
     {
@@ -51,15 +51,16 @@ export default function ServicesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesLd) }}
       />
       <ServicesHero />
-      {serviceDetails.map((service, i) => (
-        <ServiceBlock key={service.slug} service={service} reversed={i % 2 === 1} />
+      {offers.map((offer, i) => (
+        <OfferBlock key={offer.slug} offer={offer} reversed={i % 2 === 1} />
       ))}
-      <ServicesMaintenanceBlock />
+      <CapabilitiesSection index="03" />
       <CtaSection
-        title="Un projet à faire avancer ?"
-        subtitle="Parlons de vos objectifs et construisons une réponse digitale à la hauteur de vos ambitions."
+        title="Un site ou une application à concevoir ?"
+        subtitle="Décrivez votre projet. Nous vous disons franchement si nous sommes le bon interlocuteur, et comment nous procéderions."
         buttonLabel="Démarrer un projet"
         buttonHref="/contact"
+        note="Réponse sous 48 heures ouvrées · Aucun engagement"
       />
     </>
   );

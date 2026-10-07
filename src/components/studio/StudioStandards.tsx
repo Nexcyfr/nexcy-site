@@ -7,7 +7,7 @@ const standards = [
   "Performance (Core Web Vitals)",
   "Accessibilité (WCAG AA)",
   "Une base technique propre, documentée et maintenable",
-  "SEO intégré dès la conception",
+  "SEO technique intégré dès la conception",
   "Sécurité et confidentialité par défaut",
 ];
 

@@ -41,11 +41,15 @@ Ces points n'ont **pas** été modifiés dans le dépôt : aucune information in
    (sécurité du formulaire). Si un autre traceur est ajouté, un recueil de consentement devient nécessaire.
 4. **Coordonnées publiées.** Les mentions légales affichent un numéro de téléphone et l'adresse professionnelle.
    Confirmer que leur publication est voulue (elle est obligatoire pour l'éditeur, mais le téléphone est modifiable selon le cas).
-5. **Dates de version des textes légaux** (publication 1er janvier 2026, mise à jour 25 juin 2026, version 2.0) :
+5. **Description de l'activité (mentions légales §2).** Le texte juridique décrit une activité plus large que l'offre
+   commerciale du site (réseaux sociaux, référencement payant, identités visuelles, automatisation, IA, conseil,
+   maintenance) et emploie « agence digitale ». Ce n'est pas contradictoire (objet d'activité, pas offre), mais la
+   cohérence avec l'offre « Sites web » + « Applications » est à valider. Texte non modifié.
+6. **Dates de version des textes légaux** (publication 1er janvier 2026, mise à jour 25 juin 2026, version 2.0) :
    à mettre à jour si les textes changent (points 1 à 3).
-6. **Année « 2019 »** de la page Studio (« expérience construite depuis 2019 », frise « Début de pratique ») : à confirmer
+7. **Année « 2019 »** de la page Studio (« expérience construite depuis 2019 », frise « Début de pratique ») : à confirmer
    comme exacte et vérifiable. La création juridique (février 2025) est, elle, établie par les mentions légales.
-7. **Délai de réponse de 48 heures ouvrées**, annoncé partout : engagement à tenir.
+8. **Délai de réponse de 48 heures ouvrées**, annoncé partout : engagement à tenir.
 
 ## D. Ce que le site ne prétend pas (à conserver tel quel)
 

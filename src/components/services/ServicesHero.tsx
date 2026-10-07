@@ -1,25 +1,25 @@
 import { PageHero } from "@/components/ui/PageHero";
 
-/** Ouverture de la page Services. */
+/** Ouverture de la page Services : deux métiers, un seul niveau d'exigence. */
 export function ServicesHero() {
   return (
     <PageHero
       index="01"
-      kicker="Expertises"
+      kicker="Services"
       titleId="services-hero-title"
-      title="Cinq domaines, une seule exigence."
+      title="Deux métiers. Un seul niveau d'exigence."
       lead={
         <p>
-          Création web, branding, référencement, automatisation et intelligence
-          artificielle, accompagnement continu. Chaque domaine se prend seul ;
-          ensemble, ils forment un système cohérent.
+          NEXCY conçoit et développe des sites web et des applications sur
+          mesure. Design, développement, performance et sécurité sont réunis
+          dans un même studio, du premier échange à la mise en ligne.
         </p>
       }
       facts={[
-        { label: "Domaines", value: "Cinq" },
-        { label: "Base technique", value: "Documentée, reprenable" },
+        { label: "Offres", value: "Sites web · Applications" },
+        { label: "Interlocuteur", value: "Un seul, du début à la fin" },
         { label: "Délai de réponse", value: "48 heures ouvrées" },
-        { label: "Zone d'intervention", value: "France entière" },
+        { label: "Zone d'intervention", value: "Bordeaux, France entière" },
       ]}
     />
   );

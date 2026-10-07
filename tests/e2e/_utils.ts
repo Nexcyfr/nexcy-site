@@ -4,10 +4,8 @@ import type { Page } from "@playwright/test";
 export const PUBLIC_ROUTES = [
   "/",
   "/services",
-  "/services/creation-web",
-  "/services/branding",
-  "/services/seo",
-  "/services/automatisation-ia",
+  "/services/sites-web",
+  "/services/applications",
   "/studio",
   "/contact",
   "/mentions-legales",

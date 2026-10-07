@@ -59,8 +59,8 @@ test.describe("SEO et métadonnées", () => {
     }
   });
 
-  test("les pages de service portent un fil d'Ariane et un schéma Service", async ({ page }) => {
-    await page.goto("/services/seo");
+  test("les pages d'offre portent un fil d'Ariane et un schéma Service", async ({ page }) => {
+    await page.goto("/services/applications");
     const blocks = (await page.locator('script[type="application/ld+json"]').allTextContents()).map((b) => JSON.parse(b));
     const ld = blocks.find((b) => Array.isArray(b["@graph"]))!;
     const types = ld["@graph"].map((n: { "@type": string }) => n["@type"]);

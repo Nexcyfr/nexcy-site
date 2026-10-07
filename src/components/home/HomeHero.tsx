@@ -23,12 +23,12 @@ import { PHASES, phaseIndex } from "@/components/home/plan/render";
 
 /** Six temps du récit. Chaque légende porte un argument, pas une décoration. */
 const CAPTIONS: string[] = [
-  "Tout part d'un point d'entrée : votre situation réelle, mesurée.",
+  "Tout part d'un besoin réel : votre activité, vos utilisateurs, vos contraintes.",
   "On pose la trame avant de bâtir. L'architecture précède le design.",
   "Chaque module a une fonction, une place et une mesure.",
-  "Les modules communiquent : données, automatisation, intelligence artificielle.",
+  "Les modules communiquent : données, intégrations, automatisations.",
   "Ce qui est construit est documenté, mesuré et maintenu.",
-  "Web, marque, visibilité, automatisation — un seul système, tenu par une seule équipe.",
+  "Sites web, applications : un seul studio, de la conception à la mise en ligne.",
 ];
 
 /** Coordonnées réelles de Bordeaux — une donnée vraie, pas un ornement. */
@@ -164,7 +164,7 @@ export function HomeHero() {
                 className="t-h1 text-warm-white"
                 style={{ textWrap: "balance" }}
               >
-                La complexité, mise en ordre.
+                Sites web et applications sur mesure.
               </h1>
 
               {/* Récit en six temps. Supplément visuel : la proposition
@@ -176,11 +176,11 @@ export function HomeHero() {
                 {CAPTIONS[phase]}
               </p>
               <p className="sr-only">
-                NEXCY est un studio digital basé à Bordeaux. Il conçoit, construit et
-                fait évoluer les systèmes digitaux d&apos;entreprises exigeantes :
-                sites web, identité de marque, référencement naturel,
-                automatisation des processus et agents d&apos;intelligence
-                artificielle.
+                NEXCY est un studio digital basé à Bordeaux. Il conçoit et
+                développe des sites web et des applications sur mesure pour des
+                entreprises exigeantes : sites vitrines, corporate et
+                e-commerce, refontes, applications web, SaaS, plateformes métier
+                et outils internes.
               </p>
 
               <div className="pointer-events-auto mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
@@ -194,7 +194,7 @@ export function HomeHero() {
                   href="/services"
                   className="inline-flex min-h-[52px] items-center text-sm font-medium text-text-secondary underline-offset-8 transition-colors duration-200 hover:text-warm-white hover:underline"
                 >
-                  Voir les expertises
+                  Voir les services
                 </Link>
               </div>
             </div>

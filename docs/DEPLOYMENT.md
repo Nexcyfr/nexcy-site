@@ -94,9 +94,10 @@ Si `nexcy.fr` / `www.nexcy.fr` pointent aujourd'hui vers l'ancien site (GitHub P
 - [ ] Formulaire : envoi réel → e-mail reçu **et** accusé de réception reçu par l'expéditeur.
 - [ ] Formulaire sans Turnstile valide → refusé.
 - [ ] `https://nexcy.fr/robots.txt`, `/sitemap.xml`, `/manifest.webmanifest` répondent 200.
+- [ ] Anciennes URLs : `/services/seo` → 308 vers `/services/sites-web`, `/services/automatisation-ia` → 308 vers `/services/applications`.
 - [ ] En-têtes : <https://securityheaders.com> (CSP, HSTS, nosniff, frame-ancestors).
 - [ ] Partage : coller l'URL dans LinkedIn / Slack / WhatsApp, vérifier l'aperçu Open Graph.
-- [ ] Données structurées : <https://search.google.com/test/rich-results> sur `/` et `/services/seo`.
+- [ ] Données structurées : <https://search.google.com/test/rich-results> sur `/` et `/services/sites-web`.
 - [ ] Lighthouse mobile et desktop sur `/`, `/services`, `/studio`, `/contact`.
 - [ ] Console navigateur sans erreur ; page 404 personnalisée.
 

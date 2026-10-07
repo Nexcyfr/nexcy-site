@@ -12,7 +12,7 @@ async function fillValid(page: Page) {
   await page.getByLabel("Comment vous appelez-vous ?").fill(VALID.name);
   await page.getByLabel(/adresse e-mail professionnelle/).fill(VALID.email);
   await page.getByLabel("Quelle entreprise représentez-vous ?").fill(VALID.company);
-  await page.getByLabel(/type de projet/).selectOption("Site web");
+  await page.getByLabel(/type de projet/).selectOption("Site web (création ou refonte)");
   await page.getByLabel(/budget estimé/).selectOption({ index: 1 });
   await page.getByLabel(/délai souhaitez-vous/).selectOption({ index: 1 });
   await page.getByLabel(/Décrivez votre projet/).fill(VALID.message);
@@ -75,7 +75,7 @@ test.describe("Formulaire de contact", () => {
     await expect(confirmation).toContainText("Votre demande a bien été reçue.");
     await expect(confirmation).toBeFocused();
     expect(calls).toBe(1);
-    expect(body).toMatchObject({ name: VALID.name, email: VALID.email, company: VALID.company, projectType: "Site web", consent: true });
+    expect(body).toMatchObject({ name: VALID.name, email: VALID.email, company: VALID.company, projectType: "Site web (création ou refonte)", consent: true });
   });
 
   test("erreur serveur : message explicite, formulaire conservé", async ({ page }) => {
@@ -121,7 +121,7 @@ test.describe("API /api/contact", () => {
 
   test("refuse un budget hors liste (400)", async ({ request }) => {
     const res = await request.post("/api/contact", {
-      data: { ...VALID, projectType: "Site web", budget: "1 €", deadline: "1 à 3 mois", consent: true },
+      data: { ...VALID, projectType: "Site web (création ou refonte)", budget: "1 €", deadline: "1 à 3 mois", consent: true },
     });
     expect(res.status()).toBe(400);
   });
@@ -136,7 +136,7 @@ test.describe("API /api/contact", () => {
 
   test("honeypot : succès silencieux sans envoi", async ({ request }) => {
     const res = await request.post("/api/contact", {
-      data: { ...VALID, projectType: "Site web", budget: "Budget à définir", deadline: "Pas de contrainte", consent: true, website: "http://spam.example" },
+      data: { ...VALID, projectType: "Site web (création ou refonte)", budget: "Budget à définir", deadline: "Pas de contrainte", consent: true, website: "http://spam.example" },
     });
     expect(res.status()).toBe(200);
     expect((await res.json()).success).toBe(true);
@@ -145,7 +145,7 @@ test.describe("API /api/contact", () => {
   test("sans clé Resend : 503 explicite (jamais de faux succès)", async ({ request }) => {
     test.skip(!!process.env.RESEND_API_KEY, "une vraie clé enverrait un e-mail réel");
     const res = await request.post("/api/contact", {
-      data: { ...VALID, projectType: "Site web", budget: "Budget à définir", deadline: "Pas de contrainte", consent: true },
+      data: { ...VALID, projectType: "Site web (création ou refonte)", budget: "Budget à définir", deadline: "Pas de contrainte", consent: true },
     });
     expect(res.status()).toBe(503);
     expect((await res.json()).code).toBe("config");

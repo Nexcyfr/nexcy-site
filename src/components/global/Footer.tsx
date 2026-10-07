@@ -3,6 +3,7 @@ import { TextLink } from "@/components/ui/TextLink";
 import {
   navLinks,
   legalLinks,
+  serviceLinks,
   CONTACT_EMAIL,
   BRAND_TAGLINE,
   NEXCY_FOUNDING_YEAR,
@@ -42,15 +43,14 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-space-6 sm:grid-cols-2 lg:mt-24 lg:grid-cols-[1.6fr_1fr_1fr]">
+        <div className="mt-16 grid gap-space-6 sm:grid-cols-2 lg:mt-24 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           {/* Colonne identité */}
           <div className="flex flex-col items-start gap-space-4">
             <Logo width={132} />
             <p className="t-tech text-accent">{BRAND_TAGLINE}</p>
             <p className="t-body measure-tight text-text-secondary">
-              Studio digital à Bordeaux. Sites web, identité de marque,
-              référencement, automatisation et agents d&apos;intelligence
-              artificielle.
+              Studio digital à Bordeaux. Conception et développement de
+              sites web et d&apos;applications sur mesure.
             </p>
           </div>
 
@@ -58,6 +58,19 @@ export function Footer() {
             <p className="t-tech mb-space-4 text-text-muted">Navigation</p>
             <ul className="flex flex-col gap-space-3 text-sm">
               {footerNav.map((link) => (
+                <li key={link.href}>
+                  <TextLink href={link.href} className="py-2.5">
+                    {link.label}
+                  </TextLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="Offres">
+            <p className="t-tech mb-space-4 text-text-muted">Services</p>
+            <ul className="flex flex-col gap-space-3 text-sm">
+              {serviceLinks.map((link) => (
                 <li key={link.href}>
                   <TextLink href={link.href} className="py-2.5">
                     {link.label}

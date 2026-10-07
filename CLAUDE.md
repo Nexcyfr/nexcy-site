@@ -5,9 +5,20 @@ Toute décision structurante prise ici prime sur les habitudes par défaut.
 
 ## Vision NEXCY
 
-NEXCY est un **studio digital** à Bordeaux : sites web, expériences digitales, IA, automatisation et agents IA, SEO,
-branding, maintenance. Positionnement : _excellence invisible_ — systèmes élégants, fluides, précis, sans bruit inutile.
-Signature : _Precision in Motion_.
+NEXCY est un **studio digital** à Bordeaux qui **conçoit et développe des sites web et des applications sur mesure**.
+C'est le cœur — et la totalité — de l'offre. Positionnement : spécialiste, pas généraliste ; _excellence invisible_ —
+systèmes élégants, fluides, précis, sans bruit inutile. Signature : _Precision in Motion_.
+
+### Offre : exactement deux services
+1. **Sites web** : vitrines, corporate, e-commerce, landing pages, éditoriaux et événementiels, expériences haut de gamme,
+   refonte (partielle ou complète) et optimisation d'un site existant. La refonte appartient à cette offre : **jamais un 3e service**.
+2. **Applications** : applications web, SaaS, plateformes métier, outils internes, dashboards, extranets et portails clients,
+   interfaces d'administration, applications métier sur mesure, MVP, produits digitaux complexes.
+
+**Interdit** : réintroduire branding, SEO, automatisation/IA, agents IA ou maintenance comme services principaux ou pages
+vendues séparément. Ces compétences restent des **capacités transversales** (`capabilities` dans `src/data/services.ts`)
+mentionnées comme incluses lorsque le projet les nécessite (SEO technique d'un site, automatisation ou IA intégrées à une
+application, identité visuelle nécessaire à une interface, maintenance liée à un projet livré).
 
 Le visiteur doit comprendre en quelques secondes : ce que fait NEXCY, pourquoi c'est différent, pourquoi lui faire
 confiance, comment prendre contact. NEXCY ne doit jamais ressembler à une agence générique, un template, un portfolio
@@ -48,21 +59,25 @@ Source unique : `src/app/globals.css` (variables CSS) + `tailwind.config.ts` (m�
 
 Next.js 15 (App Router), React 19, TypeScript strict, Tailwind 3. Pages pré-rendues en statique.
 
-- Routes : `/`, `/services`, `/services/[slug]` (4 expertises, `generateStaticParams`, `dynamicParams = false`), `/studio`,
-  `/contact`, `/mentions-legales`, `/politique-de-confidentialite`, 404, `api/contact`, sitemap, robots, manifest, icônes.
-- `src/data/*` : contenus typés. Modifier un texte de service = `src/data/services.ts` (alimente accueil, /services,
-  pages dédiées, sitemap, JSON-LD). Ajouter un service : une entrée suffit.
+- Routes : `/`, `/services`, `/services/sites-web`, `/services/applications` (`generateStaticParams`, `dynamicParams = false`),
+  `/studio`, `/contact`, `/mentions-legales`, `/politique-de-confidentialite`, 404, `api/contact`, sitemap, robots, manifest, icônes.
+- Anciennes URLs de l'offre à cinq services : redirections 308 dans `next.config.mjs` (`redirects()`), testées dans
+  `tests/e2e/redirects.spec.ts`. Ne jamais les transformer en 404. Ancres de la page Services : `#offre-sites-web`, `#offre-applications`.
+- `src/data/*` : contenus typés. Modifier une offre = `src/data/services.ts` (`offers`, `capabilities`) : alimente accueil,
+  /services, pages dédiées, sitemap, JSON-LD. Types du formulaire : `src/data/contact.ts`.
 - `src/content/legal/*.txt` : textes juridiques, rendus verbatim par `src/lib/legal.ts`. **Ne pas les réécrire sans validation
   de Matéo** ; sommaire généré automatiquement.
 - `src/lib/metadata.ts` : `buildMetadata()` pour toute page (canonical absolu, OG, Twitter). Titre ≤ 75 car., description ≤ 160.
-- JSON-LD : `Organization` + `WebSite` (layout), `ProfessionalService` (accueil), `Service` + `BreadcrumbList` (pages service),
-  `ItemList` (services), `AboutPage`, `ContactPage`. Uniquement des champs vérifiés ; pas de schéma décoratif.
+- JSON-LD : `Organization` + `WebSite` (layout), `ProfessionalService` (accueil), `Service` + `BreadcrumbList` (pages d'offre),
+  `ItemList` (offres), `AboutPage`, `ContactPage`. Uniquement des champs vérifiés ; pas de schéma décoratif.
 - `config/required-env.mjs` : liste unique des variables requises en production (utilisée par `next.config.mjs` et l'API).
 
 ## Règles d'animation (performance d'abord)
 
 - **Aucune bibliothèque d'animation JS** (GSAP retiré). Les révélations au scroll sont en CSS pur
   (`animation-timeline: view()`) via `MotionReveal`, `TextReveal`, `LineReveal` : composants **serveur**, aucun JS client.
+  La révélation se fait par masque (`clip-path`) et léger déplacement, **jamais par fondu** : un texte semi-transparent
+  fait échouer les contrôles de contraste (axe, Lighthouse).
   Sans prise en charge ou en mouvement réduit, le contenu est affiché directement. Ne pas les rendre « client ».
 - Pas de fade sur chaque élément : réserver la révélation aux titres, blocs clés et listes structurantes.
 - Transition de page : déplacement seul, sans fondu (ne retarde pas le LCP).
@@ -97,8 +112,8 @@ client, mesurer son poids (`pnpm analyze`). Pas de polices externes.
 ## SEO
 
 Titres uniques, canonical absolu, OG par page (`public/assets/og`, générés par `pnpm og:generate`), sitemap avec dates
-stables (mises à jour manuellement dans `src/app/sitemap.ts`), robots (`/api/` exclu), un seul `h1` par page, signaux locaux
-Bordeaux intégrés naturellement (jamais de texte artificiel).
+stables (mises à jour manuellement dans `src/app/sitemap.ts`), robots (`/api/` exclu), un seul `h1` par page, axes : création de site internet / refonte à Bordeaux, studio web Bordeaux, développement d'application web, SaaS,
+plateforme métier — intégrés naturellement, sans bourrage de mots-clés. Signaux locaux Bordeaux sans texte artificiel.
 
 ## Sécurité
 

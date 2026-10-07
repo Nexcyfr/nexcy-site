@@ -5,7 +5,9 @@ import { PUBLIC_ROUTES } from "./_utils";
 // Les révélations au scroll sont des animations CSS : axe mesurerait les
 // contrastes sur des états intermédiaires. On les neutralise, comme le fait un
 // utilisateur qui demande « réduire les animations » — et c'est aussi le cas à tester.
-test.use({ reducedMotion: "reduce" });
+test.beforeEach(async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+});
 
 test.describe("Accessibilité (axe-core, WCAG 2.2 AA)", () => {
   for (const route of [...PUBLIC_ROUTES, "/cette-page-n-existe-pas"]) {

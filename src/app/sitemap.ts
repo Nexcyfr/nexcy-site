@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/utils";
-import { serviceDetails } from "@/data/services";
+import { offers } from "@/data/services";
 
 /**
  * Sitemap — Master Brief §19. Pages légales en priorité 0.3.
@@ -11,10 +11,8 @@ import { serviceDetails } from "@/data/services";
 const LAST_MODIFIED: Record<string, string> = {
   "/": "2026-10-07",
   "/services": "2026-10-07",
-  "/services/creation-web": "2026-10-07",
-  "/services/branding": "2026-10-07",
-  "/services/seo": "2026-10-07",
-  "/services/automatisation-ia": "2026-10-07",
+  "/services/sites-web": "2026-10-07",
+  "/services/applications": "2026-10-07",
   "/studio": "2026-10-07",
   "/contact": "2026-10-07",
   "/mentions-legales": "2026-06-25",
@@ -36,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     page("/", 1, "monthly"),
     page("/services", 0.8, "monthly"),
-    ...serviceDetails.map((s) => page(`/services/${s.slug}`, 0.7, "monthly")),
+    ...offers.map((o) => page(`/services/${o.slug}`, 0.8, "monthly")),
     page("/studio", 0.7, "monthly"),
     page("/contact", 0.8, "monthly"),
     page("/mentions-legales", 0.3, "yearly"),

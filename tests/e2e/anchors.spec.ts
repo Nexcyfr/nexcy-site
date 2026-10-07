@@ -1,11 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 const ANCHORS = [
-  "/services#maintenance",
-  "/services#service-creation-web",
-  "/services#service-branding",
-  "/services#service-seo",
-  "/services#service-automatisation-ia",
+  "/services#offre-sites-web",
+  "/services#offre-applications",
   "/mentions-legales#section-5",
   "/politique-de-confidentialite#section-3",
 ];
