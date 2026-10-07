@@ -17,7 +17,10 @@
     "qa:viewports": "node scripts/qa/capture.mjs viewports",
     "qa:a11y": "node scripts/qa/a11y.mjs",
     "qa:robustness": "node scripts/qa/robustness.mjs",
-    "qa:sections": "node scripts/qa/sections.mjs"
+    "qa:sections": "node scripts/qa/sections.mjs",
+    "og:generate": "node scripts/og/generate.mjs",
+    "og:capture": "node scripts/og/capture-plan.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",

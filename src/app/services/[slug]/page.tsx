@@ -27,7 +27,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: service.metaTitle,
     description: service.metaDescription,
     path: `/services/${service.slug}`,
-    ogImage: "/assets/og/og-services.png",
+    ogImage: `/assets/og/og-service-${service.slug}.png`,
   });
 }
 
@@ -98,22 +98,22 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             titleId="service-context-title"
             title="Le problème, le public, le résultat."
           />
-          <dl className="mt-16 grid gap-px border-t border-border bg-border lg:mt-24 lg:grid-cols-3">
+          <ul className="mt-16 grid gap-px border-t border-border bg-border lg:mt-24 lg:grid-cols-3">
             {[
               { label: "Le constat", text: service.problem ?? service.hook },
               { label: "Pour qui", text: service.audience },
               { label: "Résultat visé", text: service.result },
             ].map((item, i) => (
-              <div key={item.label} className="bg-black">
+              <li key={item.label} className="bg-black">
                 <MotionReveal delay={i * 0.06} className="h-full">
                   <div className={`flex h-full flex-col py-8 lg:py-10 ${i === 0 ? "lg:pr-8" : "lg:px-8"}`}>
-                    <dt className="t-tech text-accent">{item.label}</dt>
-                    <dd className="t-body measure mt-5 text-text-secondary">{item.text}</dd>
+                    <h3 className="t-tech text-accent">{item.label}</h3>
+                    <p className="t-body measure mt-5 text-text-secondary">{item.text}</p>
                   </div>
                 </MotionReveal>
-              </div>
+              </li>
             ))}
-          </dl>
+          </ul>
         </div>
       </section>
 

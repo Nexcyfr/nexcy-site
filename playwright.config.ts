@@ -12,6 +12,8 @@ export default defineConfig({
   reporter: process.env.CI ? "github" : [["list"], ["html", { open: "never" }]],
   use: {
     baseURL: BASE_URL,
+    // Navigateur Chromium installé hors des chemins Playwright (CI sandbox, conteneurs).
+    launchOptions: { executablePath: process.env.PW_CHROMIUM_PATH || undefined },
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "off",

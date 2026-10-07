@@ -101,9 +101,6 @@
     /* Toute ancre atterrit sous le header fixe, sans offset au cas par cas. */
     scroll-padding-top: calc(var(--header-h) + 1rem);
   }
-  [id] {
-    scroll-margin-top: calc(var(--header-h) + 1rem);
-  }
 
   /* Lenis pilote le scroll : on neutralise le smooth natif quand il est actif */
   html.lenis,

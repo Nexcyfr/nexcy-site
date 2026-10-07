@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { forwardRef, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
@@ -59,22 +59,18 @@ function Field({
 }
 
 /** Liste déroulante native avec chevron explicite (affordance visible). */
-function Select({
-  id,
-  options,
-  invalid,
-  describedBy,
-  ...rest
-}: {
-  id: string;
-  options: readonly string[];
-  invalid: boolean;
-  describedBy?: string;
-} & React.SelectHTMLAttributes<HTMLSelectElement>) {
+const Select = forwardRef<
+  HTMLSelectElement,
+  {
+    options: readonly string[];
+    invalid: boolean;
+    describedBy?: string;
+  } & React.SelectHTMLAttributes<HTMLSelectElement>
+>(function Select({ options, invalid, describedBy, ...rest }, ref) {
   return (
     <div className="relative">
       <select
-        id={id}
+        ref={ref}
         defaultValue=""
         aria-invalid={invalid}
         aria-describedby={describedBy}
@@ -102,7 +98,7 @@ function Select({
       </svg>
     </div>
   );
-}
+});
 
 export function ContactForm() {
   const uid = useId();

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | NEXCY",
   },
   description:
-    "NEXCY, studio digital à Bordeaux : création de sites web, SEO, automatisation et agents IA pour les entreprises exigeantes. Un interlocuteur unique, réponse sous 48 heures ouvrées.",
+    "NEXCY, studio digital à Bordeaux : sites web, SEO, automatisation et agents IA pour entreprises exigeantes. Un interlocuteur unique, réponse sous 48 h.",
   applicationName: "NEXCY",
   authors: [{ name: "NEXCY" }],
   creator: "NEXCY",
@@ -29,7 +29,9 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     siteName: "NEXCY",
     url: SITE_URL,
-    images: [{ url: "/assets/og/og-home.png", width: 1200, height: 630, alt: "NEXCY" }],
+    images: [
+      { url: "/assets/og/og-home.png", width: 1200, height: 630, alt: "NEXCY — Studio digital à Bordeaux" },
+    ],
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
@@ -48,7 +50,7 @@ const organizationLd = {
   "@id": `${SITE_URL}/#organization`,
   name: "NEXCY",
   url: SITE_URL,
-  logo: `${SITE_URL}/assets/brand/logo-nexcy-blanc.png`,
+  logo: `${SITE_URL}/assets/brand/icon-512.png`,
   description:
     "Studio digital basé à Bordeaux : création de sites web, branding, SEO, automatisation et agents IA.",
   foundingDate: "2025-02-01",

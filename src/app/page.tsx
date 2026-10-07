@@ -13,7 +13,7 @@ import { CONTACT_EMAIL } from "@/data/navigation";
 export const metadata: Metadata = buildMetadata({
   title: "NEXCY — Studio digital à Bordeaux : sites web, IA et automatisation",
   description:
-    "NEXCY, studio digital à Bordeaux : création de sites web, SEO, automatisation et agents IA pour les entreprises exigeantes. Un interlocuteur unique, réponse sous 48 heures ouvrées.",
+    "NEXCY, studio digital à Bordeaux : sites web, SEO, automatisation et agents IA pour entreprises exigeantes. Un interlocuteur unique, réponse sous 48 h.",
   path: "/",
   ogImage: "/assets/og/og-home.png",
 });

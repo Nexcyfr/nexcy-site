@@ -106,7 +106,7 @@ export const serviceDetails: ServiceDetail[] = [
     ctaLabel: "Discuter de votre projet",
     metaTitle: "Création de sites web sur mesure à Bordeaux — NEXCY",
     metaDescription:
-      "Studio digital à Bordeaux : conception et développement de sites web rapides, accessibles et pensés pour la conversion. Du diagnostic à la mise en ligne, avec un interlocuteur unique.",
+      "Studio digital à Bordeaux : sites web rapides, accessibles et pensés pour la conversion. Du diagnostic à la mise en ligne, avec un interlocuteur unique.",
   },
   {
     index: "02",
@@ -138,7 +138,7 @@ export const serviceDetails: ServiceDetail[] = [
     ctaLabel: "Parler de votre identité",
     metaTitle: "Branding et identité visuelle — NEXCY",
     metaDescription:
-      "Identité de marque cohérente, du logotype au site web : positionnement, système visuel, déclinaisons et guide d'utilisation. Studio digital NEXCY, Bordeaux.",
+      "Identité de marque cohérente, du logotype au site web : positionnement, système visuel et guide d'utilisation. Studio digital NEXCY, Bordeaux.",
   },
   {
     index: "03",
@@ -171,7 +171,7 @@ export const serviceDetails: ServiceDetail[] = [
     ctaLabel: "Analyser votre visibilité",
     metaTitle: "SEO et référencement naturel — NEXCY",
     metaDescription:
-      "Audit technique et éditorial, stratégie de mots-clés, optimisation on-page et suivi mensuel. Un travail de fond, sans promesse de première place. NEXCY, Bordeaux.",
+      "Audit technique et éditorial, mots-clés, optimisation on-page et suivi mensuel. Un travail de fond, sans promesse de première place. NEXCY, Bordeaux.",
   },
   {
     index: "04",
@@ -203,7 +203,7 @@ export const serviceDetails: ServiceDetail[] = [
     ctaLabel: "Explorer les possibilités",
     metaTitle: "Automatisation et agents IA — NEXCY",
     metaDescription:
-      "Workflows automatisés (n8n, Make, Zapier), connexion de vos outils et agents IA intégrés à vos processus. Du temps rendu à vos équipes, sans IA gadget. NEXCY, Bordeaux.",
+      "Workflows automatisés (n8n, Make, Zapier), outils connectés et agents IA intégrés à vos processus. Du temps rendu à vos équipes. NEXCY, Bordeaux.",
   },
 ];
 

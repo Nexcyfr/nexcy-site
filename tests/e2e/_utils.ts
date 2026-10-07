@@ -1,14 +1,26 @@
 import type { Page } from "@playwright/test";
 
-// Patterns bénins à filtrer des erreurs console :
-// - bruits dev/HMR Next.js
-// - erreurs réseau sur services tiers (Plausible analytics, Cloudflare Turnstile)
-//   qui peuvent être indisponibles dans les environnements de test hors-ligne.
+/** Pages publiques indexables (hors 404). */
+export const PUBLIC_ROUTES = [
+  "/",
+  "/services",
+  "/services/creation-web",
+  "/services/branding",
+  "/services/seo",
+  "/services/automatisation-ia",
+  "/studio",
+  "/contact",
+  "/mentions-legales",
+  "/politique-de-confidentialite",
+] as const;
+
+// Bruits bénins à filtrer des erreurs console :
+// - dev Next.js (HMR, Fast Refresh, DevTools) ;
+// - services tiers pouvant être injoignables hors ligne (Plausible, Turnstile).
 const BENIGN_PATTERNS = [
   /favicon/,
   /hot-update/,
   /Download the React DevTools/,
-  /ReactDOM\.render/,
   /\[HMR\]/,
   /\[Fast Refresh\]/,
   /plausible\.io/,
@@ -32,12 +44,14 @@ export function collectConsoleErrors(page: Page): () => string[] {
 
 export async function hasHorizontalOverflow(page: Page): Promise<boolean> {
   return page.evaluate(
-    () => document.documentElement.scrollWidth > window.innerWidth + 1,
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
   );
 }
 
-export const HYDRATION_RE = /hydration failed|did not match|Server Error/i;
-
-export function hasHydrationError(errors: string[]): boolean {
-  return errors.some((e) => HYDRATION_RE.test(e));
+/** Saute instantanément à une position (Lenis suit le scroll natif). */
+export async function jumpTo(page: Page, top: number) {
+  await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), top);
+  await page.waitForTimeout(700);
 }
+
+export const HYDRATION_RE = /hydration failed|did not match|Server Error/i;
