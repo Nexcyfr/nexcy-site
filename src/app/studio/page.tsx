@@ -11,9 +11,9 @@ import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Studio NEXCY — Vision, méthode et standards",
+  title: "Le studio NEXCY — vision, méthode et standards à Bordeaux",
   description:
-    "L'histoire, la vision, les standards et le fonctionnement de NEXCY. Une agence conçue pour l'exigence.",
+    "L'histoire, la vision, la méthode et les standards de NEXCY, studio digital indépendant à Bordeaux. Un interlocuteur unique, une exigence assumée.",
   path: "/studio",
   ogImage: "/assets/og/og-studio.png",
 });
@@ -28,6 +28,13 @@ const aboutLd = {
   name: "Studio NEXCY",
   url: `${SITE_URL}/studio`,
   about: { "@id": `${SITE_URL}/#organization` },
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Studio", item: `${SITE_URL}/studio` },
+    ],
+  },
 };
 
 export default function StudioPage() {

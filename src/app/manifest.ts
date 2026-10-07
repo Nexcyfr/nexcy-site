@@ -3,10 +3,10 @@ import type { MetadataRoute } from "next";
 /** manifest.json — Master Brief §98. */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "NEXCY — Agence Web Premium à Bordeaux",
+    name: "NEXCY — Studio digital à Bordeaux",
     short_name: "NEXCY",
     description:
-      "Agence digitale premium à Bordeaux. Création de sites web, branding, SEO et automatisation.",
+      "Studio digital à Bordeaux. Création de sites web, branding, SEO, automatisation et agents IA.",
     start_url: "/",
     display: "standalone",
     background_color: "#0A0A0A",

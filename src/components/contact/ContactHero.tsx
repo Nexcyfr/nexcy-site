@@ -1,5 +1,6 @@
 import { TextReveal } from "@/components/animations/TextReveal";
 import { MotionReveal } from "@/components/animations/MotionReveal";
+import { CAL_URL } from "@/lib/site-config";
 
 /**
  * En-tête de la page Contact.
@@ -41,7 +42,9 @@ export function ContactHero() {
         <ol className="mt-10 flex flex-col border-t border-border">
           {[
             "Nous lisons votre message et revenons vers vous sous 48 heures ouvrées.",
-            "Un échange de trente minutes pour cadrer le besoin, sans engagement.",
+            CAL_URL
+              ? "Un échange de 30 minutes pour cadrer le besoin, que vous pouvez réserver en ligne. Sans engagement."
+              : "Un premier échange pour cadrer le besoin, sans engagement.",
             "Une proposition écrite, détaillée ligne par ligne.",
           ].map((step, i) => (
             <li

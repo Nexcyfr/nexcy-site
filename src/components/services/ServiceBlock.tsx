@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { TextReveal } from "@/components/animations/TextReveal";
 import { MotionReveal } from "@/components/animations/MotionReveal";
 import { Button } from "@/components/ui/Button";
@@ -5,16 +6,13 @@ import type { ServiceDetail } from "@/data/services";
 import { cn } from "@/lib/utils";
 
 /**
- * Bloc de service pleine largeur.
+ * Bloc de service de la page /services — la synthèse.
  *
- * Deux colonnes : l'argument à gauche, ce qui est livré à droite. La position
- * s'inverse d'un bloc à l'autre pour donner du rythme sans recourir à des
- * illustrations.
- *
- * Les anciens « motifs » SVG par service (schéma arborescent, maquette de
- * navigateur factice) ont été retirés : décoratifs, sans rapport avec le
- * langage du plan, et le faux chrome de navigateur relevait du visuel
- * d'interface fictive. Le rythme vient désormais de la structure elle-même.
+ * Deux colonnes : l'argument à gauche (accroche, pour qui, résultat visé,
+ * méthode en une ligne), ce qui est livré à droite. La position s'inverse d'un
+ * bloc à l'autre pour donner du rythme sans illustration. Le détail complet
+ * (problème, méthode pas à pas, technologies, critères, limites) vit sur la
+ * page dédiée /services/[slug] : aucun contenu n'est dupliqué.
  */
 export function ServiceBlock({
   service,
@@ -27,7 +25,8 @@ export function ServiceBlock({
 
   return (
     <section
-      aria-labelledby={titleId}
+      id={titleId}
+      aria-labelledby={`${titleId}-title`}
       className={cn(
         "section-y border-t border-border",
         // Alternance de fond : la lecture progresse par paliers, pas par images.
@@ -49,36 +48,31 @@ export function ServiceBlock({
               </p>
             </div>
 
-            <TextReveal as="h2" id={titleId} className="t-h2 mt-6 text-text-primary">
+            <TextReveal
+              as="h2"
+              id={`${titleId}-title`}
+              className="t-h2 mt-6 text-text-primary"
+            >
               {service.title}
             </TextReveal>
 
             <MotionReveal delay={0.08}>
-              <p className="t-lead measure mt-7 text-text-primary">
-                {service.hook}
-              </p>
+              <p className="t-lead measure mt-7 text-text-primary">{service.hook}</p>
 
-              {service.problem ? (
-                <p className="t-body measure mt-6 text-text-secondary">
-                  {service.problem}
-                </p>
-              ) : null}
-
-              <p className="t-body measure mt-6 flex gap-4 text-text-primary">
-                <span
-                  aria-hidden="true"
-                  className="mt-[0.7em] h-px w-4 shrink-0 bg-accent"
-                />
-                <span>
-                  <span className="text-text-muted">Résultat visé — </span>
-                  {service.result}
-                </span>
-              </p>
-
-              <div className="measure mt-10 border-t border-border pt-6">
-                <p className="t-tech text-text-muted">Méthode</p>
-                <p className="t-body mt-4 text-text-secondary">{service.method}</p>
-              </div>
+              <dl className="measure mt-8 flex flex-col gap-6">
+                <div>
+                  <dt className="t-tech text-text-muted">Pour qui</dt>
+                  <dd className="t-body mt-3 text-text-secondary">{service.audience}</dd>
+                </div>
+                <div>
+                  <dt className="t-tech text-text-muted">Résultat visé</dt>
+                  <dd className="t-body mt-3 text-text-primary">{service.result}</dd>
+                </div>
+                <div>
+                  <dt className="t-tech text-text-muted">Méthode</dt>
+                  <dd className="t-body mt-3 text-text-secondary">{service.method}</dd>
+                </div>
+              </dl>
             </MotionReveal>
           </div>
 
@@ -100,28 +94,17 @@ export function ServiceBlock({
                 ))}
               </ul>
 
-              {service.technologies ? (
-                <p className="t-body mt-8 border-t border-border pt-6 text-text-muted">
-                  <span className="text-text-secondary">Technologies : </span>
-                  {service.technologies}
-                </p>
-              ) : null}
-
-              <div className="mt-6 border-t border-border pt-6">
-                <p className="t-body text-text-secondary">
-                  <span className="text-text-muted">Critères de réussite — </span>
-                  {service.criteria}
-                </p>
-                <p className="t-body mt-3 text-text-muted">
-                  <span className="text-text-secondary">Notre limite — </span>
-                  {service.limit}
-                </p>
-              </div>
-
-              <div className="mt-8">
-                <Button href="/contact" variant="secondary">
-                  {service.ctaLabel}
+              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-border pt-6">
+                <Button href={`/services/${service.slug}`} variant="secondary">
+                  Voir le détail
                 </Button>
+                <Link
+                  href="/contact"
+                  className="t-tech inline-flex min-h-[44px] items-center gap-3 text-text-secondary transition-colors duration-200 hover:text-accent"
+                >
+                  {service.ctaLabel}
+                  <span aria-hidden="true" className="block h-px w-8 bg-current" />
+                </Link>
               </div>
             </div>
           </MotionReveal>

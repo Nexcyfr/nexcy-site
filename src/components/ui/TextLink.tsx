@@ -17,7 +17,7 @@ export function TextLink({ href, children, className, external }: TextLinkProps)
   const classes = cn(
     "group relative inline-block text-text-secondary transition-colors duration-200 hover:text-text-primary",
     "after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left",
-    "after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-premium",
+    "after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 after:ease-standard",
     "hover:after:scale-x-100 focus-visible:after:scale-x-100",
     className,
   );

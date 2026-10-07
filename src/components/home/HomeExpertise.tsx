@@ -8,14 +8,14 @@ import { serviceDetails, maintenanceService } from "@/data/services";
  *
  * Chaque ligne annonce le domaine et, en regard, le résultat visé. C'est la
  * seule information qui décide un lecteur à ce niveau de lecture ; le détail
- * vit sur /services. La ligne entière est cliquable et mène à l'ancre du service.
+ * vit sur /services. La ligne entière est cliquable et mène à la page dédiée du service.
  */
 const ROWS = [
   ...serviceDetails.map((s) => ({
     index: s.index,
     title: s.title,
     result: s.result,
-    href: `/services#service-${s.slug}`,
+    href: `/services/${s.slug}`,
   })),
   {
     index: maintenanceService.index,
@@ -84,7 +84,7 @@ export function HomeExpertise() {
         <MotionReveal className="mt-12">
           <Link
             href="/services"
-            className="t-tech inline-flex items-center gap-3 text-text-secondary transition-colors duration-200 hover:text-accent"
+            className="t-tech inline-flex min-h-[44px] items-center gap-3 text-text-secondary transition-colors duration-200 hover:text-accent"
           >
             Voir le détail des expertises
             <span aria-hidden="true" className="block h-px w-8 bg-current" />

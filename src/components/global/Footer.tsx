@@ -33,7 +33,7 @@ export function Footer() {
           <p className="t-tech text-text-muted">Écrire à NEXCY</p>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="mt-5 inline-block break-all text-[clamp(1.375rem,1rem+1.7vw,2.75rem)] font-medium leading-tight tracking-[-0.02em] text-text-primary underline-offset-[0.18em] transition-colors duration-200 hover:text-accent hover:underline"
+            className="mt-5 inline-block min-h-[44px] break-all text-[clamp(1.375rem,1rem+1.7vw,2.75rem)] font-medium leading-tight tracking-[-0.02em] text-text-primary underline-offset-[0.18em] transition-colors duration-200 hover:text-accent hover:underline"
           >
             {CONTACT_EMAIL}
           </a>
@@ -48,8 +48,8 @@ export function Footer() {
             <Logo width={132} />
             <p className="t-tech text-accent">{BRAND_TAGLINE}</p>
             <p className="t-body measure-tight text-text-secondary">
-              Studio digital indépendant à Bordeaux. Sites web sur mesure,
-              identité de marque, référencement, automatisation et intelligence
+              Studio digital à Bordeaux. Sites web, identité de marque,
+              référencement, automatisation et agents d&apos;intelligence
               artificielle.
             </p>
           </div>
@@ -59,7 +59,9 @@ export function Footer() {
             <ul className="flex flex-col gap-space-3 text-sm">
               {footerNav.map((link) => (
                 <li key={link.href}>
-                  <TextLink href={link.href}>{link.label}</TextLink>
+                  <TextLink href={link.href} className="py-2.5">
+                    {link.label}
+                  </TextLink>
                 </li>
               ))}
             </ul>
@@ -70,7 +72,9 @@ export function Footer() {
             <ul className="flex flex-col gap-space-3 text-sm">
               {legalLinks.map((link) => (
                 <li key={link.href}>
-                  <TextLink href={link.href}>{link.label}</TextLink>
+                  <TextLink href={link.href} className="py-2.5">
+                    {link.label}
+                  </TextLink>
                 </li>
               ))}
             </ul>

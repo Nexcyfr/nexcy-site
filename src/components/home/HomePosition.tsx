@@ -15,8 +15,8 @@ const STATEMENTS = [
   },
   {
     index: "B",
-    title: "Le code vous appartient",
-    body: "Base documentée, dépendances à jour, aucun verrou propriétaire. Vous pouvez reprendre le projet en interne ou le confier à quelqu'un d'autre — sans nous demander l'autorisation.",
+    title: "Rien ne vous enferme",
+    body: "Base documentée, dépendances à jour, aucun verrou propriétaire. Vous pouvez reprendre le projet en interne ou le confier à un autre prestataire.",
   },
   {
     index: "C",

@@ -8,39 +8,36 @@ import { buildMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Création de sites web sur mesure — NEXCY",
+  title: "Services — sites web, SEO, automatisation et IA à Bordeaux | NEXCY",
   description:
-    "Création de sites web sur mesure, branding, SEO et automatisation. NEXCY accompagne les entreprises exigeantes dans la durée.",
+    "Création de sites web, branding, SEO, automatisation et agents IA, plus un accompagnement continu. Studio digital à Bordeaux, interventions dans toute la France.",
   path: "/services",
   ogImage: "/assets/og/og-services.png",
 });
 
 /**
- * JSON-LD Service ×4 (les 4 services détaillés dans le contenu visible ;
- * maintenance exclue) + BreadcrumbList. `provider` référence l'Organization
- * globale par @id (pas de duplication). Aucun prix/note/avis/durée non vérifié.
+ * JSON-LD : liste ordonnée des expertises (chacune renvoie vers sa page, qui
+ * porte son propre schéma Service) + fil d'Ariane. Aucun prix, note, avis ni
+ * durée non vérifié.
  */
 const servicesLd = {
   "@context": "https://schema.org",
   "@graph": [
-    ...serviceDetails.map((s) => ({
-      "@type": "Service",
-      "@id": `${SITE_URL}/services#${s.slug}`,
-      name: s.title,
-      description: s.hook,
-      provider: { "@id": `${SITE_URL}/#organization` },
-      areaServed: { "@type": "Country", name: "France" },
-    })),
+    {
+      "@type": "ItemList",
+      name: "Expertises NEXCY",
+      itemListElement: serviceDetails.map((s, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: s.title,
+        url: `${SITE_URL}/services/${s.slug}`,
+      })),
+    },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Accueil", item: SITE_URL },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Services",
-          item: `${SITE_URL}/services`,
-        },
+        { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
       ],
     },
   ],

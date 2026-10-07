@@ -29,6 +29,9 @@
   --color-line: rgba(153, 149, 143, 0.14);
   --color-line-strong: rgba(153, 149, 143, 0.3);
 
+  /* Erreur de formulaire — corail doux, chaud comme le reste de la palette */
+  --color-danger: #f0907e;
+
   /* Accent ambre cuivré — signal contrôlé, jamais un aplat */
   --color-accent: #d9913d;
   --color-accent-light: #e7aa62;

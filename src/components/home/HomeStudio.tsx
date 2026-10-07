@@ -26,12 +26,13 @@ export function HomeStudio() {
           index="05"
           kicker="Studio"
           titleId="home-studio-title"
-          title="Une équipe restreinte, un interlocuteur unique."
+          title="Un studio compact, un interlocuteur unique."
           lead={
             <p>
               NEXCY est un studio indépendant basé à Bordeaux. Pas de couche
-              commerciale entre vous et la personne qui construit : vous parlez
-              à celui qui écrit le code et qui répondra dans six mois.
+              commerciale entre vous et la personne qui pilote votre projet :
+              celui à qui vous parlez est celui qui répond de la qualité, au
+              lancement comme six mois plus tard.
             </p>
           }
         />
@@ -54,7 +55,7 @@ export function HomeStudio() {
         <MotionReveal className="mt-14">
           <Link
             href="/studio"
-            className="t-tech inline-flex items-center gap-3 text-text-secondary transition-colors duration-200 hover:text-accent"
+            className="t-tech inline-flex min-h-[44px] items-center gap-3 text-text-secondary transition-colors duration-200 hover:text-accent"
           >
             Découvrir le studio
             <span aria-hidden="true" className="block h-px w-8 bg-current" />

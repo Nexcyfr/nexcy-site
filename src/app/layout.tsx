@@ -14,17 +14,16 @@ const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "NEXCY — Agence web premium à Bordeaux",
+    default: "NEXCY — Studio digital à Bordeaux : sites web, IA et automatisation",
     template: "%s | NEXCY",
   },
   description:
-    "NEXCY conçoit des sites web, identités visuelles et systèmes d'automatisation conçus avec précision pour les entreprises exigeantes. Basée à Bordeaux. Réponse sous 48h.",
+    "NEXCY, studio digital à Bordeaux : création de sites web, SEO, automatisation et agents IA pour les entreprises exigeantes. Un interlocuteur unique, réponse sous 48 heures ouvrées.",
   applicationName: "NEXCY",
   authors: [{ name: "NEXCY" }],
   creator: "NEXCY",
   publisher: "NEXCY",
   formatDetection: { email: false, address: false, telephone: false },
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "fr_FR",
@@ -39,6 +38,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#0A0A0A",
   colorScheme: "dark",
+  viewportFit: "cover",
 };
 
 /** JSON-LD global — Organization + WebSite (Master Brief §21). */
@@ -50,8 +50,8 @@ const organizationLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/assets/brand/logo-nexcy-blanc.png`,
   description:
-    "Agence digitale premium spécialisée en création de sites web, branding, SEO et automatisation. Basée à Bordeaux, France.",
-  foundingDate: "2025",
+    "Studio digital basé à Bordeaux : création de sites web, branding, SEO, automatisation et agents IA.",
+  foundingDate: "2025-02-01",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Bordeaux",

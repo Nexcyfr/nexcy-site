@@ -17,24 +17,25 @@ export function StudioMethod() {
             id="studio-method-title"
             className="mt-6 t-h2 text-text-primary"
           >
-            Un interlocuteur unique. Un réseau d&apos;experts sélectionnés.
+            Un interlocuteur unique. Les bons spécialistes, au bon moment.
           </TextReveal>
         </div>
         <MotionReveal delay={0.1}>
           <div className="flex flex-col gap-6">
             <p className="t-body-lg text-text-secondary">
-              NEXCY fonctionne comme une structure agile : un interlocuteur unique
-              qui porte la vision de votre projet de bout en bout.
+              NEXCY fonctionne comme un studio compact : un interlocuteur unique porte
+              la vision de votre projet de bout en bout, de l&apos;audit à la mise
+              en ligne.
             </p>
             <p className="t-body-lg text-text-secondary">
-              Selon la nature et l&apos;envergure de chaque mission, nous mobilisons
-              des experts partenaires sélectionnés — développeurs, designers,
-              consultants SEO, spécialistes IA — pour garantir le niveau
-              d&apos;exécution que vous méritez.
+              Selon la nature de chaque mission, le studio peut s&apos;appuyer sur
+              des spécialistes — design, développement, référencement, IA —
+              choisis pour le besoin et coordonnés par NEXCY. Vous gardez un
+              seul point de contact et un seul responsable de la qualité.
             </p>
             <p className="t-body-lg text-text-secondary">
-              Pas de hiérarchie inutile. Pas d&apos;intermédiaires qui diluent la
-              qualité. La bonne expertise, au bon moment.
+              Pas de hiérarchie inutile, pas d&apos;intermédiaires qui diluent la
+              qualité.
             </p>
           </div>
         </MotionReveal>

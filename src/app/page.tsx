@@ -11,9 +11,9 @@ import { SITE_URL } from "@/lib/utils";
 import { CONTACT_EMAIL } from "@/data/navigation";
 
 export const metadata: Metadata = buildMetadata({
-  title: "NEXCY — Agence web premium à Bordeaux",
+  title: "NEXCY — Studio digital à Bordeaux : sites web, IA et automatisation",
   description:
-    "NEXCY conçoit des sites web, identités visuelles et systèmes d'automatisation conçus avec précision pour les entreprises exigeantes. Basée à Bordeaux. Réponse sous 48h.",
+    "NEXCY, studio digital à Bordeaux : création de sites web, SEO, automatisation et agents IA pour les entreprises exigeantes. Un interlocuteur unique, réponse sous 48 heures ouvrées.",
   path: "/",
   ogImage: "/assets/og/og-home.png",
 });
@@ -30,8 +30,11 @@ const professionalServiceLd = {
   name: "NEXCY",
   url: SITE_URL,
   description:
-    "Agence digitale premium à Bordeaux — création de sites web, branding, SEO et automatisation.",
-  areaServed: { "@type": "Country", name: "France" },
+    "Studio digital à Bordeaux — création de sites web, branding, SEO, automatisation et agents IA.",
+  areaServed: [
+    { "@type": "City", name: "Bordeaux" },
+    { "@type": "Country", name: "France" },
+  ],
   address: {
     "@type": "PostalAddress",
     addressLocality: "Bordeaux",

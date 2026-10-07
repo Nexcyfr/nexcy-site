@@ -156,7 +156,7 @@ export function HomeHero() {
             {/* Bloc de titre */}
             <div className="max-w-[34rem] pb-12 sm:max-w-[44rem] lg:max-w-[52rem] lg:pb-16">
               <p className="t-tech mb-5 text-accent">
-                NEXCY — Agence digitale · Bordeaux
+                NEXCY — Studio digital · Bordeaux
               </p>
 
               <h1
@@ -176,10 +176,11 @@ export function HomeHero() {
                 {CAPTIONS[phase]}
               </p>
               <p className="sr-only">
-                NEXCY conçoit, construit et opère les systèmes digitaux
-                d&apos;entreprises exigeantes : sites web sur mesure, identité de
-                marque, référencement naturel, automatisation des processus et
-                intégration d&apos;intelligence artificielle. Basée à Bordeaux.
+                NEXCY est un studio digital basé à Bordeaux. Il conçoit, construit et
+                fait évoluer les systèmes digitaux d&apos;entreprises exigeantes :
+                sites web, identité de marque, référencement naturel,
+                automatisation des processus et agents d&apos;intelligence
+                artificielle.
               </p>
 
               <div className="pointer-events-auto mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">

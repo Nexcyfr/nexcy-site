@@ -10,9 +10,10 @@ export function StudioHero() {
       title="Un studio indépendant, à Bordeaux."
       lead={
         <p>
-          NEXCY est une structure volontairement petite. Pas d&apos;intermédiaire
-          commercial, pas de sous-traitance opaque : la personne qui conçoit est
-          celle qui construit, et celle qui répondra dans six mois.
+          NEXCY est un studio volontairement compact. Pas d&apos;intermédiaire
+          commercial : vous échangez avec la personne qui conçoit et pilote
+          votre projet, de la première discussion à la mise en ligne, puis dans
+          la durée.
         </p>
       }
       facts={[

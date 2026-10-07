@@ -1,19 +1,20 @@
 import { z } from "zod";
-import { projectTypes } from "@/data/contact";
+import { projectTypes, budgetRanges, deadlineOptions } from "@/data/contact";
 
 /**
  * Schéma de validation du formulaire de contact — Master Brief §16 / §22.
  * Partagé client (React Hook Form) et serveur (API Route).
  */
 export const contactSchema = z.object({
-  name: z.string().min(2, "Nom requis").max(120),
-  email: z.string().email("E-mail invalide").max(160),
-  company: z.string().min(1, "Entreprise requise").max(160),
+  name: z.string().trim().min(2, "Nom requis").max(120),
+  email: z.string().trim().email("E-mail invalide").max(160),
+  company: z.string().trim().min(1, "Entreprise requise").max(160),
   projectType: z.enum(projectTypes, { message: "Type de projet requis" }),
-  budget: z.string().min(1, "Budget requis"),
-  deadline: z.string().min(1, "Délai requis"),
+  budget: z.enum(budgetRanges, { message: "Budget requis" }),
+  deadline: z.enum(deadlineOptions, { message: "Délai requis" }),
   message: z
     .string()
+    .trim()
     .min(20, "Message trop court (20 caractères minimum)")
     .max(4000),
   consent: z.boolean().refine((v) => v === true, "Consentement requis"),

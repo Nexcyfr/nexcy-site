@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
   title: "Mentions légales — NEXCY",
-  description: "Mentions légales de NEXCY, agence digitale basée à Bordeaux.",
+  description: "Mentions légales de NEXCY, studio digital basé à Bordeaux : éditeur, hébergeur, propriété intellectuelle et données personnelles.",
   path: "/mentions-legales",
 });
 

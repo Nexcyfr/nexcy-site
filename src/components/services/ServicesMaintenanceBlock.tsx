@@ -11,7 +11,8 @@ export function ServicesMaintenanceBlock() {
   const m = maintenanceService;
   return (
     <section
-      aria-labelledby="service-maintenance"
+      id="maintenance"
+      aria-labelledby="service-maintenance-title"
       className="section-y border-t border-border bg-surface"
     >
       <div className="container-site">
@@ -21,7 +22,7 @@ export function ServicesMaintenanceBlock() {
           <div>
             <TextReveal
               as="h2"
-              id="service-maintenance"
+              id="service-maintenance-title"
               className="t-h2 text-text-primary"
             >
               {m.title}

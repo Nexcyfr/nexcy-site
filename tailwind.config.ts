@@ -3,7 +3,7 @@ import { cssEase } from "./src/lib/motion/easing";
 
 /**
  * NEXCY — Design tokens (Master Brief §7).
- * Palette entièrement sombre, accent doré cuivré #C8883A. Aucune couleur bleue.
+ * Palette entièrement sombre, accent ambre #D9913D (jamais d'aplat). Aucune couleur froide.
  * L'échelle typographique (xs → 9xl) correspond déjà aux défauts Tailwind.
  */
 const config: Config = {
@@ -28,6 +28,7 @@ const config: Config = {
         "text-muted": "#808080",
         "warm-white": "#F4F1EB",
         stone: "#99958F",
+        danger: "#F0907E",
         border: "#222222",
         line: "rgba(153,149,143,0.14)",
         "line-strong": "rgba(153,149,143,0.30)",
