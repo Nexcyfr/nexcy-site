@@ -44,6 +44,19 @@ function project(x: number, y: number, z: number, cam: Camera) {
   };
 }
 
+/** Variante sans allocation : écrit dans `out`. Réservée au chemin chaud (îlots). */
+interface Pt {
+  sx: number;
+  sy: number;
+}
+function projectTo(out: Pt, x: number, y: number, z: number, cam: Camera): Pt {
+  out.sx = (x - y) * ISO_X * cam.scale + cam.cx;
+  out.sy = (x + y) * ISO_Y * cam.scale - z * cam.scale + cam.cy;
+  return out;
+}
+/** Sept points réutilisés à chaque îlot — aucun objet créé par image. */
+const P: Pt[] = Array.from({ length: 7 }, () => ({ sx: 0, sy: 0 }));
+
 /* ── Utilitaires de progression ───────────────────────────────────────────── */
 
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
@@ -407,10 +420,8 @@ function drawPlots(
   const build = seg(p, 0.22, 0.6);
   if (build <= 0) return;
 
-  // Algorithme du peintre : les îlots lointains d'abord.
-  const sorted = [...model.plots].sort((a, b) => a.x + a.y - (b.x + b.y));
-
-  for (const plot of sorted) {
+  // Algorithme du peintre : les îlots lointains d'abord (ordre précalculé).
+  for (const plot of model.sorted) {
     // Extrusion échelonnée : croissance radiale depuis le cœur du plan.
     const delay = plot.order * 0.62;
     const t = easeOut(clamp01((build - delay) / (1 - delay)));
@@ -431,13 +442,13 @@ function drawPlot(
   const x1 = x + w;
   const y1 = y + d;
 
-  const topA = project(x, y, z, cam);
-  const topB = project(x1, y, z, cam);
-  const topC = project(x1, y1, z, cam);
-  const topD = project(x, y1, z, cam);
-  const botB = project(x1, y, 0, cam);
-  const botC = project(x1, y1, 0, cam);
-  const botD = project(x, y1, 0, cam);
+  const topA = projectTo(P[0], x, y, z, cam);
+  const topB = projectTo(P[1], x1, y, z, cam);
+  const topC = projectTo(P[2], x1, y1, z, cam);
+  const topD = projectTo(P[3], x, y1, z, cam);
+  const botB = projectTo(P[4], x1, y, 0, cam);
+  const botC = projectTo(P[5], x1, y1, 0, cam);
+  const botD = projectTo(P[6], x, y1, 0, cam);
 
   // Trois valeurs franches — une source lumineuse unique, haute et à droite.
   // L'écart entre les faces fait tout le volume : sans lui, le plan est illisible.

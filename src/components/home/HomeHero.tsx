@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { PlanCanvas } from "@/components/home/plan/PlanCanvas";
 import { PHASES, phaseIndex } from "@/components/home/plan/render";
@@ -37,6 +36,7 @@ const COORDS = "44.8378° N — 0.5792° O";
 
 export function HomeHero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef(0);
   const railRef = useRef<HTMLSpanElement>(null);
   /** Repeinte immédiate fournie par le canvas — filet si rAF est bridé. */
@@ -67,29 +67,37 @@ export function HomeHero() {
     if (railRef.current) railRef.current.style.transform = `scaleX(${p})`;
   }, []);
 
-  useGSAP(
-    () => {
-      if (reduced) return;
-      const section = sectionRef.current;
-      if (!section) return;
+  // Le scroll à travers la section pilote la progression. Écouteur natif passif,
+  // une lecture de géométrie par image au plus — aucune bibliothèque de scroll.
+  useEffect(() => {
+    if (reduced) return;
+    const section = sectionRef.current;
+    const sticky = stickyRef.current;
+    if (!section || !sticky) return;
 
-      const trigger = ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-        // Les mesures sont reprises après tout changement de mise en page.
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          progressRef.current = self.progress;
-          requestPaintRef.current?.();
-        },
-      });
+    let raf = 0;
+    const compute = () => {
+      raf = 0;
+      const rect = section.getBoundingClientRect();
+      const travel = Math.max(1, rect.height - sticky.offsetHeight);
+      const p = Math.min(1, Math.max(0, -rect.top / travel));
+      if (p === progressRef.current) return;
+      progressRef.current = p;
+      requestPaintRef.current?.();
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(compute);
+    };
 
-      return () => trigger.kill();
-    },
-    { scope: sectionRef, dependencies: [reduced, compact] },
-  );
+    compute();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [reduced, compact]);
 
   // Hauteur de défilement : assez longue pour que chaque temps respire,
   // assez courte pour ne pas retenir l'utilisateur en otage sur mobile.
@@ -102,7 +110,7 @@ export function HomeHero() {
       className="relative w-full bg-void"
       style={{ height: scrollHeight }}
     >
-      <div className="sticky top-0 h-svh w-full overflow-hidden">
+      <div ref={stickyRef} className="sticky top-0 h-svh w-full overflow-hidden">
         {/* Le plan. Monté une fois la largeur connue, pour éviter un rebuild. */}
         <div className="absolute inset-0">
           {ready ? (

@@ -45,6 +45,8 @@ export interface Route {
 
 export interface PlanModel {
   plots: Plot[];
+  /** Îlots triés du plus lointain au plus proche (algorithme du peintre) — calculé une fois. */
+  sorted: Plot[];
   routes: Route[];
   /** Demi-étendue de la trame, en unités de plan. */
   radius: number;
@@ -189,7 +191,10 @@ export function buildPlan(density: "full" | "compact" = "full"): PlanModel {
     routes.push({ points, length: polylineLength(points), order: 1 });
   }
 
-  return { plots, routes, radius, netZ, maxH };
+  // Tri unique à la construction : le rendu l'utilise tel quel, à chaque image.
+  const sorted = [...plots].sort((a, b) => a.x + a.y - (b.x + b.y));
+
+  return { plots, sorted, routes, radius, netZ, maxH };
 }
 
 function polylineLength(points: { x: number; y: number }[]): number {

@@ -1,6 +1,6 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { FadeIn } from "@/components/animations/FadeIn";
+import { MotionReveal } from "@/components/animations/MotionReveal";
 import { cn } from "@/lib/utils";
 
 const standards = [
@@ -42,20 +42,20 @@ export function StudioStandards() {
                 i === standards.length - 1 && "sm:col-span-2",
               )}
             >
-              <FadeIn as="div" delay={i * 0.04} y={16} className="h-full">
+              <MotionReveal delay={i * 0.04} className="h-full">
                 <div className="flex h-full items-start gap-4 p-8">
                   <span aria-hidden="true" className="mt-3 h-px w-5 shrink-0 bg-accent" />
                   <p className="t-body-lg font-medium text-text-primary">
                     {item}
                   </p>
                 </div>
-              </FadeIn>
+              </MotionReveal>
             </li>
           ))}
         </ul>
 
         {/* Notre cadre — critères d'acceptation */}
-        <FadeIn delay={0.1} className="mt-16">
+        <MotionReveal delay={0.1} className="mt-16">
           <div className="max-w-3xl border-l-2 border-accent pl-6">
             <p className="t-h3 text-text-primary">
               Nous choisissons les projets sur lesquels nous pouvons créer une
@@ -67,7 +67,7 @@ export function StudioStandards() {
               pas le cas, nous le disons.
             </p>
           </div>
-        </FadeIn>
+        </MotionReveal>
       </div>
     </section>
   );

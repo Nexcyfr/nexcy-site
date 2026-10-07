@@ -1,5 +1,5 @@
 import { TextReveal } from "@/components/animations/TextReveal";
-import { FadeIn } from "@/components/animations/FadeIn";
+import { MotionReveal } from "@/components/animations/MotionReveal";
 import { Button } from "@/components/ui/Button";
 import { LineReveal } from "@/components/animations/LineReveal";
 import { maintenanceService } from "@/data/services";
@@ -26,7 +26,7 @@ export function ServicesMaintenanceBlock() {
             >
               {m.title}
             </TextReveal>
-            <FadeIn delay={0.1}>
+            <MotionReveal delay={0.1}>
               <p className="mt-8 max-w-md t-lead text-text-primary">
                 {m.hook}
               </p>
@@ -38,10 +38,10 @@ export function ServicesMaintenanceBlock() {
                   {m.ctaLabel}
                 </Button>
               </div>
-            </FadeIn>
+            </MotionReveal>
           </div>
 
-          <FadeIn delay={0.15} y={20}>
+          <MotionReveal delay={0.15}>
             <div className="rounded-card border border-border bg-card p-8 md:p-10">
               <p className="text-xs uppercase tracking-widest2 text-text-muted">
                 {m.deliverablesTitle}
@@ -59,7 +59,7 @@ export function ServicesMaintenanceBlock() {
                 ))}
               </ul>
             </div>
-          </FadeIn>
+          </MotionReveal>
         </div>
       </div>
     </section>

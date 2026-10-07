@@ -1,5 +1,5 @@
 import { TextReveal } from "@/components/animations/TextReveal";
-import { FadeIn } from "@/components/animations/FadeIn";
+import { MotionReveal } from "@/components/animations/MotionReveal";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -46,16 +46,16 @@ export function CtaSection({
         </TextReveal>
 
         {subtitle ? (
-          <FadeIn className="mt-6">
+          <MotionReveal className="mt-6">
             <p className="t-lead measure mx-auto">{subtitle}</p>
-          </FadeIn>
+          </MotionReveal>
         ) : null}
 
-        <FadeIn className="mt-10">
+        <MotionReveal className="mt-10">
           <Button href={buttonHref} variant="primary">
             {buttonLabel}
           </Button>
-        </FadeIn>
+        </MotionReveal>
 
         {note ? (
           <p className="t-tech mt-6 text-text-muted">{note}</p>

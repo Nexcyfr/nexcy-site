@@ -5,6 +5,23 @@ import { buildPlan } from "./system";
 import { drawPlan } from "./render";
 
 /**
+ * Cadence de repeinte (ms entre deux images).
+ *
+ * - `scrub` : la progression de scroll change → on suit l'écran (desktop 60 Hz,
+ *   mobile plafonné à ~30 Hz : l'œil ne distingue pas la différence sur un plan
+ *   filaire, le coût CPU est divisé par deux).
+ * - `idle` : la progression est stable, seules la respiration et les impulsions
+ *   du réseau évoluent. Leur mouvement est lent : ~20 Hz suffit amplement.
+ */
+const FRAME_MS = {
+  full: { scrub: 0, idle: 50 },
+  compact: { scrub: 32, idle: 80 },
+} as const;
+
+/** DPR maximal : le coût de remplissage croît avec le carré du DPR. */
+const DPR_CAP = { full: 2, compact: 1.5 } as const;
+
+/**
  * Surface de rendu du plan.
  *
  * Séparation stricte des responsabilités :
@@ -17,9 +34,11 @@ import { drawPlan } from "./render";
  *   1. immédiat — au montage, au redimensionnement, et sur demande du scroll ;
  *   2. continu — une boucle rAF, uniquement pour l'amortissement et les impulsions.
  *
- * Le chemin immédiat est le filet de sécurité : si rAF est bridé (onglet en
- * arrière-plan, économie d'énergie, restauration depuis le bfcache), le plan
- * reste peint. Un Hero noir n'est jamais acceptable.
+ * La boucle ne tourne que si le plan est réellement visible : elle s'arrête hors
+ * viewport (IntersectionObserver) et quand l'onglet est caché (visibilitychange).
+ * Le chemin immédiat reste le filet de sécurité : si rAF est bridé ou si le plan
+ * revient dans le viewport, une image est repeinte tout de suite. Un Hero noir
+ * n'est jamais acceptable.
  */
 export function PlanCanvas({
   getProgress,
@@ -52,20 +71,25 @@ export function PlanCanvas({
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
-    const model = buildPlan(compact ? "compact" : "full");
+    const density = compact ? "compact" : "full";
+    const cadence = FRAME_MS[density];
+    const dprCap = DPR_CAP[density];
+
+    const model = buildPlan(density);
     let width = 0;
     let height = 0;
     let raf = 0;
     let startedAt = 0;
-    let lastFrameAt = 0;
+    let lastPaintAt = 0;
     let smoothed = reduced ? staticProgress : getProgressRef.current();
     let disposed = false;
+    let inView = true;
+    let tabVisible = !document.hidden;
 
     /** Redimensionne le buffer. Réinitialise le contexte, donc impose une repeinte. */
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      // DPR plafonné à 2 : au-delà, le coût de remplissage double sans gain visible.
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
       width = Math.max(1, Math.round(rect.width));
       height = Math.max(1, Math.round(rect.height));
       canvas.width = Math.round(width * dpr);
@@ -74,6 +98,7 @@ export function PlanCanvas({
     };
 
     const paint = (progress: number, time: number) => {
+      lastPaintAt = performance.now();
       drawPlan(ctx, { model, progress, time, width, height, compact });
       onPhaseChangeRef.current?.(progress);
     };
@@ -88,32 +113,78 @@ export function PlanCanvas({
 
     /**
      * Repeinte immédiate, appelée par le contrôleur de scroll.
-     * Court-circuitée quand la boucle rAF tourne : elle a déjà la main.
+     * Court-circuitée quand la boucle rAF vient de peindre : elle a la main.
      */
     const requestPaint = () => {
-      if (disposed || reduced) return;
-      if (performance.now() - lastFrameAt < 120) return;
+      if (disposed || reduced || !inView || !tabVisible) return;
+      if (performance.now() - lastPaintAt < 120) return;
       smoothed = getProgressRef.current();
       paint(smoothed, elapsed());
     };
     onReadyRef.current?.(requestPaint);
 
-    if (!reduced) {
-      const frame = (now: number) => {
-        if (disposed) return;
-        lastFrameAt = now;
+    const frame = (now: number) => {
+      raf = 0;
+      if (disposed || !inView || !tabVisible) return;
 
-        // Amortissement vers la cible : lissage sans dérive — on interpole vers
-        // une valeur absolue, jamais de façon cumulative.
-        const target = getProgressRef.current();
-        smoothed += (target - smoothed) * 0.16;
-        if (Math.abs(target - smoothed) < 0.0004) smoothed = target;
+      // Amortissement vers la cible : lissage sans dérive — on interpole vers
+      // une valeur absolue, jamais de façon cumulative.
+      const target = getProgressRef.current();
+      const scrubbing = Math.abs(target - smoothed) >= 0.0004;
+      const minGap = scrubbing ? cadence.scrub : cadence.idle;
 
+      if (now - lastPaintAt >= minGap) {
+        if (scrubbing) smoothed += (target - smoothed) * 0.16;
+        else smoothed = target;
         paint(smoothed, elapsed());
-        raf = requestAnimationFrame(frame);
-      };
+      }
       raf = requestAnimationFrame(frame);
-    }
+    };
+
+    const start = () => {
+      if (reduced || disposed || raf || !inView || !tabVisible) return;
+      raf = requestAnimationFrame(frame);
+    };
+    const stop = () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    };
+
+    // Pause hors viewport : le Hero est sticky dans une section haute, mais
+    // une fois dépassé il n'a plus aucune raison de consommer du CPU.
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[entries.length - 1];
+        if (!entry) return;
+        inView = entry.isIntersecting;
+        if (inView) {
+          smoothed = reduced ? staticProgress : getProgressRef.current();
+          paint(smoothed, elapsed());
+          start();
+        } else {
+          stop();
+        }
+      },
+      { threshold: 0 },
+    );
+    io.observe(canvas);
+
+    // Onglet caché : on s'arrête, on reprend sur une image à jour.
+    const onVisibility = () => {
+      tabVisible = !document.hidden;
+      if (tabVisible) {
+        if (inView) {
+          smoothed = reduced ? staticProgress : getProgressRef.current();
+          paint(smoothed, elapsed());
+          start();
+        }
+      } else {
+        stop();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    start();
 
     // ResizeObserver plutôt que l'événement window : capte aussi les changements
     // de mise en page (barres dynamiques Safari, rotation, split view).
@@ -137,8 +208,10 @@ export function PlanCanvas({
 
     return () => {
       disposed = true;
-      cancelAnimationFrame(raf);
+      stop();
+      io.disconnect();
       ro.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [compact, reduced, staticProgress]);
 

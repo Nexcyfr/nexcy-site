@@ -1,6 +1,6 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { FadeIn } from "@/components/animations/FadeIn";
+import { MotionReveal } from "@/components/animations/MotionReveal";
 import { values } from "@/data/values";
 
 /** Section « Valeurs » — Master Brief §15 (5 valeurs). */
@@ -23,7 +23,7 @@ export function StudioValues() {
         <ul className="mt-16 grid gap-px overflow-hidden rounded-card border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {values.map((value, i) => (
             <li key={value.index} className="bg-black">
-              <FadeIn as="div" delay={i * 0.04} y={16} className="h-full">
+              <MotionReveal delay={i * 0.04} className="h-full">
                 <div className="flex h-full flex-col gap-4 p-8">
                   <span
                     aria-hidden="true"
@@ -38,7 +38,7 @@ export function StudioValues() {
                     {value.description}
                   </p>
                 </div>
-              </FadeIn>
+              </MotionReveal>
             </li>
           ))}
         </ul>

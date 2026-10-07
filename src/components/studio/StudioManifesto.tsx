@@ -1,6 +1,6 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { FadeIn } from "@/components/animations/FadeIn";
+import { MotionReveal } from "@/components/animations/MotionReveal";
 import { cn } from "@/lib/utils";
 
 interface ManifestoBlockProps {
@@ -37,7 +37,7 @@ function ManifestoBlock({
             {title}
           </TextReveal>
         </div>
-        <FadeIn delay={0.1}>
+        <MotionReveal delay={0.1}>
           <div className="flex flex-col gap-6">
             {paragraphs.map((p, i) => (
               <p
@@ -48,7 +48,7 @@ function ManifestoBlock({
               </p>
             ))}
           </div>
-        </FadeIn>
+        </MotionReveal>
       </div>
     </section>
   );

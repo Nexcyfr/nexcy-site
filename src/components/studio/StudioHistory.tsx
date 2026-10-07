@@ -1,6 +1,6 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { FadeIn } from "@/components/animations/FadeIn";
+import { MotionReveal } from "@/components/animations/MotionReveal";
 
 /**
  * Bloc « Notre histoire » — page Studio.
@@ -24,7 +24,7 @@ export function StudioHistory() {
             Une pratique affinée, une structure dédiée.
           </TextReveal>
         </div>
-        <FadeIn delay={0.1}>
+        <MotionReveal delay={0.1}>
           <div className="flex flex-col gap-6">
             <p className="t-body-lg text-text-secondary">
               NEXCY s&apos;appuie sur une expérience du digital construite depuis
@@ -35,7 +35,7 @@ export function StudioHistory() {
               Un haut niveau d&apos;exigence, de la stratégie à l&apos;exécution.
             </p>
           </div>
-        </FadeIn>
+        </MotionReveal>
       </div>
     </section>
   );

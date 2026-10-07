@@ -1,6 +1,6 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { FadeIn } from "@/components/animations/FadeIn";
+import { MotionReveal } from "@/components/animations/MotionReveal";
 
 /** Section « Comment nous travaillons » — Master Brief §15. */
 export function StudioMethod() {
@@ -20,7 +20,7 @@ export function StudioMethod() {
             Un interlocuteur unique. Un réseau d&apos;experts sélectionnés.
           </TextReveal>
         </div>
-        <FadeIn delay={0.1}>
+        <MotionReveal delay={0.1}>
           <div className="flex flex-col gap-6">
             <p className="t-body-lg text-text-secondary">
               NEXCY fonctionne comme une structure agile : un interlocuteur unique
@@ -37,7 +37,7 @@ export function StudioMethod() {
               qualité. La bonne expertise, au bon moment.
             </p>
           </div>
-        </FadeIn>
+        </MotionReveal>
       </div>
     </section>
   );

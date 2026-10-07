@@ -80,6 +80,11 @@
 
   /* Chrome de navigation — réservation d'espace en haut de page */
   --header-h: 4.5rem;
+
+  /* Courbes d'accélération — miroir de src/lib/motion/easing.ts */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-snappy: cubic-bezier(0.5, 0, 0, 1);
 }
 
 @layer base {
@@ -90,6 +95,11 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    /* Toute ancre atterrit sous le header fixe, sans offset au cas par cas. */
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+  }
+  [id] {
+    scroll-margin-top: calc(var(--header-h) + 1rem);
   }
 
   /* Lenis pilote le scroll : on neutralise le smooth natif quand il est actif */
@@ -247,15 +257,6 @@
     text-wrap: balance;
   }
 
-  /* Masque de révélation ligne par ligne (TextReveal) */
-  .reveal-line {
-    overflow: hidden;
-    display: block;
-  }
-  .reveal-line > span {
-    display: block;
-  }
-
   /* ──────────────────────────────────────────────
      Langage « plan technique » — le même trait que le Hero, en CSS.
      Utilisé pour relier les sections au système visuel du plan.
@@ -297,6 +298,83 @@
     width: var(--space-6);
     height: 1px;
     background-color: var(--color-accent);
+  }
+}
+
+/* ============================================================
+   Mouvement — CSS pur, piloté par le scroll
+   Aucun JavaScript : le contenu est rendu par le serveur, l'animation
+   n'est qu'un habillage. Sans prise en charge de `animation-timeline`
+   (ou en mouvement réduit), tout est affiché directement.
+   ============================================================ */
+@keyframes nx-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--nx-y, 1.25rem), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes nx-draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes nx-draw-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes nx-page-in {
+  from {
+    transform: translate3d(0, 0.5rem, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Entrée de page : déplacement seul, jamais de fondu (LCP préservé). */
+@media (prefers-reduced-motion: no-preference) {
+  .nx-page-in {
+    animation: nx-page-in 0.5s var(--ease-cinematic) backwards;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .nx-reveal {
+      --nx-offset: 0%;
+      animation: nx-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--nx-offset)) entry calc(35% + var(--nx-offset));
+    }
+    .nx-reveal-title {
+      --nx-y: 1.75rem;
+    }
+    .nx-line-x {
+      animation: nx-draw-x linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+    .nx-line-y {
+      animation: nx-draw-y linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .nx-reveal {
+    --nx-y: 0.875rem;
   }
 }
 
