@@ -135,8 +135,6 @@ export function Header() {
   }, [menuOpen]);
 
   const barHidden = hidden && !menuOpen;
-  // `inert` n'est pas typé en React 18 : on le pose par attribut.
-  const inertProps = (menuOpen ? {} : { inert: "" }) as Record<string, string>;
 
   return (
     <>
@@ -237,7 +235,7 @@ export function Header() {
         role="dialog"
         aria-modal="true"
         aria-label="Menu de navigation"
-        {...inertProps}
+        inert={!menuOpen}
         className={cn(
           "fixed inset-0 z-[55] flex flex-col justify-between bg-void px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(var(--header-h)+env(safe-area-inset-top)+1.5rem)] transition-[opacity,visibility] duration-300 md:px-10 lg:hidden",
           menuOpen ? "visible opacity-100" : "invisible opacity-0",

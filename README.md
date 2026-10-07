@@ -1,102 +1,96 @@
 # NEXCY — Site officiel
 
-Site premium de **NEXCY**, agence digitale à Bordeaux. _Precision in Motion._
+Site de **NEXCY**, studio digital à Bordeaux : sites web, branding, SEO, automatisation et agents IA.
+Signature : _Precision in Motion_.
 
-Conçu conformément au **Master Brief v2** (source de vérité). Thème entièrement
-sombre, accent doré cuivré `#C8883A`, typographie Geist Sans. **Aucune couleur bleue.**
+Direction visuelle : thème sombre, grille « plan technique », accent **ambre** `#D9913D` utilisé avec parcimonie
+(CTA, traits, états actifs). Aucune couleur froide. Typographie Geist.
 
 ## Stack
 
 | Domaine | Choix |
 |---|---|
-| Framework | Next.js 14 (App Router) |
-| Langage | TypeScript strict |
-| Style | Tailwind CSS v3 |
-| Animations | GSAP 3 + ScrollTrigger + `@gsap/react` (`useGSAP`) |
-| Scroll | Lenis (un seul provider) |
-| Typographie | Geist Sans (`geist` via `next/font`) |
-| Formulaire | React Hook Form + Zod + Resend |
-| Anti-spam | Cloudflare Turnstile (`@marsidev/react-turnstile`) + honeypot |
-| Analytics | Plausible |
-| Déploiement | Vercel |
+| Framework | Next.js 15 (App Router), React 19, TypeScript strict |
+| Style | Tailwind CSS 3, tokens CSS dans `src/app/globals.css` |
+| Mouvement | CSS pur (animations pilotées par le scroll), canvas 2D pour le hero, Lenis (desktop uniquement) |
+| Typographie | Geist Sans, auto-hébergée (`geist`) |
+| Formulaire | React Hook Form + Zod, route API `/api/contact`, Resend (e-mails), Cloudflare Turnstile + honeypot |
+| Mesure | Plausible (sans cookie), optionnel |
+| Rendez-vous | Cal.com (lien), optionnel |
+| Tests | Playwright (e2e, accessibilité axe-core), GitHub Actions |
 
 ## Démarrage
 
+Prérequis : Node.js 22, pnpm 10.
+
 ```bash
 pnpm install
-cp .env.example .env.local   # renseigner les clés
+cp .env.example .env.local   # facultatif en développement
 pnpm dev                     # http://localhost:3000
 ```
 
-### Vérifications avant livraison
+En développement, le site fonctionne **sans aucune clé** : Turnstile est ignoré (jamais en production) et l'API
+répond `503` explicite tant que `RESEND_API_KEY` n'est pas renseignée (aucun faux succès).
 
-```bash
-pnpm exec tsc --noEmit   # 0 erreur TypeScript
-pnpm lint                # 0 warning
-pnpm build               # build de production
-```
+## Commandes
+
+| Commande | Rôle |
+|---|---|
+| `pnpm dev` | Serveur de développement |
+| `pnpm build` / `pnpm start` | Build et serveur de production |
+| `pnpm typecheck` | TypeScript (`tsc --noEmit`) |
+| `pnpm lint` | ESLint (`next lint`) |
+| `pnpm test:e2e` | Suite Playwright (desktop + mobile), démarre `pnpm dev` si besoin |
+| `pnpm test:a11y` | Seulement les tests d'accessibilité (axe-core, WCAG 2.2 AA) |
+| `pnpm audit:lighthouse` | Build + Lighthouse CI (seuils dans `.lighthouserc.json`) |
+| `pnpm analyze` | Analyse du bundle |
+| `pnpm og:generate` | Régénère les visuels Open Graph (`public/assets/og`) |
+| `pnpm og:capture` | Recapture le plan du hero (serveur de production requis) |
+
+Les tests e2e utilisent Chromium. Hors CI, indiquer son chemin si besoin : `PW_CHROMIUM_PATH=/chemin/chromium pnpm test:e2e`.
 
 ## Variables d'environnement
 
-Voir `.env.example`. Requises en production :
+Modèle complet et commenté : `.env.example`. Détail, provenance et configuration : [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
-- `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_TO_EMAIL` — envoi du formulaire
-- `TURNSTILE_SECRET_KEY`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY` — anti-spam
-- `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` — analytics (`nexcy.fr`)
-- `NEXT_PUBLIC_SITE_URL` — URL canonique (`https://nexcy.fr`)
-- `NEXT_PUBLIC_CAL_URL` — lien Cal.com (optionnel)
+| Variable | Requise en production | Rôle |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | oui | URL canonique (metadata, sitemap, JSON-LD) |
+| `RESEND_API_KEY` | oui | Envoi des e-mails du formulaire |
+| `RESEND_FROM_EMAIL` | oui | Expéditeur (domaine vérifié chez Resend) |
+| `RESEND_TO_EMAIL` | oui | Boîte de réception des demandes |
+| `TURNSTILE_SECRET_KEY` | oui | Vérification anti-robot (serveur) |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | oui | Widget Turnstile (public) |
+| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | non | Active la mesure d'audience |
+| `NEXT_PUBLIC_CAL_URL` | non | Active le bloc de réservation (https uniquement) |
+| `NEXCY_STRICT_ENV` | non | `1` : le build de production échoue si une variable requise manque |
 
-> Le formulaire et Turnstile se dégradent proprement si les clés sont absentes
-> (le formulaire affiche un message invitant à écrire directement ; Turnstile
-> n'est rendu que si sa clé publique est présente ; en dev sans secret, la
-> vérification serveur est ignorée).
+Aucun secret n'est versionné. Sur Vercel en production, le contrôle strict est automatique (`VERCEL_ENV=production`).
 
 ## Structure
 
 ```
 src/
-  app/            routes (/, /services, /studio, /contact, légales, 404),
+  app/            routes : /, /services, /services/[slug], /studio, /contact, pages légales, 404,
                   api/contact, sitemap, robots, manifest, icônes
-  components/     global · ui · animations · home · services · studio · contact · legal
-  data/           contenus typés (services, valeurs, méthode, navigation, contact)
+  components/     global · ui · animations · home (+ plan/ : moteur canvas) · services · studio · contact · legal
+  data/           contenus typés (services, méthode, valeurs, navigation, formulaire)
   hooks/          useLenis · useReducedMotion
-  lib/            gsap · utils · metadata · media (sourcing) · contact-schema · legal
-  content/legal/  textes juridiques (extraits des sources RTF, verbatim)
-  styles/         globals.css (tokens CSS, reduced-motion)
+  lib/            metadata · utils · site-config · env · contact-schema · legal · motion/easing
+  content/legal/  textes juridiques (texte brut, rendu verbatim par lib/legal.ts)
+config/           liste des variables requises en production (partagée avec next.config.mjs)
+scripts/          og/ (visuels sociaux) · assets/ (icônes)
+tests/e2e/        Playwright
 ```
 
-## Décisions techniques notables
+## Qualité
 
-- **Dépendances ajustées vs brief** (packages inexistants/renommés) :
-  - `@turnstile/next` (inexistant, 404 sur npm) → **`@marsidev/react-turnstile`**
-    (wrapper React Turnstile MIT maintenu).
-  - `@studio-freight/lenis` (déprécié) → **`lenis`** (même librairie, renommée).
-  - Ajouts justifiés : `@gsap/react` (`useGSAP` + cleanup), `@hookform/resolvers`
-    (pont Zod↔RHF), `clsx` + `tailwind-merge` (`cn()`), `sharp` (optimisation images).
-- **Hero d'accueil** : la séquence de révélation joue **au chargement** (message
-  visible en < 2 s, conforme au brief §46 et à la règle premium « animation au
-  load »), et le scroll ajoute une **parallaxe subtile** (esprit « Precision in
-  Motion »). Un hero purement scroll-gaté laisserait le titre invisible à l'arrivée.
-- **Pages légales** : les sources fournies étaient en **RTF** (extension `.md`
-  trompeuse). Texte extrait via `textutil`, stocké dans `src/content/legal/*.txt`,
-  puis rendu **verbatim** par un parseur maison (aucune dépendance markdown).
-- **Visuels** : le hero et les cellules de démonstration sont **générés en code**
-  (SVG/Canvas GSAP) — priorité du brief §30, LCP instantané, zéro CLS.
+- Lighthouse (mesures locales, build de production) : accueil mobile ≥ 95, desktop ≈ 100 ; accessibilité 100 ; SEO 100.
+- Pages pré-rendues en statique ; JavaScript initial de l'accueil ≈ 112 kB.
+- `pnpm audit --prod` : aucune vulnérabilité connue.
+- Détail des choix et règles à ne pas casser : [`CLAUDE.md`](CLAUDE.md).
 
-## Assets à remplacer (placeholders générés)
+## Déploiement
 
-| Asset | Emplacement | Statut |
-|---|---|---|
-| `og-*.png` | `public/assets/og/` | générés (logo + tagline sur fond noir) — remplaçables par des visuels finaux |
-| `monogram-n.svg`, icônes | `public/assets/brand/`, `src/app/` | générés depuis le monogramme N |
-| Hero / Studio (IMG-01, IMG-02) | rendus en SVG codé | substitut premium ; images IA optionnelles via prompts du brief §27 |
-
-Assets fournis intégrés : `logo-nexcy.svg`, `bordeaux-skyline.png`, textes légaux.
-
-## Déploiement Vercel
-
-1. Importer le repo, framework **Next.js** détecté automatiquement.
-2. Renseigner les variables d'environnement (ci-dessus).
-3. Ajouter le domaine `nexcy.fr` (A `76.76.19.19`, CNAME `www` → `cname.vercel-dns.com`).
-4. Post-déploiement : soumettre le sitemap à Google Search Console, vérifier les
-   en-têtes via securityheaders.com, tester le formulaire en production.
+Voir [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) (variables, domaine, Resend, Turnstile, vérifications après mise en ligne) et
+[`docs/LAUNCH-CHECKLIST.md`](docs/LAUNCH-CHECKLIST.md) (actions humaines et informations à confirmer avant production).

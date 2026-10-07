@@ -1,6 +1,12 @@
 import { z } from "zod";
 import { projectTypes, budgetRanges, deadlineOptions } from "@/data/contact";
 
+// Zod teste `new Function("")` pour compiler ses validateurs à la volée : la CSP
+// du site (sans 'unsafe-eval') le refuse, ce qui lève un avertissement du
+// navigateur. Le mode « jitless » interprète les schémas sans eval — plus que
+// suffisant pour un formulaire de huit champs.
+z.config({ jitless: true });
+
 /**
  * Schéma de validation du formulaire de contact — Master Brief §16 / §22.
  * Partagé client (React Hook Form) et serveur (API Route).

@@ -20,8 +20,11 @@ function getService(slug: string) {
   return serviceDetails.find((s) => s.slug === slug);
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const service = getService(params.slug);
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const service = getService(slug);
   if (!service) return {};
   return buildMetadata({
     title: service.metaTitle,
@@ -31,8 +34,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   });
 }
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const service = getService(params.slug);
+export default async function ServicePage({ params }: Props) {
+  const { slug } = await params;
+  const service = getService(slug);
   if (!service) notFound();
 
   const url = `${SITE_URL}/services/${service.slug}`;
