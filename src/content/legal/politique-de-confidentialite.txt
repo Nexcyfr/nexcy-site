@@ -1,0 +1,877 @@
+Politique de confidentialité
+
+Date de publication initiale : 1er janvier 2026
+Dernière mise à jour : 25 juin 2026
+Version : 2.0
+
+La présente Politique de confidentialité décrit les modalités selon lesquelles NEXCY collecte, utilise, conserve, protège et, le cas échéant, transmet les données à caractère personnel des personnes qui consultent le site https://nexcy.fr, prennent contact avec NEXCY ou entretiennent une relation professionnelle avec l’agence.
+
+NEXCY accorde une importance particulière à la confidentialité et à la protection des données personnelles.
+
+Les traitements décrits dans la présente politique sont réalisés conformément :
+
+au règlement (UE) 2016/679 du Parlement européen et du Conseil du 27 avril 2016, dit « Règlement général sur la protection des données » ou « RGPD » ;
+à la loi n° 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, dans sa version modifiée ;
+aux règles françaises et européennes applicables aux communications électroniques, cookies et autres traceurs.
+
+1. Définitions
+
+Pour l’application de la présente Politique de confidentialité :
+
+1.1. Donnée personnelle
+
+Une donnée personnelle désigne toute information se rapportant à une personne physique identifiée ou identifiable, directement ou indirectement.
+
+Il peut notamment s’agir d’un nom, d’une adresse électronique, d’un numéro de téléphone, d’une adresse IP, d’un identifiant en ligne ou d’informations relatives à un projet professionnel.
+
+1.2. Traitement
+
+Un traitement désigne toute opération réalisée sur des données personnelles, notamment leur collecte, leur consultation, leur enregistrement, leur organisation, leur conservation, leur modification, leur transmission, leur archivage ou leur suppression.
+
+1.3. Responsable du traitement
+
+Le responsable du traitement est la personne qui détermine les finalités et les moyens essentiels d’un traitement de données personnelles.
+
+1.4. Sous-traitant
+
+Un sous-traitant est une personne ou une organisation qui traite des données personnelles pour le compte et sur les instructions du responsable du traitement.
+
+1.5. Utilisateur
+
+Le terme « utilisateur » désigne toute personne physique qui consulte le site, transmet une demande ou interagit avec NEXCY.
+
+2. Responsable du traitement
+
+Le responsable des traitements de données personnelles décrits dans la présente politique est :
+
+Matéo LEGARÇON – Entrepreneur individuel
+Exerçant sous le nom commercial NEXCY
+
+Adresse professionnelle :
+5 allée de Tourny
+33000 Bordeaux
+France
+
+SIREN : 941 167 918
+SIRET : 941 167 918 00015
+RCS : 941 167 918 RCS Bordeaux
+Adresse électronique : contact.agency@nexcy.fr
+Téléphone : 06 68 86 30 74
+Site internet : https://nexcy.fr
+
+NEXCY n’a pas désigné de délégué à la protection des données, cette désignation n’étant pas obligatoire au regard de la nature et de l’ampleur actuelles des traitements mis en œuvre.
+
+Toute demande relative à la vie privée ou aux données personnelles peut être adressée à :
+
+contact.agency@nexcy.fr
+
+3. Champ d’application
+
+La présente politique s’applique aux données personnelles traitées dans les situations suivantes :
+
+consultation du site nexcy.fr ;
+utilisation d’un formulaire de contact ;
+demande de renseignements ;
+demande de devis ;
+prise de contact par courrier électronique ou téléphone ;
+organisation d’un rendez-vous professionnel ;
+préparation ou exécution d’une prestation ;
+gestion d’une relation avec un prospect, un client ou un partenaire ;
+exercice d’un droit relatif aux données personnelles ;
+signalement d’un incident ou d’une vulnérabilité ;
+gestion administrative, contractuelle ou comptable d’une relation professionnelle.
+
+Le site et les services de NEXCY sont destinés exclusivement aux professionnels.
+
+4. Principes appliqués par NEXCY
+
+NEXCY s’engage à traiter les données personnelles conformément aux principes suivants :
+
+licéité, loyauté et transparence ;
+collecte pour des finalités déterminées, explicites et légitimes ;
+minimisation des données collectées ;
+exactitude et mise à jour des données ;
+limitation des durées de conservation ;
+confidentialité, intégrité et sécurité ;
+responsabilité et documentation des traitements.
+
+NEXCY veille à ne collecter que les données réellement nécessaires à la réalisation des finalités décrites dans la présente politique.
+
+5. Données personnelles collectées
+
+Les catégories de données collectées dépendent de la manière dont l’utilisateur interagit avec NEXCY.
+
+5.1. Données d’identification
+
+NEXCY peut collecter :
+
+le nom ;
+le prénom ;
+le nom de l’entreprise ;
+la fonction ou qualité professionnelle, lorsqu’elle est communiquée ;
+l’identité du représentant ou interlocuteur de l’entreprise.
+
+5.2. Coordonnées
+
+NEXCY peut collecter :
+
+l’adresse électronique ;
+le numéro de téléphone ;
+l’adresse professionnelle ;
+les coordonnées de l’entreprise ;
+les préférences de contact.
+
+5.3. Données relatives au projet
+
+Lorsqu’un utilisateur sollicite NEXCY, les données suivantes peuvent être collectées :
+
+le type de projet ;
+la nature des prestations recherchées ;
+le budget indicatif ;
+les besoins et objectifs exprimés ;
+le calendrier ou les délais envisagés ;
+les contraintes fonctionnelles ou techniques ;
+le contenu du message ;
+les réponses fournies dans un formulaire ;
+les documents, images, cahiers des charges ou pièces jointes transmis volontairement.
+
+L’utilisateur ne doit transmettre que les informations nécessaires au traitement de sa demande.
+
+5.4. Données relatives à la relation professionnelle
+
+Dans le cadre d’une relation précontractuelle ou contractuelle, NEXCY peut traiter :
+
+l’historique des échanges ;
+les demandes de devis ;
+les propositions commerciales ;
+les devis acceptés ou refusés ;
+les contrats ;
+les bons de commande ;
+les informations nécessaires à l’exécution des prestations ;
+les livrables et validations ;
+les informations relatives à la facturation ;
+les paiements et incidents de paiement ;
+les réclamations ;
+les éléments nécessaires à la preuve des échanges et engagements.
+
+NEXCY ne collecte pas directement de données bancaires par l’intermédiaire du site, aucun paiement en ligne n’étant actuellement proposé.
+
+5.5. Données de navigation et données techniques
+
+Le fonctionnement et la sécurité du site peuvent entraîner le traitement de certaines informations techniques, notamment :
+
+l’adresse IP ou une version tronquée de celle-ci ;
+la date et l’heure de connexion ;
+les pages ou ressources demandées ;
+le navigateur utilisé ;
+le système d’exploitation ;
+le type d’appareil ;
+les erreurs techniques ;
+les journaux de connexion et de sécurité ;
+les données nécessaires à la prévention des abus, attaques ou accès frauduleux.
+
+Ces données sont principalement traitées par l’hébergeur ou les composants techniques nécessaires au fonctionnement du site.
+
+5.6. Données relatives aux demandes d’exercice de droits
+
+Lorsqu’une personne exerce un droit, NEXCY peut collecter :
+
+son identité ;
+ses coordonnées ;
+la nature de sa demande ;
+les échanges relatifs à cette demande ;
+les informations permettant de vérifier son identité en cas de doute raisonnable ;
+la date et la réponse apportée à la demande.
+
+Une copie d’un titre d’identité ne sera sollicitée que lorsque cela est strictement nécessaire et proportionné.
+
+5.7. Données sensibles
+
+NEXCY ne cherche pas à collecter de catégories particulières de données personnelles, telles que les informations relatives :
+
+à la santé ;
+aux opinions politiques ;
+aux convictions religieuses ou philosophiques ;
+à l’appartenance syndicale ;
+à l’orientation sexuelle ;
+aux données génétiques ou biométriques ;
+aux infractions et condamnations pénales.
+
+L’utilisateur est invité à ne pas transmettre ce type d’informations, sauf nécessité particulière et accord préalable de NEXCY.
+
+5.8. Données collectées auprès de tiers
+
+NEXCY peut exceptionnellement recevoir des données personnelles provenant :
+
+de l’entreprise ou de l’organisation à laquelle appartient la personne ;
+d’un partenaire professionnel ;
+d’un client qui désigne un interlocuteur ;
+d’une source publiquement accessible ;
+d’une plateforme professionnelle ;
+d’une autorité ou d’un conseil professionnel.
+
+Dans ce cas, NEXCY fournit les informations requises par la réglementation lorsque cela est nécessaire.
+
+6. Caractère obligatoire ou facultatif des données
+
+Les champs signalés comme obligatoires dans un formulaire sont nécessaires au traitement de la demande.
+
+À défaut de communication des données obligatoires, NEXCY pourra ne pas être en mesure :
+
+de répondre à la demande ;
+de préparer un devis ;
+d’organiser un rendez-vous ;
+de conclure ou d’exécuter une prestation ;
+de respecter une obligation légale.
+
+Les autres informations sont facultatives.
+
+7. Finalités et bases légales des traitements
+
+NEXCY traite les données uniquement lorsqu’une base juridique valide est applicable.
+
+7.1. Gestion des demandes de contact
+
+Finalités :
+
+recevoir et analyser les demandes ;
+identifier l’interlocuteur ;
+répondre aux questions ;
+reprendre contact avec le demandeur ;
+orienter la demande vers le service approprié.
+
+Base légale :
+
+intérêt légitime de NEXCY à répondre aux sollicitations professionnelles ;
+mesures précontractuelles lorsque la demande concerne une prestation envisagée.
+
+7.2. Élaboration des devis et propositions commerciales
+
+Finalités :
+
+analyser les besoins ;
+préparer une proposition ;
+estimer les coûts et délais ;
+transmettre un devis ;
+échanger sur les conditions de la prestation.
+
+Base légale :
+
+exécution de mesures précontractuelles prises à la demande du prospect.
+
+7.3. Gestion de la relation contractuelle
+
+Finalités :
+
+conclure et exécuter les contrats ;
+gérer les projets ;
+communiquer avec le client ;
+assurer le suivi des prestations ;
+livrer les travaux ;
+gérer les modifications, validations et réclamations.
+
+Base légale :
+
+exécution du contrat ;
+intérêt légitime de NEXCY à conserver la preuve des instructions, échanges et validations.
+
+7.4. Gestion administrative, comptable et financière
+
+Finalités :
+
+établir les factures ;
+suivre les règlements ;
+tenir la comptabilité ;
+gérer les impayés ;
+respecter les obligations fiscales et comptables ;
+conserver les justificatifs obligatoires.
+
+Base légale :
+
+respect d’obligations légales ;
+exécution du contrat ;
+intérêt légitime de NEXCY à recouvrer ses créances et défendre ses droits.
+
+7.5. Gestion des prospects
+
+Finalités :
+
+assurer le suivi d’une demande ;
+conserver l’historique des échanges ;
+reprendre contact à la suite d’une sollicitation ;
+gérer les opportunités commerciales.
+
+Base légale :
+
+intérêt légitime de NEXCY à développer son activité et assurer le suivi de ses relations professionnelles ;
+mesures précontractuelles, selon la nature des échanges.
+
+NEXCY n’utilise pas les données collectées par l’intermédiaire du site pour envoyer une newsletter ou des sollicitations commerciales automatisées non demandées.
+
+7.6. Sécurité du site et prévention des abus
+
+Finalités :
+
+détecter les incidents ;
+prévenir les attaques et accès frauduleux ;
+assurer la disponibilité du site ;
+analyser les erreurs techniques ;
+protéger les données et les systèmes ;
+conserver les preuves d’un incident.
+
+Base légale :
+
+intérêt légitime de NEXCY à assurer la sécurité de son site, de ses systèmes et de ses données ;
+respect d’obligations légales en matière de sécurité des données.
+
+7.7. Gestion des demandes relatives aux droits
+
+Finalités :
+
+vérifier la recevabilité de la demande ;
+identifier la personne ;
+rechercher les données concernées ;
+répondre à la demande ;
+conserver la preuve de son traitement.
+
+Base légale :
+
+respect des obligations légales résultant du RGPD et de la loi Informatique et Libertés.
+
+7.8. Gestion des contentieux
+
+Finalités :
+
+prévenir les litiges ;
+établir et conserver des preuves ;
+défendre les intérêts de NEXCY ;
+engager ou répondre à une procédure.
+
+Base légale :
+
+intérêt légitime de NEXCY à constater, exercer ou défendre ses droits en justice ;
+respect d’une obligation légale, le cas échéant.
+
+8. Absence de décision automatisée
+
+NEXCY ne prend aucune décision produisant des effets juridiques ou affectant significativement une personne sur le seul fondement d’un traitement entièrement automatisé.
+
+NEXCY ne met actuellement en œuvre aucun profilage automatisé à partir des données collectées sur le site.
+
+9. Destinataires des données
+
+Les données ne sont accessibles qu’aux personnes qui ont besoin d’en connaître pour accomplir leurs missions.
+
+9.1. Destinataires internes
+
+Les données peuvent être consultées par :
+
+Matéo LEGARÇON ;
+les personnes expressément autorisées par NEXCY ;
+les intervenants internes chargés du suivi administratif, commercial ou technique.
+
+Les accès sont limités selon les besoins et responsabilités de chaque personne.
+
+9.2. Prestataires techniques et sous-traitants
+
+Les données peuvent être communiquées, dans la limite de ce qui est nécessaire, aux catégories de prestataires suivantes :
+
+hébergeur du site ;
+prestataire de messagerie électronique ;
+prestataire de stockage ;
+fournisseur d’outils bureautiques ou collaboratifs ;
+prestataire informatique ou de maintenance ;
+fournisseur de solutions de sécurité ;
+prestataire de sauvegarde ;
+prestataire chargé de la gestion des formulaires ;
+fournisseur de logiciel ou de base de données ;
+outil CRM utilisé par NEXCY ;
+expert-comptable ou conseil professionnel.
+
+Les principaux prestataires actuellement susceptibles d’intervenir sont :
+
+Hostinger International Limited, pour l’hébergement du site ;
+Google, pour la messagerie électronique et, le cas échéant, certains outils bureautiques ;
+[À REMPLIR : liste complète des autres prestataires traitant effectivement des données].
+
+NEXCY vérifie que les prestataires présentent des garanties suffisantes et encadre contractuellement leur intervention lorsque le RGPD l’exige.
+
+9.3. Autorités et tiers habilités
+
+Les données peuvent également être communiquées :
+
+aux autorités administratives ;
+aux autorités judiciaires ;
+aux forces de l’ordre ;
+aux organismes fiscaux ou sociaux ;
+aux auxiliaires de justice ;
+aux assureurs ;
+à toute personne légalement habilitée.
+
+Une telle transmission n’intervient que lorsqu’elle est requise par la loi, une décision, une demande légalement fondée ou nécessaire à la défense des droits de NEXCY.
+
+9.4. Absence de vente des données
+
+NEXCY ne vend, ne loue et ne cède pas les données personnelles à des tiers à des fins commerciales.
+
+10. Durées de conservation
+
+NEXCY ne conserve pas les données personnelles pendant une durée supérieure à celle nécessaire aux finalités poursuivies.
+
+Les durées peuvent être prolongées lorsque cela est nécessaire au respect d’une obligation légale, à l’établissement d’une preuve ou à la gestion d’un contentieux.
+
+10.1. Demandes de contact
+
+Les données relatives à une demande de contact sans suite peuvent être conservées pendant une durée maximale de trois ans à compter du dernier échange avec la personne concernée.
+
+10.2. Prospects
+
+Les données relatives aux prospects peuvent être conservées pendant une durée maximale de trois ans à compter de leur collecte ou du dernier contact émanant du prospect.
+
+Au terme de ce délai, elles sont supprimées ou archivées lorsqu’une obligation ou un intérêt probatoire le justifie.
+
+10.3. Données clients
+
+Les données nécessaires à la gestion des clients sont conservées pendant toute la durée de la relation contractuelle.
+
+Elles peuvent ensuite être archivées pendant les délais légaux de prescription applicables, notamment afin de permettre à NEXCY d’établir ou de défendre ses droits.
+
+10.4. Devis et propositions commerciales
+
+Les devis, propositions commerciales et échanges précontractuels peuvent être conservés :
+
+pendant la durée des négociations ;
+pendant la relation contractuelle lorsqu’ils ont été acceptés ;
+puis pendant la durée nécessaire à la preuve des engagements et au respect des délais légaux de prescription.
+
+10.5. Contrats et éléments de preuve
+
+Les contrats, validations, correspondances et pièces ayant une valeur probatoire sont conservés pendant la durée de la relation, puis archivés pendant le délai de prescription applicable.
+
+La durée exacte dépend de la nature du document et de la relation concernée.
+
+10.6. Factures et documents comptables
+
+Les factures, pièces justificatives et documents comptables sont conservés pendant dix ans à compter de la clôture de l’exercice concerné, conformément aux obligations légales applicables.
+
+10.7. Données relatives aux paiements
+
+Les données nécessaires au suivi des règlements et au recouvrement sont conservées pendant la durée nécessaire au traitement du paiement, puis pendant les délais légaux applicables.
+
+NEXCY ne conserve pas de numéro complet de carte bancaire par l’intermédiaire du site.
+
+10.8. Journaux techniques et de sécurité
+
+Les journaux techniques et données nécessaires à la sécurité sont conservés pendant une durée proportionnée à leur finalité, généralement comprise entre six et douze mois, sauf incident justifiant une conservation plus longue.
+
+10.9. Demandes d’exercice de droits
+
+Les données relatives aux demandes d’exercice de droits sont conservées pendant la durée nécessaire à leur traitement, puis pendant une durée permettant de démontrer le respect des obligations de NEXCY.
+
+Les copies de titres d’identité éventuellement demandées sont supprimées dès que la vérification est achevée, sauf obligation ou contentieux particulier.
+
+10.10. Contentieux
+
+Les données nécessaires à un contentieux sont conservées pendant toute la durée de la procédure, puis jusqu’à l’épuisement des voies de recours et des délais applicables.
+
+11. Hébergement des données
+
+Le site est hébergé par :
+
+HOSTINGER INTERNATIONAL LIMITED
+61 Lordou Vironos Street
+6023 Larnaca
+Chypre
+
+Site internet : https://www.hostinger.fr
+Adresse électronique : compliance@hostinger.com
+
+Chypre étant membre de l’Union européenne, les traitements réalisés dans cet État sont soumis au cadre européen de protection des données.
+
+Les informations échangées par courrier électronique peuvent également être traitées à travers les services Google utilisés par NEXCY.
+
+12. Transferts de données en dehors de l’Espace économique européen
+
+12.1. Principe général
+
+NEXCY privilégie, dans la mesure du possible, des prestataires et des infrastructures situés dans l’Union européenne ou dans l’Espace économique européen.
+
+Toutefois, certains prestataires internationaux peuvent traiter des données depuis un pays situé en dehors de l’Espace économique européen ou permettre à certaines de leurs entités d’y accéder.
+
+Cela peut notamment concerner :
+
+des services de messagerie ;
+des solutions bureautiques ;
+des outils techniques ;
+des services de sécurité ;
+des fournisseurs de logiciels ;
+des prestataires de sauvegarde ou de support.
+
+12.2. Garanties applicables
+
+Lorsqu’un transfert hors de l’Espace économique européen intervient, NEXCY veille à ce qu’il repose sur un mécanisme reconnu par le RGPD, notamment :
+
+une décision d’adéquation adoptée par la Commission européenne ;
+les clauses contractuelles types adoptées par la Commission européenne ;
+des règles d’entreprise contraignantes ;
+un mécanisme de certification ou un code de conduite approuvé ;
+toute autre garantie appropriée prévue par la réglementation.
+
+Lorsque cela est nécessaire, NEXCY ou son prestataire évalue les risques associés au transfert et met en place des mesures complémentaires.
+
+12.3. Transferts vers les États-Unis
+
+Lorsqu’un prestataire établi aux États-Unis est certifié au titre du cadre de protection applicable reconnu par la Commission européenne, le transfert peut reposer sur la décision d’adéquation correspondante.
+
+À défaut, il peut notamment être encadré par les clauses contractuelles types de la Commission européenne et par des mesures de protection complémentaires.
+
+La liste précise des garanties applicables peut être obtenue en écrivant à :
+
+contact.agency@nexcy.fr
+
+13. Sécurité et confidentialité
+
+NEXCY met en œuvre des mesures techniques et organisationnelles proportionnées aux risques présentés par les traitements.
+
+13.1. Mesures techniques
+
+Selon les systèmes et services concernés, les mesures peuvent notamment comprendre :
+
+l’utilisation du protocole HTTPS ;
+le chiffrement des échanges ;
+l’utilisation de mots de passe robustes ;
+l’authentification renforcée ou à deux facteurs lorsque disponible ;
+la limitation des accès ;
+la gestion des droits et habilitations ;
+la mise à jour des logiciels et systèmes ;
+la protection contre les programmes malveillants ;
+la journalisation des accès et incidents ;
+la sauvegarde régulière des données ;
+la sécurisation des postes et équipements ;
+la protection des interfaces d’administration ;
+la séparation des environnements lorsque cela est nécessaire.
+
+13.2. Mesures organisationnelles
+
+NEXCY applique également des mesures telles que :
+
+la limitation des données collectées ;
+la limitation du nombre de personnes autorisées ;
+l’obligation de confidentialité ;
+la sélection de prestataires offrant des garanties suffisantes ;
+la suppression ou l’archivage des données devenues inutiles ;
+la vérification des accès ;
+la gestion des incidents de sécurité ;
+la documentation des traitements ;
+la sensibilisation des personnes autorisées.
+
+13.3. Limites de sécurité
+
+Malgré les mesures mises en place, aucun système informatique ni aucune transmission sur internet ne peut garantir une sécurité absolue.
+
+L’utilisateur doit éviter de transmettre par un formulaire ou par courrier électronique des données excessivement sensibles ou non nécessaires.
+
+14. Violation de données personnelles
+
+Une violation de données personnelles peut notamment résulter :
+
+d’un accès non autorisé ;
+d’une divulgation accidentelle ;
+d’une perte ;
+d’une destruction ;
+d’une altération ;
+d’un vol d’équipement ;
+d’une attaque informatique.
+
+En cas de violation, NEXCY évalue les risques pour les droits et libertés des personnes.
+
+Lorsque les conditions légales sont réunies, NEXCY notifie la violation à la CNIL dans les délais applicables et informe les personnes concernées lorsqu’un risque élevé est susceptible de se produire.
+
+15. Droits des personnes concernées
+
+Toute personne concernée dispose des droits prévus par la réglementation, sous réserve de leurs conditions d’application.
+
+15.1. Droit d’accès
+
+Toute personne peut demander à savoir si NEXCY traite des données la concernant et, dans l’affirmative, en obtenir une copie ainsi que les principales informations relatives au traitement.
+
+15.2. Droit de rectification
+
+Toute personne peut demander la correction de données inexactes ou la mise à jour de données incomplètes.
+
+15.3. Droit à l’effacement
+
+Toute personne peut demander l’effacement de ses données lorsqu’une condition prévue par le RGPD est remplie, notamment lorsque les données ne sont plus nécessaires ou lorsque le consentement est retiré.
+
+Ce droit n’est pas absolu.
+
+NEXCY peut conserver certaines données lorsqu’elles sont nécessaires :
+
+au respect d’une obligation légale ;
+à l’exécution d’un contrat ;
+à la constatation, à l’exercice ou à la défense de droits en justice ;
+à la conservation d’une preuve ;
+à la poursuite d’un intérêt légitime prévalant dans les conditions prévues par la loi.
+
+15.4. Droit à la limitation du traitement
+
+Toute personne peut demander que l’utilisation de ses données soit temporairement limitée, notamment lorsqu’elle conteste leur exactitude ou s’oppose au traitement.
+
+Pendant cette période, les données sont conservées mais ne sont plus utilisées, sauf dans les cas autorisés par le RGPD.
+
+15.5. Droit d’opposition
+
+Toute personne peut s’opposer, pour des raisons tenant à sa situation particulière, à un traitement fondé sur l’intérêt légitime de NEXCY.
+
+NEXCY cesse alors le traitement, sauf s’il existe des motifs légitimes et impérieux prévalant sur les intérêts, droits et libertés de la personne ou si les données sont nécessaires à la défense de droits en justice.
+
+L’opposition à la prospection commerciale peut être exercée à tout moment et sans justification.
+
+15.6. Droit à la portabilité
+
+Lorsque le traitement repose sur le consentement ou sur un contrat et qu’il est effectué à l’aide de procédés automatisés, la personne peut demander à recevoir les données qu’elle a fournies dans un format structuré, couramment utilisé et lisible par machine.
+
+Elle peut également demander leur transmission à un autre responsable de traitement lorsque cela est techniquement possible.
+
+15.7. Droit de retirer son consentement
+
+Lorsqu’un traitement repose sur le consentement, celui-ci peut être retiré à tout moment.
+
+Le retrait ne remet pas en cause la licéité du traitement effectué avant ce retrait.
+
+15.8. Droit relatif aux décisions automatisées
+
+Toute personne dispose du droit de ne pas faire l’objet d’une décision fondée exclusivement sur un traitement automatisé produisant des effets juridiques ou l’affectant de manière significative, sauf exception légale.
+
+NEXCY n’utilise actuellement aucun mécanisme de ce type.
+
+15.9. Directives après le décès
+
+Toute personne peut définir des directives générales ou particulières relatives à la conservation, à l’effacement et à la communication de ses données après son décès, dans les conditions prévues par le droit français.
+
+16. Procédure d’exercice des droits
+
+Les droits peuvent être exercés gratuitement en écrivant à :
+
+NEXCY – Protection des données personnelles
+5 allée de Tourny
+33000 Bordeaux
+France
+
+ou par courrier électronique à :
+
+contact.agency@nexcy.fr
+
+La demande doit préciser :
+
+le nom et le prénom du demandeur ;
+les coordonnées permettant de lui répondre ;
+le droit exercé ;
+les données ou traitements concernés ;
+toute information permettant d’identifier la relation avec NEXCY.
+
+16.1. Vérification de l’identité
+
+En cas de doute raisonnable sur l’identité du demandeur, NEXCY peut demander des informations complémentaires.
+
+Une pièce d’identité n’est pas demandée systématiquement.
+
+Lorsque sa transmission est nécessaire, les informations non pertinentes peuvent être masquées et le document est supprimé après la vérification, sauf nécessité légale particulière.
+
+16.2. Délai de réponse
+
+NEXCY répond dans un délai d’un mois à compter de la réception de la demande.
+
+Ce délai peut être prolongé de deux mois compte tenu de la complexité ou du nombre de demandes. Dans ce cas, la personne est informée de la prolongation et de ses motifs dans le délai initial d’un mois.
+
+16.3. Demandes excessives ou manifestement infondées
+
+Lorsque les demandes sont manifestement infondées ou excessives, notamment en raison de leur caractère répétitif, NEXCY peut :
+
+exiger le paiement de frais raisonnables tenant compte des coûts administratifs ;
+ou refuser de donner suite à la demande.
+
+NEXCY doit pouvoir justifier sa décision.
+
+17. Réclamation auprès de la CNIL
+
+Toute personne estimant que le traitement de ses données ne respecte pas la réglementation peut adresser une réclamation à :
+
+Commission nationale de l’informatique et des libertés – CNIL
+3 place de Fontenoy
+TSA 80715
+75334 Paris Cedex 07
+France
+
+Site internet : https://www.cnil.fr
+
+La personne est invitée, sans que cela constitue une obligation préalable, à contacter NEXCY afin de rechercher une solution.
+
+18. Cookies et autres traceurs
+
+18.1. Définition
+
+Un cookie ou traceur est un petit fichier ou identifiant susceptible d’être déposé, lu ou stocké sur le terminal de l’utilisateur lors de sa consultation d’un site.
+
+Les traceurs peuvent notamment permettre :
+
+le fonctionnement technique d’un site ;
+la sécurisation d’une session ;
+la mémorisation de préférences ;
+la mesure de l’audience ;
+la personnalisation de contenus ;
+le suivi publicitaire ;
+l’intégration de services tiers.
+
+18.2. Cookies strictement nécessaires
+
+Le site peut utiliser des cookies ou dispositifs techniques strictement nécessaires :
+
+à son fonctionnement ;
+à sa sécurité ;
+à la répartition de la charge ;
+à la mémorisation de choix techniques ;
+à la prévention des abus ;
+à la gestion des préférences de confidentialité.
+
+Ces traceurs ne nécessitent pas de consentement préalable lorsqu’ils sont strictement nécessaires au service demandé par l’utilisateur.
+
+18.3. Traceurs publicitaires
+
+Dans sa configuration actuelle, le site n’utilise pas :
+
+Meta Pixel ;
+LinkedIn Insight Tag ;
+TikTok Pixel ;
+de dispositif de reciblage ;
+de traceur destiné à créer des audiences publicitaires ;
+de cookie destiné à personnaliser des publicités.
+
+Ces outils ne doivent pas être actifs sur le site tant qu’une solution de consentement conforme n’a pas été mise en place.
+
+18.4. Mesure d’audience
+
+Dans sa configuration actuelle, NEXCY déclare ne pas utiliser de traceur de mesure d’audience non essentiel nécessitant le consentement préalable.
+
+Google Analytics et tout autre outil comparable doivent être désactivés tant qu’ils ne sont pas configurés dans des conditions conformes et, lorsque cela est nécessaire, soumis au consentement préalable de l’utilisateur.
+
+Si un outil de mesure d’audience est ultérieurement installé, la présente politique devra être mise à jour afin d’indiquer :
+
+le nom de l’outil ;
+son fournisseur ;
+les données traitées ;
+sa finalité ;
+sa base légale ;
+la durée de vie des traceurs ;
+la durée de conservation des données ;
+les destinataires ;
+les éventuels transferts hors de l’Union européenne ;
+les modalités de consentement ou d’opposition.
+
+18.5. Réseaux sociaux
+
+Le site comporte de simples icônes ou liens hypertextes renvoyant vers les profils NEXCY sur :
+
+Instagram ;
+LinkedIn ;
+Facebook.
+
+Ces liens ne chargent pas directement de contenus sociaux dans les pages de nexcy.fr.
+
+Lorsque l’utilisateur clique sur un lien, il quitte le site et accède à une plateforme tierce susceptible de déposer ses propres cookies selon sa politique de confidentialité.
+
+18.6. Google Maps
+
+Le site peut proposer un simple lien vers Google Maps.
+
+Aucune carte Google Maps interactive n’est directement intégrée dans les pages.
+
+Les traitements éventuellement réalisés par Google interviennent après que l’utilisateur a choisi d’accéder au service externe.
+
+18.7. Polices de caractères
+
+Les polices du site doivent, dans la mesure du possible, être hébergées localement.
+
+[À VÉRIFIER TECHNIQUEMENT : confirmer que les polices ne sont pas chargées directement depuis fonts.googleapis.com ou fonts.gstatic.com.]
+
+Si des polices Google sont chargées directement depuis les serveurs de Google, cette information devra être ajoutée à la présente politique et les conséquences en matière de transmission de données devront être évaluées.
+
+18.8. Gestion du consentement
+
+Lorsque des cookies non essentiels seront utilisés, l’utilisateur devra pouvoir :
+
+les accepter ;
+les refuser aussi facilement qu’il peut les accepter ;
+personnaliser ses choix ;
+retirer son consentement à tout moment ;
+accéder à une liste claire des fournisseurs et finalités.
+
+Les traceurs non essentiels devront être bloqués avant le recueil du consentement.
+
+Solution de gestion du consentement : [À REMPLIR uniquement si des traceurs non essentiels sont ajoutés]
+
+18.9. Paramètres du navigateur
+
+L’utilisateur peut également configurer son navigateur pour limiter ou supprimer certains cookies.
+
+Toutefois, les paramètres du navigateur ne remplacent pas le mécanisme de consentement que NEXCY doit mettre en place lorsque celui-ci est légalement requis.
+
+19. Liens vers des services tiers
+
+Le site peut contenir des liens vers :
+
+des réseaux sociaux ;
+des sites clients ;
+des sites partenaires ;
+des plateformes professionnelles ;
+Google Maps ;
+des outils ou ressources externes.
+
+NEXCY ne contrôle pas les traitements réalisés par les sites tiers après que l’utilisateur a quitté nexcy.fr.
+
+L’utilisateur est invité à consulter la politique de confidentialité de chaque service concerné.
+
+20. Données des mineurs
+
+Le site et les services de NEXCY sont exclusivement destinés à des professionnels.
+
+NEXCY ne cherche pas à collecter sciemment des données concernant des mineurs.
+
+Toute personne mineure ayant transmis des données est invitée à en demander la suppression, directement ou par l’intermédiaire de son représentant légal.
+
+21. Modifications de la présente politique
+
+NEXCY peut modifier la présente Politique de confidentialité afin de tenir compte notamment :
+
+d’une évolution légale ou réglementaire ;
+d’une recommandation de la CNIL ;
+d’une modification de ses services ;
+de l’ajout ou du retrait d’un outil ;
+d’une évolution technique du site ;
+d’un changement de prestataire ;
+d’une modification des traitements ;
+d’une modification des durées de conservation.
+
+La version applicable est celle publiée sur le site à la date de la consultation.
+
+Lorsque la modification affecte substantiellement les droits des personnes ou les modalités d’un traitement, NEXCY peut en informer les personnes concernées par un moyen approprié.
+
+22. Contact
+
+Pour toute question concernant la présente Politique de confidentialité ou le traitement des données personnelles :
+
+NEXCY
+Matéo LEGARÇON – Entrepreneur individuel
+5 allée de Tourny
+33000 Bordeaux
+France
+
+Adresse électronique : contact.agency@nexcy.fr
+Téléphone : 06 68 86 30 74
+Site internet : https://nexcy.fr
+
+⸻
+
+Date de publication initiale : 1er janvier 2026
+Dernière mise à jour : 25 juin 2026
+Version : 2.0
